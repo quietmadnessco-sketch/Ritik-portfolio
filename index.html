@@ -2113,7 +2113,6 @@ function submitForm(e, type) {
   e.preventDefault();
   var form = e.target;
   var data = new FormData(form);
-  data.append('_form_type', type === 'strategy' ? 'Strategy Call Request' : 'Project Quote Request');
 
   fetch('https://formspree.io/f/xjgqboaj', {
     method: 'POST',
@@ -2125,14 +2124,17 @@ function submitForm(e, type) {
       var header = modal.querySelector('.form-header');
       form.style.display = 'none';
       if (header) header.style.display = 'none';
-      var success = modal.querySelector('.form-success') || document.createElement('div');
-      success.className = 'form-success';
+      var success = modal.querySelector('.form-success');
+      if (!success) {
+        success = document.createElement('div');
+        success.className = 'form-success';
+        modal.appendChild(success);
+      }
       var title = type === 'strategy' ? "We'll be in touch within 24 hours!" : "Your quote request is received!";
       var body = type === 'strategy'
         ? 'Thanks for booking a strategy call. Ritik will reach out shortly to confirm your slot.'
         : 'Thanks for submitting your project details. We will put together a custom proposal and send it within 48 hours.';
       success.innerHTML = '<div class="success-icon">&#10003;</div><div class="success-title">' + title + '</div><div class="success-body">' + body + '</div>';
-      modal.appendChild(success);
       success.classList.add('show');
       setTimeout(function() {
         var id = type === 'strategy' ? 'strategyBackdrop' : 'quoteBackdrop';
@@ -2144,10 +2146,13 @@ function submitForm(e, type) {
           form.reset();
         }, 400);
       }, 3500);
+    } else {
+      alert('Something went wrong. Please try again.');
     }
+  }).catch(function() {
+    alert('Network error. Please check your connection and try again.');
   });
 }
-
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeForm('strategyBackdrop');
