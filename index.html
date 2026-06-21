@@ -1663,67 +1663,68 @@ footer{
       <p class="form-subtitle">We'll audit your current marketing, find your biggest growth opportunity, and show you exactly how we'd approach it — for free.</p>
       
     </div>
-    <form class="vx-form" action="https://formspree.io/f/xjgqboaj" method="POST" onsubmit="submitForm(event,'strategy')">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Your Name *</label>
-          <input type="text" placeholder="Your Full Name" required>
-        </div>
-        <div class="form-group">
-          <label>Business Name *</label>
-          <input type="text" placeholder="Your Company" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" placeholder="you@company.com" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>What industry are you in? *</label>
-        <select required>
-          <option value="" disabled selected>Select your industry</option>
-          <option>Industrial &amp; Manufacturing</option>
-          <option>Real Estate</option>
-          <option>Engineering</option>
-          <option>E-Commerce / D2C</option>
-          <option>Fashion &amp; Apparel</option>
-          <option>Jewellery &amp; Luxury</option>
-          <option>Food &amp; Beverage</option>
-          <option>Startup</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>What is your biggest marketing challenge right now? *</label>
-        <textarea rows="3" placeholder="e.g. We're not getting enough leads, our content doesn't convert, we need better brand visuals..." required></textarea>
-      </div>
-      <div class="form-group">
-        <label>What is your monthly marketing budget?</label>
-        <select>
-          <option value="" disabled selected>Select a range</option>
-          <option>Under ₹25,000</option>
-          <option>₹25,000 – ₹75,000</option>
-          <option>₹75,000 – ₹1,50,000</option>
-          <option>₹1,50,000 – ₹5,00,000</option>
-          <option>₹5,00,000+</option>
-          <option>Prefer not to say</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Preferred time to call</label>
-        <select>
-          <option value="" disabled selected>Select a time slot</option>
-          <option>Morning (9am – 12pm)</option>
-          <option>Afternoon (12pm – 3pm)</option>
-          <option>Evening (4pm – 7pm)</option>
-          <option>Flexible / Anytime</option>
-        </select>
-      </div>
-      <button type="submit" class="form-submit">Book My Strategy Call →</button>
-      <p class="form-note">We'll reach out within 24 hours to confirm your slot.</p>
-    </form>
+   <form class="vx-form" action="https://formspree.io/f/xjgqboaj" method="POST" onsubmit="submitForm(event,'strategy')">
+  <input type="hidden" name="_subject" value="New Strategy Call Request - Ritik & Co.">
+  <div class="form-row">
+    <div class="form-group">
+      <label>Your Name *</label>
+      <input type="text" name="name" placeholder="Your Full Name" required>
+    </div>
+    <div class="form-group">
+      <label>Business Name *</label>
+      <input type="text" name="business_name" placeholder="Your Company" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" name="email" placeholder="you@company.com" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>What industry are you in? *</label>
+    <select name="industry" required>
+      <option value="" disabled selected>Select your industry</option>
+      <option>Industrial &amp; Manufacturing</option>
+      <option>Real Estate</option>
+      <option>Engineering</option>
+      <option>E-Commerce / D2C</option>
+      <option>Fashion &amp; Apparel</option>
+      <option>Jewellery &amp; Luxury</option>
+      <option>Food &amp; Beverage</option>
+      <option>Startup</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>What is your biggest marketing challenge right now? *</label>
+    <textarea name="marketing_challenge" rows="3" placeholder="e.g. We're not getting enough leads, our content doesn't convert, we need better brand visuals..." required></textarea>
+  </div>
+  <div class="form-group">
+    <label>What is your monthly marketing budget?</label>
+    <select name="monthly_budget">
+      <option value="" disabled selected>Select a range</option>
+      <option>Under ₹25,000</option>
+      <option>₹25,000 – ₹75,000</option>
+      <option>₹75,000 – ₹1,50,000</option>
+      <option>₹1,50,000 – ₹5,00,000</option>
+      <option>₹5,00,000+</option>
+      <option>Prefer not to say</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Preferred time to call</label>
+    <select name="preferred_time">
+      <option value="" disabled selected>Select a time slot</option>
+      <option>Morning (9am – 12pm)</option>
+      <option>Afternoon (12pm – 3pm)</option>
+      <option>Evening (4pm – 7pm)</option>
+      <option>Flexible / Anytime</option>
+    </select>
+  </div>
+  <button type="submit" class="form-submit">Book My Strategy Call →</button>
+  <p class="form-note">We'll reach out within 24 hours to confirm your slot.</p>
+</form>
   </div>
 </div>
 
@@ -1737,88 +1738,89 @@ footer{
       <p class="form-subtitle">Tell us about your project. The more detail you share, the more accurate and useful your custom proposal will be.</p>
     </div>
     <form class="vx-form" action="https://formspree.io/f/xjgqboaj" method="POST" onsubmit="submitForm(event,'quote')">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Your Name *</label>
-          <input type="text" placeholder="Your Full Name" required>
-        </div>
-        <div class="form-group">
-          <label>Company / Brand Name *</label>
-          <input type="text" placeholder="Your Company" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" placeholder="you@company.com" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>What services are you looking for? *</label>
-        <div class="form-checkboxes">
-          <label class="check-option"><input type="checkbox"> 3D Rendering &amp; Modeling</label>
-          <label class="check-option"><input type="checkbox"> 3D Animation Video</label>
-          <label class="check-option"><input type="checkbox"> Cinematic Brand Film</label>
-          <label class="check-option"><input type="checkbox"> Product Photography</label>
-          <label class="check-option"><input type="checkbox"> AI Video / Content</label>
-          <label class="check-option"><input type="checkbox"> Social Media Management</label>
-          <label class="check-option"><input type="checkbox"> Paid Ads (Meta / Google)</label>
-          <label class="check-option"><input type="checkbox"> Website Design &amp; Dev</label>
-          <label class="check-option"><input type="checkbox"> Lead Generation Campaign</label>
-          <label class="check-option"><input type="checkbox"> UI/UX Design</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Describe your project *</label>
-        <textarea rows="4" placeholder="Tell us what you need — product type, goals, any references or inspirations, key deliverables expected..." required></textarea>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Project Budget *</label>
-          <select required>
-            <option value="" disabled selected>Select a range</option>
-            <option>₹20,000 – ₹50,000</option>
-            <option>₹50,000 – ₹1,00,000</option>
-            <option>₹1,00,000 – ₹3,00,000</option>
-            <option>₹3,00,000 – ₹5,00,000</option>
-            <option>₹5,00,000+</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Expected Timeline *</label>
-          <select required>
-            <option value="" disabled selected>Select timeline</option>
-            <option>ASAP (under 1 week)</option>
-            <option>1 – 2 weeks</option>
-            <option>2 – 4 weeks</option>
-            <option>1 – 2 months</option>
-            <option>Flexible</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Do you have existing brand assets?</label>
-        <select>
-          <option value="" disabled selected>Select one</option>
-          <option>Yes — logo, brand guidelines, references ready</option>
-          <option>Partial — some assets available</option>
-          <option>No — starting from scratch</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>How did you hear about us?</label>
-        <select>
-          <option value="" disabled selected>Select one</option>
-          <option>Referral / Word of mouth</option>
-          <option>Instagram / Social Media</option>
-          <option>Google Search</option>
-          <option>Behance</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <button type="submit" class="form-submit">Submit for a Custom Quote →</button>
-      <p class="form-note">We'll send your custom proposal within 48 hours.</p>
-    </form>
+  <input type="hidden" name="_subject" value="New Project Quote Request - Ritik & Co.">
+  <div class="form-row">
+    <div class="form-group">
+      <label>Your Name *</label>
+      <input type="text" name="name" placeholder="Your Full Name" required>
+    </div>
+    <div class="form-group">
+      <label>Company / Brand Name *</label>
+      <input type="text" name="company_name" placeholder="Your Company" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" name="email" placeholder="you@company.com" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>What services are you looking for? *</label>
+    <div class="form-checkboxes">
+      <label class="check-option"><input type="checkbox" name="services" value="3D Rendering & Modeling"> 3D RENDERING &amp; MODELING</label>
+      <label class="check-option"><input type="checkbox" name="services" value="3D Animation Video"> 3D ANIMATION VIDEO</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Cinematic Brand Film"> CINEMATIC BRAND FILM</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Product Photography"> PRODUCT PHOTOGRAPHY</label>
+      <label class="check-option"><input type="checkbox" name="services" value="AI Video / Content"> AI VIDEO / CONTENT</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Social Media Management"> SOCIAL MEDIA MANAGEMENT</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Paid Ads (Meta / Google)"> PAID ADS (META / GOOGLE)</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Website Design & Dev"> WEBSITE DESIGN &amp; DEV</label>
+      <label class="check-option"><input type="checkbox" name="services" value="Lead Generation Campaign"> LEAD GENERATION CAMPAIGN</label>
+      <label class="check-option"><input type="checkbox" name="services" value="UI/UX Design"> UI/UX DESIGN</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Describe your project *</label>
+    <textarea name="project_description" rows="4" placeholder="Tell us what you need — product type, goals, any references or inspirations, key deliverables expected..." required></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Project Budget *</label>
+      <select name="project_budget" required>
+        <option value="" disabled selected>Select a range</option>
+        <option>₹20,000 – ₹50,000</option>
+        <option>₹50,000 – ₹1,00,000</option>
+        <option>₹1,00,000 – ₹3,00,000</option>
+        <option>₹3,00,000 – ₹5,00,000</option>
+        <option>₹5,00,000+</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Expected Timeline *</label>
+      <select name="timeline" required>
+        <option value="" disabled selected>Select timeline</option>
+        <option>ASAP (under 1 week)</option>
+        <option>1 – 2 weeks</option>
+        <option>2 – 4 weeks</option>
+        <option>1 – 2 months</option>
+        <option>Flexible</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Do you have existing brand assets?</label>
+    <select name="brand_assets">
+      <option value="" disabled selected>Select one</option>
+      <option>Yes — logo, brand guidelines, references ready</option>
+      <option>Partial — some assets available</option>
+      <option>No — starting from scratch</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>How did you hear about us?</label>
+    <select name="how_heard">
+      <option value="" disabled selected>Select one</option>
+      <option>Referral / Word of mouth</option>
+      <option>Instagram / Social Media</option>
+      <option>Google Search</option>
+      <option>Behance</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <button type="submit" class="form-submit">Submit for a Custom Quote →</button>
+  <p class="form-note">We'll send your custom proposal within 48 hours.</p>
+</form>
   </div>
 </div>
 
