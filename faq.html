@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ & Legal — Ritik & Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #09090b;
+  --white: #fafaf9;
+  --off: #f4f1ec;
+  --accent: #10b981;
+  --accent-d: #059669;
+  --dark1: #111113;
+  --dark2: #18181b;
+  --dark3: #27272a;
+  --muted: #71717a;
+  --border: #27272a;
+  --border-light: #e4e4e7;
+  --text-d: #a1a1aa;
+  --ff-head: 'Syne', sans-serif;
+  --ff-body: 'Inter', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--black);font-family:var(--ff-body);font-weight:400;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 3rem;height:68px;
+  background:rgba(9,9,11,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.logo{font-family:var(--ff-head);font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:13px;font-weight:400;color:var(--text-d);letter-spacing:0.3px;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--accent);color:var(--white);
+  font-family:var(--ff-body);font-size:13px;font-weight:500;
+  padding:10px 22px;border:none;border-radius:6px;
+  transition:background 0.2s;cursor:pointer;display:inline-block;
+}
+.nav-cta:hover{background:var(--accent-d)}
+@media(max-width:960px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--black);
+  padding:140px 3rem 80px;
+  text-align:center;
+}
+.page-header h1{
+  font-family:var(--ff-head);
+  font-size:clamp(40px,6vw,72px);
+  font-weight:800;letter-spacing:-2px;
+  color:var(--white);margin-bottom:1rem;
+}
+.page-header p{
+  font-size:16px;color:var(--text-d);
+  max-width:480px;margin:0 auto;line-height:1.8;
+}
+
+/* FAQ */
+.faq-section{background:var(--white);padding:7rem 3rem}
+.faq-grid{display:grid;grid-template-columns:320px 1fr;gap:6rem;align-items:start;max-width:1100px;margin:0 auto}
+.faq-sticky{position:sticky;top:100px}
+.faq-sticky h2{font-family:var(--ff-head);font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:1rem}
+.faq-sticky p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.faq-cta{
+  display:inline-block;background:var(--accent);color:var(--white);
+  font-size:13px;font-weight:500;padding:12px 24px;border-radius:6px;
+  transition:background 0.2s;
+}
+.faq-cta:hover{background:var(--accent-d)}
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid var(--border-light)}
+.faq-item:first-child{border-top:1px solid var(--border-light)}
+.faq-question{
+  width:100%;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 0;cursor:pointer;gap:1rem;
+  font-family:var(--ff-head);font-size:16px;font-weight:700;
+  color:var(--black);text-align:left;letter-spacing:-0.2px;
+  transition:color 0.2s;
+}
+.faq-question:hover{color:var(--accent)}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--border-light);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:16px;color:var(--muted);
+  transition:all 0.25s;
+}
+.faq-item.open .faq-icon{background:var(--accent);border-color:var(--accent);color:var(--white);transform:rotate(45deg)}
+.faq-answer{
+  font-size:14px;color:var(--muted);line-height:1.8;
+  max-height:0;overflow:hidden;
+  transition:max-height 0.35s ease,padding 0.35s ease;
+  padding-bottom:0;
+}
+.faq-item.open .faq-answer{max-height:400px;padding-bottom:1.25rem}
+
+/* LEGAL */
+.legal-section{background:var(--dark1);padding:7rem 3rem}
+.legal-inner{max-width:1100px;margin:0 auto}
+.legal-title{font-family:var(--ff-head);font-size:32px;font-weight:800;color:var(--white);margin-bottom:2rem;letter-spacing:-1px}
+.legal-tabs{display:flex;gap:2px;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.07)}
+.legal-tab{
+  font-family:var(--ff-body);font-size:12px;font-weight:500;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:10px 20px;background:none;border:none;cursor:pointer;
+  color:var(--text-d);border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all 0.2s;
+}
+.legal-tab:hover{color:var(--white)}
+.legal-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.legal-panel{display:none;max-width:820px}
+.legal-panel.active{display:block}
+.legal-panel h4{
+  font-family:var(--ff-head);font-size:16px;font-weight:700;
+  color:var(--white);margin:1.75rem 0 0.6rem;letter-spacing:-0.2px;
+}
+.legal-panel h4:first-child{margin-top:0}
+.legal-panel p{font-size:14px;color:var(--text-d);line-height:1.85;margin-bottom:0.75rem}
+.legal-panel ul{padding-left:1.25rem;margin-bottom:0.75rem}
+.legal-panel ul li{font-size:14px;color:var(--text-d);line-height:1.8;margin-bottom:4px}
+.legal-updated{
+  font-size:10px;letter-spacing:2px;
+  color:var(--text-d);text-transform:uppercase;margin-bottom:2rem;
+  display:flex;align-items:center;gap:8px;
+}
+.legal-updated::before{content:'';display:block;width:16px;height:1px;background:var(--accent)}
+
+/* FOOTER */
+footer{
+  background:var(--dark1);border-top:1px solid var(--border);
+  padding:2rem 3rem;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:1rem;
+  font-size:12px;color:var(--muted);
+}
+footer a{color:var(--muted);transition:color 0.2s}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:960px){
+  .page-header{padding:120px 1.5rem 60px}
+  .faq-section,.legal-section{padding:5rem 1.5rem}
+  .faq-grid{grid-template-columns:1fr;gap:3rem}
+  .faq-sticky{position:static}
+  .legal-tabs{flex-wrap:wrap}
+  footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Ritik & Co.<span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html#why">Why Us</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#results">Results</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">Free Strategy Call</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>FAQ & Legal</h1>
+  <p>Everything you need to know about working with Ritik & Co. — and how we protect you.</p>
+</div>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <div class="faq-grid">
+    <div class="faq-sticky">
+      <h2>Frequently Asked Questions</h2>
+      <p>Can't find your answer? Reach out directly and we'll get back to you within 24 hours.</p>
+      <a href="index.html#contact" class="faq-cta">Ask Us Anything →</a>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What services does Ritik & Co. offer?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">We offer a full stack of creative and marketing services — 3D rendering & animation, cinematic brand films, AI-powered content, Meta & Google paid ads, social media management, website design & development, and UI/UX design. Everything is handled in-house.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long does a typical project take?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">It depends on the scope. A 3D product render takes 5–7 days. A brand film takes 2–3 weeks. A full website takes 3–4 weeks. Performance marketing campaigns can be live within 7 days. We always give you a clear timeline before we start.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is your pricing structure?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">We don't believe in generic pricing because every project is different. We send a custom proposal based on your specific requirements, goals, and budget. Book a free strategy call or submit a project quote to get your custom pricing.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do I own the work you create for me?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">Yes — 100%. Full IP transfer is included with every project. Once delivered and paid, all files, source materials, and rights belong to you. No hidden licensing fees, no usage restrictions.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you work with businesses outside India?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">Yes. We work with clients globally. Most of our communication and delivery happens remotely via email, WhatsApp, and video calls. We've worked with brands across India, the Middle East, and internationally.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I get started?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">Two ways — book a free 30-minute strategy call where we'll audit your current position and map out a growth plan, or fill in the project quote form with your requirements and we'll send a custom proposal within 48 hours.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What industries do you work with?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">We specialize in industrial & manufacturing, real estate, engineering firms, e-commerce & D2C brands, jewellery & luxury, food & beverage, and startups. Our strongest expertise is in sectors where visuals need to be technically accurate and performance-driven.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you offer retainer packages?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">Yes. For ongoing social media management, paid advertising, and content creation, we offer monthly retainer packages. These are available after an initial project so we can understand your brand properly before committing to ongoing work.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is your refund policy?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">We offer refunds on the unused portion of any project if cancelled before work begins. Once creative work has started, refunds are evaluated case by case. Full details are in our Refund Policy section below.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL SECTION -->
+<section class="legal-section">
+  <div class="legal-inner">
+    <div class="legal-title">Legal Policies</div>
+    <div class="legal-tabs">
+      <button class="legal-tab active" onclick="showLegal('terms', this)">Terms & Conditions</button>
+      <button class="legal-tab" onclick="showLegal('privacy', this)">Privacy Policy</button>
+      <button class="legal-tab" onclick="showLegal('refund', this)">Refund Policy</button>
+    </div>
+
+    <!-- TERMS -->
+    <div class="legal-panel active" id="legal-terms">
+      <div class="legal-updated">Last updated — June 2026</div>
+      <h4>Acceptance of Terms</h4>
+      <p>By engaging Ritik & Co. for any service, you agree to these Terms and Conditions. These terms govern all projects, proposals, and ongoing relationships between Ritik & Co. and its clients.</p>
+      <h4>Services</h4>
+      <p>Ritik & Co. provides creative production and digital marketing services including but not limited to 3D visualization, video production, paid advertising, social media management, and website design. The specific scope of each project is defined in the individual proposal or agreement.</p>
+      <h4>Payment</h4>
+      <p>All projects require a minimum 50% advance payment before work begins. The remaining balance is due upon delivery of final files. Ongoing retainer services are billed monthly in advance.</p>
+      <h4>Revisions</h4>
+      <p>Each project includes a defined number of revision rounds as stated in the proposal. Additional revisions beyond the agreed scope will be billed at our standard hourly rate.</p>
+      <h4>Intellectual Property</h4>
+      <p>Upon full payment, all intellectual property rights for the delivered work transfer to the client. Ritik & Co. reserves the right to display the work in our portfolio unless a confidentiality agreement is in place.</p>
+      <h4>Confidentiality</h4>
+      <p>We treat all client information as strictly confidential and do not share business details, strategies, or data with third parties without explicit written consent.</p>
+      <h4>Limitation of Liability</h4>
+      <p>Ritik & Co. is not liable for any indirect, incidental, or consequential damages arising from the use of our services. Our total liability is limited to the amount paid for the specific project in question.</p>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="legal-panel" id="legal-privacy">
+      <div class="legal-updated">Last updated — June 2026</div>
+      <h4>Information We Collect</h4>
+      <p>We collect information you provide directly — including your name, email address, company name, and project details when you fill out a form or contact us. We do not collect payment information directly; all payments are processed through secure third-party platforms.</p>
+      <h4>How We Use Your Information</h4>
+      <ul>
+        <li>To respond to your enquiries and deliver project proposals</li>
+        <li>To communicate project updates and deliverables</li>
+        <li>To send relevant service information (you can opt out at any time)</li>
+        <li>To improve our website and services</li>
+      </ul>
+      <h4>Data Storage</h4>
+      <p>Your information is stored securely and is only accessible to the Ritik & Co. team. We do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
+      <h4>Cookies</h4>
+      <p>Our website may use basic cookies to improve user experience. These do not collect personally identifiable information and can be disabled through your browser settings.</p>
+      <h4>Your Rights</h4>
+      <p>You have the right to request access to, correction of, or deletion of your personal data at any time. Contact us at hello.ritik@outlook.com to make any such request.</p>
+      <h4>Contact</h4>
+      <p>For any privacy-related questions, contact us at hello.ritik@outlook.com</p>
+    </div>
+
+    <!-- REFUND -->
+    <div class="legal-panel" id="legal-refund">
+      <div class="legal-updated">Last updated — June 2026</div>
+      <h4>Project Cancellation Before Work Begins</h4>
+      <p>If a project is cancelled before any creative work has started, you are entitled to a full refund of any advance payment made, minus any administrative or processing fees.</p>
+      <h4>Project Cancellation After Work Has Begun</h4>
+      <p>Once creative work has commenced, refunds are evaluated based on the percentage of work completed. The client will be charged for work completed up to the point of cancellation, and any remaining balance will be refunded.</p>
+      <h4>Revision & Dissatisfaction</h4>
+      <p>We are committed to delivering work that meets the agreed brief. If you are not satisfied with a deliverable, we will first work to resolve the issue through revisions within the agreed scope. Refunds based on dissatisfaction are considered only if we are unable to meet the requirements outlined in the original brief after reasonable revision attempts.</p>
+      <h4>Retainer Services</h4>
+      <p>Monthly retainer payments are non-refundable once the service period has begun. Retainers can be cancelled with 15 days written notice before the next billing cycle.</p>
+      <h4>Digital Products & Strategy Documents</h4>
+      <p>Strategy documents, proposals, and digital deliverables that have been delivered and accessed are non-refundable.</p>
+      <h4>How to Request a Refund</h4>
+      <p>To request a refund, contact us at hello.ritik@outlook.com with your project details and reason for the request. We will respond within 3 business days.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Ritik & Co. All rights reserved.</span>
+  <span>hello.ritik@outlook.com</span>
+  <a href="index.html">← Back to Home</a>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+
+function showLegal(tab, btn) {
+  document.querySelectorAll('.legal-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.legal-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('legal-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
