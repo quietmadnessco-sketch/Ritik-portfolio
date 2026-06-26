@@ -1143,6 +1143,64 @@ footer{
 .cta-contact-item a{color:var(--white);font-family:var(--ff-head);font-size:15px;font-weight:700;letter-spacing:0.5px;transition:color 0.2s}
 .cta-contact-item a:hover{color:var(--accent)}
 .cta-contact-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+  @media (max-width: 768px) {
+  .work-card,
+  .work-card:first-child {
+    aspect-ratio: auto !important;
+    min-height: 420px;
+  }
+
+  .work-card-overlay {
+    justify-content: flex-end;
+    padding: 1.1rem;
+    background: linear-gradient(
+      to top,
+      rgba(9,9,11,1) 0%,
+      rgba(9,9,11,0.95) 34%,
+      rgba(9,9,11,0.45) 62%,
+      transparent 100%
+    );
+  }
+
+  .work-card-cat {
+    font-size: 8px;
+    letter-spacing: 1.3px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .work-card-title {
+    font-size: 20px;
+    line-height: 1.15;
+    max-width: 95%;
+  }
+
+  .work-card-cta {
+    font-size: 13px;
+  }
+
+  .work-card-label {
+    top: 1rem;
+    left: 1rem;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .work-card,
+  .work-card:first-child {
+    min-height: 390px;
+  }
+
+  .work-card-title {
+    font-size: 18px;
+  }
+
+  .work-card-cat {
+    font-size: 7.5px;
+    letter-spacing: 1.1px;
+  }
+}
 </style>
 
 <!-- CLIENT LOGOS STRIP -->
