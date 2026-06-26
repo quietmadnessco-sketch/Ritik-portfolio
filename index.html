@@ -2257,17 +2257,18 @@ function openModal(id) {
   hero.style.background = '';
 
   hero.innerHTML = `
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      style="width:100%;height:100%;object-fit:cover;"
-    >
-      <source src="${p.video}" type="video/mp4">
-    </video>
-    <div class="modal-hero-cat">${p.cat}</div>
-  `;
+  <video
+    src="${p.video}"
+    autoplay
+    muted
+    loop
+    playsinline
+    controls
+    style="width:100%;height:100%;object-fit:cover;display:block;"
+  ></video>
+
+  <div class="modal-hero-cat">${p.cat}</div>
+`;
 }
   } else {
     hero.innerHTML = `
