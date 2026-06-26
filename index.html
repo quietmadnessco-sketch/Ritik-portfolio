@@ -2256,7 +2256,10 @@ function openModal(id) {
  if (p.video) {
   hero.style.background = '';
 
-  hero.innerHTML = `
+  
+}
+  } else {
+    hero.innerHTML = `
   <video
     src="${p.video}"
     autoplay
@@ -2269,18 +2272,6 @@ function openModal(id) {
 
   <div class="modal-hero-cat">${p.cat}</div>
 `;
-}
-  } else {
-    hero.innerHTML = `
-      <div class="modal-hero-placeholder">
-        <div class="modal-hero-gradient"></div>
-        <div class="modal-hero-icon">${p.heroIcon}</div>
-        <div class="modal-hero-text">
-          PROJECT VISUAL — ${p.title.toUpperCase()}
-        </div>
-      </div>
-      <div class="modal-hero-cat">${p.cat}</div>
-    `;
 
     hero.style.background = p.heroBg;
   }
