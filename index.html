@@ -2208,30 +2208,35 @@ function openModal(id) {
   const p = projects[id];
   if (!p) return;
 
-  // hero
   const hero = document.getElementById('modalHero');
 
-if (p.video) {
-  hero.innerHTML = `
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      controls
-      style="width:100%;height:100%;object-fit:cover;border-radius:12px;"
-    >
-      <source src="${p.video}" type="video/mp4">
-    </video>
-  `;
-} else {
-  hero.innerHTML = `
-    <div id="modalHeroIcon">${p.heroIcon}</div>
-  `;
-  hero.style.background = p.heroBg;
-}
-  document.getElementById('modalHeroText').textContent = 'PROJECT VISUAL — ' + p.title.toUpperCase();
-  document.getElementById('modalHeroCat').textContent = p.cat;
+  if (p.video) {
+    hero.innerHTML = `
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        style="width:100%;height:100%;object-fit:cover;"
+      >
+        <source src="${p.video}" type="video/mp4">
+      </video>
+      <div class="modal-hero-cat">${p.cat}</div>
+    `;
+  } else {
+    hero.innerHTML = `
+      <div class="modal-hero-placeholder">
+        <div class="modal-hero-gradient"></div>
+        <div class="modal-hero-icon">${p.heroIcon}</div>
+        <div class="modal-hero-text">
+          PROJECT VISUAL — ${p.title.toUpperCase()}
+        </div>
+      </div>
+      <div class="modal-hero-cat">${p.cat}</div>
+    `;
+
+    hero.style.background = p.heroBg;
+  }
 
   // body
   document.getElementById('modalCat').textContent = p.cat;
