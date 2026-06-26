@@ -2209,8 +2209,27 @@ function openModal(id) {
   if (!p) return;
 
   // hero
-  document.getElementById('modalHero').style.background = p.heroBg;
-  document.getElementById('modalHeroIcon').textContent = p.heroIcon;
+  const hero = document.getElementById('modalHero');
+
+if (p.video) {
+  hero.innerHTML = `
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      controls
+      style="width:100%;height:100%;object-fit:cover;border-radius:12px;"
+    >
+      <source src="${p.video}" type="video/mp4">
+    </video>
+  `;
+} else {
+  hero.innerHTML = `
+    <div id="modalHeroIcon">${p.heroIcon}</div>
+  `;
+  hero.style.background = p.heroBg;
+}
   document.getElementById('modalHeroText').textContent = 'PROJECT VISUAL — ' + p.title.toUpperCase();
   document.getElementById('modalHeroCat').textContent = p.cat;
 
