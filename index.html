@@ -2253,26 +2253,30 @@ function openModal(id) {
 
   const hero = document.getElementById('modalHero');
 
- if (p.video) {
-  hero.style.background = '';
-
-  
-}
+  if (p.video) {
+    hero.style.background = '';
+    hero.innerHTML = `
+      <video
+        src="${p.video}"
+        autoplay
+        muted
+        loop
+        playsinline
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+      ></video>
+      <div class="modal-hero-cat">${p.cat}</div>
+    `;
   } else {
     hero.innerHTML = `
-  <video
-    src="${p.video}"
-    autoplay
-    muted
-    loop
-    playsinline
-    controls
-    style="width:100%;height:100%;object-fit:cover;display:block;"
-  ></video>
-
-  <div class="modal-hero-cat">${p.cat}</div>
-`;
-
+      <div class="modal-hero-placeholder">
+        <div class="modal-hero-gradient"></div>
+        <div class="modal-hero-icon">${p.heroIcon}</div>
+        <div class="modal-hero-text">
+          PROJECT VISUAL — ${p.title.toUpperCase()}
+        </div>
+      </div>
+      <div class="modal-hero-cat">${p.cat}</div>
+    `;
     hero.style.background = p.heroBg;
   }
 
@@ -2285,7 +2289,6 @@ function openModal(id) {
   document.getElementById('modalOutcome').textContent = p.outcome;
   document.getElementById('modalBehanceLink').href = p.behance;
 
-  // approach list
   const list = document.getElementById('modalApproach');
   list.innerHTML = '';
   p.approach.forEach(item => {
@@ -2294,7 +2297,6 @@ function openModal(id) {
     list.appendChild(li);
   });
 
-  // tags
   const tags = document.getElementById('modalTags');
   tags.innerHTML = '';
   p.tags.forEach(tag => {
