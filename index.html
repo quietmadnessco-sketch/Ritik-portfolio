@@ -1217,12 +1217,14 @@ footer{
   <div class="work-grid" id="workGrid">
 
     <!-- PROJECT 1: Rotex — featured large -->
-   <div class="work-card-img"
-     style="background-image:url('images/rotexthumb.png');
-            background-size:cover;
-            background-position:center;
-            background-repeat:no-repeat;">
-</div>
+    <div class="work-card" data-category="3d" onclick="openModal('rotex')">
+      <div class="work-card-img" style="background:linear-gradient(135deg,#0f1923 0%,#1a2a38 50%,#0d1820 100%)">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.15">
+          <rect x="10" y="20" width="60" height="40" rx="4" stroke="white" stroke-width="1.5"/>
+          <path d="M10 32h60M30 20v40M50 20v40" stroke="white" stroke-width="1"/>
+          <circle cx="40" cy="40" r="8" stroke="white" stroke-width="1.5"/>
+        </svg>
+      </div>
       <div class="work-card-overlay">
         <div class="work-card-cat">3D Visualization · Industrial</div>
         <div class="work-card-title">Rotex Automation — Industrial Product Visualization &amp; Catalogue</div>
@@ -1946,7 +1948,6 @@ const projects = {
   rotex: {
     cat: "3D Visualization · Industrial",
     title: "Rotex Automation",
-    image: "images/rotexthumb.png",
     subtitle: "Industrial Product Visualization & Catalogue Design",
     heroBg: "linear-gradient(135deg,#0f1923 0%,#1a2a38 50%,#0d1820 100%)",
     heroIcon: "⬡",
