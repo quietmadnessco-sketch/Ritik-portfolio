@@ -460,6 +460,10 @@ footer{
   transition:transform 0.4s ease;
 }
 .work-card:first-child{grid-column:1/3;aspect-ratio:16/7}
+  .work-card:last-child{
+  grid-column:span 2;
+  aspect-ratio:8/3;
+}
 .work-card:hover{transform:scale(0.98)}
 .work-card-img{
   width:100%;height:100%;
@@ -1428,6 +1432,7 @@ footer{
   </div>
 
 
+   
   <!-- PROJECT 4: Cartier -->
   <div class="work-card" data-category="3d" onclick="openModal('cartier')">
     <div class="work-card-img">
