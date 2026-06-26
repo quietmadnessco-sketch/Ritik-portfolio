@@ -2172,6 +2172,7 @@ const projects = {
     title: "Real Estate Video Content Strategy",
     subtitle: "Dual-video approach for digital platforms and on-ground sales environments",
     video: "Video2/realestate.mp4",
+    poster: "images/real estate.png",
     heroBg: "linear-gradient(135deg,#1a1408 0%,#2a2010 50%,#181206 100%)",
     heroIcon: "▣",
     overview: "A dual-video content strategy designed to elevate real estate marketing across digital and physical touchpoints. The project delivers two distinct video formats — a fast-paced social reel and a refined property overview film — each engineered for a specific audience and channel.",
@@ -2212,6 +2213,7 @@ const projects = {
     title: "A Cartier Bracelet Brought to Life in 3D",
     subtitle: "3D visualization and animation for the Cartier International Design Competition",
     video: "Video2/cartier.mp4",
+    poster: "images/cartier.jpg",
     heroBg: "linear-gradient(135deg,#14100a 0%,#1e1610 50%,#100c08 100%)",
     heroIcon: "◎",
     overview: "Created for a group of fashion and jewelry designers selected to participate in the prestigious Cartier International Design Competition. The brief was to conceptualize and present an original bracelet design to Cartier's global design director through a photorealistic 3D experience.",
@@ -2232,6 +2234,7 @@ const projects = {
     title: "Jewelry Collection Film for Batoki.Arts",
     subtitle: "Cinematic product film for an Indian handcrafted jewelry brand",
     video: "Video/batokiweb.mp4",
+    poster: "images/batoki.jpg",
     heroBg: "linear-gradient(135deg,#0f0a14 0%,#1a1020 50%,#0c0810 100%)",
     heroIcon: "✦",
     overview: "A cinematic product film created for Batoki.Arts — a handcrafted jewelry brand rooted in Indian heritage. The video highlights the elegance, detailing, and emotional richness of each piece through artistic storytelling and soft visuals. Developed for brand campaigns, launch teasers, and digital promotion.",
@@ -2259,14 +2262,16 @@ function openModal(id) {
   if (p.video) {
     hero.style.background = '';
     hero.innerHTML = `
-      <video
-        src="${p.video}"
-        autoplay
-        muted
-        loop
-        playsinline
-        style="width:100%;height:100%;object-fit:cover;display:block;"
-      ></video>
+  <video
+    src="${p.video}"
+    poster="${p.poster || ''}"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    style="width:100%;height:100%;object-fit:cover;display:block;"
+  ></video>
       <div class="modal-hero-cat">${p.cat}</div>
     `;
   } else {
