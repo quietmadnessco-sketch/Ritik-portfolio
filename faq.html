@@ -275,11 +275,10 @@ footer a:hover{color:var(--accent)}
   <div class="legal-inner">
     <div class="legal-title">Legal Policies</div>
     <div class="legal-tabs">
-      <button class="legal-tab active" onclick="showLegal('terms', this)">Terms & Conditions</button>
-      <button class="legal-tab" onclick="showLegal('privacy', this)">Privacy Policy</button>
-      <button class="legal-tab" onclick="showLegal('refund', this)">Refund Policy</button>
+      <button class="legal-tab active" id="tab-terms" onclick="showLegal('terms', this)">Terms & Conditions</button>
+      <button class="legal-tab" id="tab-privacy" onclick="showLegal('privacy', this)">Privacy Policy</button>
+      <button class="legal-tab" id="tab-refund" onclick="showLegal('refund', this)">Refund Policy</button>
     </div>
-
     <!-- TERMS -->
     <div class="legal-panel active" id="legal-terms">
       <div class="legal-updated">Last updated — June 2026</div>
@@ -361,7 +360,18 @@ function showLegal(tab, btn) {
   document.querySelectorAll('.legal-tab').forEach(function(t) { t.classList.remove('active'); });
   document.getElementById('legal-' + tab).classList.add('active');
   btn.classList.add('active');
+  document.querySelector('.legal-section').scrollIntoView({ behavior: 'smooth' });
 }
+
+window.addEventListener('load', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash === 'terms' || hash === 'privacy' || hash === 'refund') {
+    var btn = document.getElementById('tab-' + hash);
+    if (btn) {
+      showLegal(hash, btn);
+    }
+  }
+});
 </script>
 
 </body>
