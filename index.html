@@ -3250,5 +3250,20 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape')fabClose();
 });
 </script>
+  <script>
+// ── AUTO-TRIGGER FAB on first visit ──
+(function(){
+  var delay = 2000; // opens after 2 seconds
+  var key = 'fabShown';
+
+  // only triggers once per session
+  if(!sessionStorage.getItem(key)){
+    setTimeout(function(){
+      fabOpen();
+      sessionStorage.setItem(key, '1');
+    }, delay);
+  }
+})();
+</script>
 </body>
 </html>
