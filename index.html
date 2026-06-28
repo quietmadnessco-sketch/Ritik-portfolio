@@ -1516,6 +1516,462 @@ footer{
     object-position: center center !important;
   }
 }
+  /* ── FAB SIDE TAB (persistent trigger) ── */
+.fab-tab{
+  position:fixed;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:8999;
+  background:var(--accent);
+  color:var(--white);
+  font-family:var(--ff-head);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  padding:18px 10px;
+  border-radius:8px 0 0 8px;
+  cursor:pointer;
+  border:none;
+  box-shadow:-4px 0 20px rgba(16,185,129,0.25);
+  transition:all 0.25s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.fab-tab:hover{
+  background:var(--accent-d);
+  padding-right:14px;
+  box-shadow:-6px 0 28px rgba(16,185,129,0.4);
+}
+.fab-tab-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--white);
+  flex-shrink:0;
+  animation:fabPulse 2s infinite;
+}
+@keyframes fabPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.4;transform:scale(0.7)}
+}
+
+/* ── FAB BACKDROP ── */
+.fab-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:9001;
+  background:rgba(9,9,11,0.75);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:1.5rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+.fab-backdrop.open{
+  opacity:1;
+  pointer-events:all;
+}
+
+/* ── FAB MODAL ── */
+.fab-modal{
+  background:var(--dark1);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  width:100%;
+  max-width:400px;
+  transform:translateX(40px) scale(0.96);
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);
+}
+.fab-backdrop.open .fab-modal{
+  transform:translateX(0) scale(1);
+}
+
+/* ── MODAL HEADER ── */
+.fab-modal-head{
+  padding:1.75rem 1.75rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:relative;
+}
+.fab-modal-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(16,185,129,0.1);
+  border:1px solid rgba(16,185,129,0.2);
+  color:var(--accent);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:100px;
+  margin-bottom:0.875rem;
+}
+.fab-modal-badge-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:fabPulse 2s infinite;
+}
+.fab-modal-head h4{
+  font-family:var(--ff-head);
+  font-size:20px;
+  font-weight:800;
+  color:var(--white);
+  letter-spacing:-0.4px;
+  margin-bottom:5px;
+  line-height:1.2;
+}
+.fab-modal-head p{
+  font-size:13px;
+  color:var(--text-d);
+  line-height:1.6;
+}
+.fab-close{
+  position:absolute;
+  top:1.25rem;
+  right:1.25rem;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.09);
+  color:var(--text-d);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  transition:all 0.2s;
+  line-height:1;
+}
+.fab-close:hover{
+  background:rgba(239,68,68,0.15);
+  border-color:rgba(239,68,68,0.3);
+  color:#ef4444;
+}
+
+/* ── OPTIONS ── */
+.fab-options{
+  padding:1.25rem 1.75rem 1.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.fab-option{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:1.1rem 1.25rem;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.07);
+  background:rgba(255,255,255,0.02);
+  cursor:pointer;
+  transition:all 0.22s;
+  text-align:left;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+.fab-option::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(16,185,129,0.06),transparent);
+  opacity:0;
+  transition:opacity 0.22s;
+}
+.fab-option:hover{
+  border-color:rgba(16,185,129,0.35);
+  background:rgba(16,185,129,0.04);
+  transform:translateX(-3px);
+}
+.fab-option:hover::before{opacity:1}
+.fab-opt-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(16,185,129,0.1);
+  border:1px solid rgba(16,185,129,0.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+  transition:all 0.22s;
+}
+.fab-option:hover .fab-opt-icon{
+  background:rgba(16,185,129,0.18);
+  border-color:rgba(16,185,129,0.3);
+}
+.fab-opt-text{flex:1;min-width:0}
+.fab-opt-title{
+  font-family:var(--ff-head);
+  font-size:14px;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:3px;
+  letter-spacing:-0.2px;
+}
+.fab-opt-desc{
+  font-size:11.5px;
+  color:var(--text-d);
+  line-height:1.5;
+}
+.fab-opt-arrow{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  color:var(--text-d);
+  flex-shrink:0;
+  transition:all 0.22s;
+}
+.fab-option:hover .fab-opt-arrow{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:var(--white);
+  transform:translateX(2px);
+}
+
+/* ── DIVIDER ── */
+.fab-divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 1.75rem;
+  margin:-4px 0;
+}
+.fab-divider::before,.fab-divider::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,0.06);
+}
+.fab-divider span{
+  font-size:10px;
+  color:rgba(161,161,170,0.4);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+
+/* ── BROCHURE FORM ── */
+.fab-step2-head{
+  padding:1.75rem 1.75rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:relative;
+}
+.fab-step2-head h4{
+  font-family:var(--ff-head);
+  font-size:18px;
+  font-weight:800;
+  color:var(--white);
+  letter-spacing:-0.3px;
+  margin-bottom:5px;
+}
+.fab-step2-head p{
+  font-size:12px;
+  color:var(--text-d);
+  line-height:1.6;
+}
+.fab-brochure-form{
+  padding:1.5rem 1.75rem 1.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.fab-field{display:flex;flex-direction:column;gap:6px}
+.fab-field label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:rgba(161,161,170,0.8);
+}
+.fab-field input{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;
+  padding:11px 14px;
+  font-family:var(--ff-body);
+  font-size:13.5px;
+  color:var(--white);
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+  width:100%;
+}
+.fab-field input::placeholder{color:rgba(161,161,170,0.35)}
+.fab-field input:focus{
+  border-color:rgba(16,185,129,0.45);
+  background:rgba(255,255,255,0.06);
+}
+.fab-back-btn{
+  background:none;
+  border:none;
+  color:var(--text-d);
+  font-size:12px;
+  font-family:var(--ff-body);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0;
+  transition:color 0.2s;
+  margin-bottom:2px;
+}
+.fab-back-btn:hover{color:var(--accent)}
+.fab-submit-btn{
+  width:100%;
+  background:var(--accent);
+  color:var(--white);
+  border:none;
+  border-radius:10px;
+  padding:14px;
+  font-family:var(--ff-head);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  cursor:pointer;
+  margin-top:4px;
+  transition:all 0.2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.fab-submit-btn:hover{
+  background:var(--accent-d);
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(16,185,129,0.35);
+}
+.fab-submit-btn svg{
+  width:15px;height:15px;
+  transition:transform 0.2s;
+}
+.fab-submit-btn:hover svg{transform:translateX(3px)}
+.fab-form-note{
+  text-align:center;
+  font-size:11px;
+  color:rgba(161,161,170,0.5);
+  line-height:1.5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+/* ── SUCCESS STATE ── */
+.fab-success{
+  display:none;
+  padding:2.5rem 1.75rem;
+  text-align:center;
+}
+.fab-success.show{display:block}
+.fab-success-ring{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:rgba(16,185,129,0.1);
+  border:2px solid rgba(16,185,129,0.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 1.25rem;
+  animation:fabRingPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes fabRingPop{
+  from{transform:scale(0.5);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.fab-success-check{
+  width:28px;
+  height:28px;
+  stroke:var(--accent);
+  stroke-width:2.5;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.fab-success-title{
+  font-family:var(--ff-head);
+  font-size:18px;
+  font-weight:800;
+  color:var(--white);
+  margin-bottom:8px;
+  letter-spacing:-0.3px;
+}
+.fab-success-body{
+  font-size:13px;
+  color:var(--text-d);
+  line-height:1.75;
+  margin-bottom:1.5rem;
+}
+.fab-success-close{
+  display:inline-block;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--text-d);
+  font-size:12px;
+  font-family:var(--ff-body);
+  padding:10px 20px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.fab-success-close:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ── MOBILE ── */
+@media(max-width:960px){
+  .fab-tab{
+    top:auto;
+    bottom:5rem;
+    transform:none;
+  }
+  .fab-backdrop{
+    align-items:flex-end;
+    justify-content:center;
+    padding:0;
+  }
+  .fab-modal{
+    max-width:100%;
+    border-radius:20px 20px 0 0;
+    transform:translateY(60px) scale(0.97);
+    max-height:92vh;
+    overflow-y:auto;
+  }
+  .fab-backdrop.open .fab-modal{
+    transform:translateY(0) scale(1);
+  }
+}
+@media(max-width:480px){
+  .fab-modal-head,
+  .fab-step2-head{padding:1.5rem 1.25rem 1rem}
+  .fab-options{padding:1rem 1.25rem 1.5rem}
+  .fab-brochure-form{padding:1.25rem 1.25rem 1.5rem}
+  .fab-success{padding:2rem 1.25rem}
+  .fab-modal-head h4{font-size:17px}
+}
 </style>
 
 <!-- CLIENT LOGOS STRIP -->
@@ -2601,6 +3057,198 @@ window.addEventListener('resize', function() {
   if (window.innerWidth > 960) closeMenu();
 });
 </script>
+<!-- ── PERSISTENT SIDE TAB ── -->
+<button class="fab-tab" onclick="fabOpen()" aria-label="Get Started">
+  <div class="fab-tab-dot"></div>
+  Get Started
+</button>
 
+<!-- ── FAB MODAL ── -->
+<div class="fab-backdrop" id="fabBackdrop" onclick="fabBackdropClick(event)">
+  <div class="fab-modal" id="fabModal" role="dialog" aria-modal="true">
+
+    <!-- STEP 1: Options -->
+    <div id="fabStep1">
+      <div class="fab-modal-head">
+        <button class="fab-close" onclick="fabClose()" aria-label="Close">✕</button>
+        <div class="fab-modal-badge">
+          <span class="fab-modal-badge-dot"></span>
+          Now Accepting Clients
+        </div>
+        <h4>How can we help you?</h4>
+        <p>Choose an option below to get started with Ritik & Co.</p>
+      </div>
+      <div class="fab-options">
+        <button class="fab-option" onclick="fabChooseCall()">
+          <div class="fab-opt-icon">📞</div>
+          <div class="fab-opt-text">
+            <div class="fab-opt-title">Book a Strategy Call</div>
+            <div class="fab-opt-desc">Free 30-min session — we'll map out your exact growth plan</div>
+          </div>
+          <div class="fab-opt-arrow">→</div>
+        </button>
+        <div class="fab-divider"><span>or</span></div>
+        <button class="fab-option" onclick="fabChooseBrochure()">
+          <div class="fab-opt-icon">📄</div>
+          <div class="fab-opt-text">
+            <div class="fab-opt-title">Get Agency Brochure</div>
+            <div class="fab-opt-desc">Download our services, case studies & pricing overview</div>
+          </div>
+          <div class="fab-opt-arrow">→</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Brochure Form -->
+    <div id="fabStep2" style="display:none">
+      <div class="fab-step2-head">
+        <button class="fab-close" onclick="fabClose()" aria-label="Close">✕</button>
+        <h4>Get the Agency Brochure</h4>
+        <p>Enter your details below to unlock the download instantly.</p>
+      </div>
+
+      <form class="fab-brochure-form" id="fabBrochureForm" onsubmit="fabSubmit(event)" novalidate>
+        <input type="hidden" name="_subject" value="Brochure Download — Ritik & Co.">
+
+        <button type="button" class="fab-back-btn" onclick="fabBack()">
+          ← Back to options
+        </button>
+
+        <div class="fab-field">
+          <label>Your Name <span style="color:rgba(239,68,68,0.7)">*</span></label>
+          <input type="text" name="name" placeholder="Full Name" required autocomplete="name">
+        </div>
+
+        <div class="fab-field">
+          <label>Email Address <span style="color:rgba(239,68,68,0.7)">*</span></label>
+          <input type="email" name="email" placeholder="you@company.com" required autocomplete="email">
+        </div>
+
+        <div class="fab-field">
+          <label>Company <span style="color:rgba(161,161,170,0.4);font-weight:400;text-transform:none;font-size:10px">— optional</span></label>
+          <input type="text" name="company" placeholder="Your Company" autocomplete="organization">
+        </div>
+
+        <button type="submit" class="fab-submit-btn">
+          Get Brochure
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <p class="fab-form-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          No spam. Your info is safe with us.
+        </p>
+      </form>
+
+      <div class="fab-success" id="fabSuccessMsg">
+        <div class="fab-success-ring">
+          <svg class="fab-success-check" viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="fab-success-title">Your brochure is downloading!</div>
+        <div class="fab-success-body">
+          Thanks for your interest in Ritik & Co.<br>
+          Check your downloads folder — and watch your inbox for a follow-up shortly.
+        </div>
+        <button class="fab-success-close" onclick="fabClose()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+  <script>
+// ── FAB LOGIC ──
+function fabOpen(){
+  document.getElementById('fabBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function fabClose(){
+  document.getElementById('fabBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(fabReset,400);
+}
+function fabBackdropClick(e){
+  if(e.target===document.getElementById('fabBackdrop'))fabClose();
+}
+function fabReset(){
+  document.getElementById('fabStep1').style.display='';
+  document.getElementById('fabStep2').style.display='none';
+  var form=document.getElementById('fabBrochureForm');
+  form.style.display='flex';
+  document.getElementById('fabSuccessMsg').classList.remove('show');
+  form.reset();
+}
+function fabChooseCall(){
+  fabClose();
+  setTimeout(function(){
+    var el=document.getElementById('contact');
+    if(el)el.scrollIntoView({behavior:'smooth'});
+    setTimeout(function(){openForm('strategy');},600);
+  },350);
+}
+function fabChooseBrochure(){
+  document.getElementById('fabStep1').style.display='none';
+  document.getElementById('fabStep2').style.display='';
+}
+function fabBack(){
+  document.getElementById('fabStep1').style.display='';
+  document.getElementById('fabStep2').style.display='none';
+}
+function fabSubmit(e){
+  e.preventDefault();
+  var form=e.target;
+  var btn=form.querySelector('.fab-submit-btn');
+
+  // basic validation
+  var name=form.querySelector('[name="name"]').value.trim();
+  var email=form.querySelector('[name="email"]').value.trim();
+  if(!name||!email){
+    form.querySelector('[name="'+((!name)?'name':'email')+'"]').focus();
+    return;
+  }
+
+  // loading state
+  btn.textContent='Sending…';
+  btn.disabled=true;
+
+  var data=new FormData(form);
+  fetch('https://formspree.io/f/mlgybjed',{
+    method:'POST',body:data,
+    headers:{'Accept':'application/json'}
+  })
+  .then(function(res){
+    if(res.ok){
+      // trigger download
+      var a=document.createElement('a');
+      a.href='ritikandco-final.pdf';
+      a.download='Ritik-and-Co-Agency-Brochure.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      // show success
+      form.style.display='none';
+      document.getElementById('fabSuccessMsg').classList.add('show');
+      setTimeout(fabClose,5000);
+    } else {
+      btn.innerHTML='Get Brochure <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+      btn.disabled=false;
+      alert('Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(){
+    btn.innerHTML='Get Brochure <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    btn.disabled=false;
+    alert('Network error. Please check your connection.');
+  });
+}
+
+// ESC key
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')fabClose();
+});
+</script>
 </body>
 </html>
