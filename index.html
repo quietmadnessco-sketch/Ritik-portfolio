@@ -1091,10 +1091,20 @@ footer{
   .work-card-title{font-size:15px}
 
   /* MODAL */
-  .modal{border-radius:12px 12px 0 0;max-height:95vh;position:fixed;bottom:0;left:0;right:0;top:auto;width:100%;max-width:100%}
-  .modal-backdrop{align-items:flex-end;padding:0}
-  .modal-backdrop.open .modal{transform:translateY(0) scale(1)}
-  .modal-hero{aspect-ratio:16/6;border-radius:12px 12px 0 0}
+ /* MODAL */
+.modal{border-radius:12px 12px 0 0;max-height:95vh;position:fixed;bottom:0;left:0;right:0;top:auto;width:100%;max-width:100%}
+.modal-backdrop{align-items:flex-end;padding:0}
+.modal-backdrop.open .modal{transform:translateY(0) scale(1)}
+.modal-hero{
+  aspect-ratio:4/3;
+  max-height:42vh;
+  border-radius:12px 12px 0 0;
+  background:#000;
+}
+.modal-hero video{
+  object-fit:contain;
+  background:#000;
+}
 
   /* FORMS */
   .form-modal{border-radius:16px 16px 0 0;max-height:95vh;position:fixed;bottom:0;left:0;right:0;width:100%;max-width:100%}
@@ -1171,6 +1181,10 @@ footer{
 
   /* MODAL slides up from bottom */
   .modal-body{padding:1.25rem}
+  .modal-hero{
+    aspect-ratio:1/1;
+    max-height:36vh;
+  }
 
   /* FORM */
   .vx-form{padding:1.25rem 1.25rem 1.75rem}
