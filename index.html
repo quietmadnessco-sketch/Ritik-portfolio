@@ -1289,10 +1289,11 @@ footer{
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 0;
+  filter: brightness(1.15) contrast(1.05);  /* lifts the dull look */
 }
-.hero-video-overlay {
+..hero-video-overlay {
   position: absolute; inset: 0;
-  background: rgba(8,8,14,0.62);
+  background: rgba(8,8,14,0.40);   /* was 0.62 — much lighter now */
   z-index: 1;
 }
 /* your glows/noise sit above video but below text */
