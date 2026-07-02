@@ -1235,6 +1235,10 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="images/rotexthumb.png">
+    <source src="hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay"></div>
   <div class="hero-noise"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
@@ -1276,6 +1280,25 @@ footer{
 
 
 <style>
+  .hero { position: relative; overflow: hidden; }
+
+.hero-bg-video {
+  position: absolute; top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-video-overlay {
+  position: absolute; inset: 0;
+  background: rgba(8,8,14,0.62);
+  z-index: 1;
+}
+/* your glows/noise sit above video but below text */
+.hero-noise, .hero-glow, .hero-glow2 { z-index: 2; }
+/* text and buttons on top of everything */
+.hero-inner { position: relative; z-index: 3; }
 /* ── LOGO STRIP ── */
 .logo-strip{
   background:var(--dark1);
