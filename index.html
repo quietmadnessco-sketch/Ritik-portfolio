@@ -1235,13 +1235,9 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
- <video class="hero-bg-video hero-bg-video--desktop" autoplay muted loop playsinline>
-  <source src="hero-video.mp4" type="video/mp4">
-</video>
-<video class="hero-bg-video hero-bg-video--mobile" autoplay muted loop playsinline>
-  <source src="hero-video-mobile.mp4" type="video/mp4">
-</video>
-  
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="images/rotexthumb.png">
+    <source src="hero-video.mp4" type="video/mp4">
+  </video>
   <div class="hero-video-overlay"></div>
   <div class="hero-noise"></div>
   <div class="hero-glow"></div>
@@ -1284,31 +1280,21 @@ footer{
 
 
 <style>
- 
-  .hero {
-  position: relative;
-  overflow: hidden;
-  background: #1a0f0f; /* dark base behind the video while it loads */
-}
-
-.hero-video-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(8,8,14,0.25) 0%, rgba(8,8,14,0.55) 100%);
-  z-index: 1;
-}
+  .hero { position: relative; overflow: hidden; }
 
 .hero-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
+  position: absolute; top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  object-position: center;
   z-index: 0;
-  filter: brightness(1.15) contrast(1.05);
+  filter: brightness(1.15) contrast(1.05);  /* lifts the dull look */
+}
+..hero-video-overlay {
+  position: absolute; inset: 0;
+  background: rgba(8,8,14,0.40);   /* was 0.62 — much lighter now */
+  z-index: 1;
 }
 /* your glows/noise sit above video but below text */
 .hero-noise, .hero-glow, .hero-glow2 { z-index: 2; }
@@ -1556,13 +1542,7 @@ footer{
   .work-grid {
     align-items: stretch;
   }
-}
-  /* Desktop hero video — original size, no zoom */
-@media (min-width: 769px) {
-  .hero-bg-video--desktop {
-    object-fit: contain;
-  }
-}
+
   /* Second work card = Real Estate */
   .work-card:nth-child(2) {
     aspect-ratio: auto !important;
@@ -2037,31 +2017,6 @@ footer{
   .fab-success{padding:2rem 1.25rem}
   .fab-modal-head h4{font-size:17px}
 }
-  @media (max-width: 768px) {
-  .hero {
-  position: relative;      /* anchors the absolute video — don't lose this */
-  overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background: #1a0f0f;
-}
-  .hero-bg-video--desktop { display: none !important; }
-  .hero-bg-video--mobile  {
-    display: block !important;
-    object-fit: contain;
-  }
-  .hero-inner {
-    padding-top: 90px;
-  }
-  .hero h1 {
-    font-size: clamp(2.2rem, 11vw, 3rem);
-  }
-  .hero-proof {
-    gap: 1rem;
-  }
-}
-  
 </style>
 
 <!-- CLIENT LOGOS STRIP -->
@@ -2828,32 +2783,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
-});
-  (function() {
-  const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    const video = document.getElementById('heroVideo');
-    const source = document.getElementById('heroVideoSource');
-    source.src = 'hero-video-mobile.mp4';
-    video.load();
-    video.play();
-  }
-})();
-  document.addEventListener('DOMContentLoaded', function() {
-  const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    const video = document.getElementById('heroVideo');
-    const source = document.getElementById('heroVideoSource');
-    if (video && source) {
-      source.src = 'hero-video-mobile.mp4';
-      video.load();
-      video.play().catch(function(err) {
-        console.log('Video play failed:', err);
-      });
-    } else {
-      console.log('Video elements not found');
-    }
-  }
 });
 </script>
 
