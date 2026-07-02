@@ -1556,7 +1556,13 @@ footer{
   .work-grid {
     align-items: stretch;
   }
-
+}
+  /* Desktop hero video — original size, no zoom */
+@media (min-width: 769px) {
+  .hero-bg-video--desktop {
+    object-fit: contain;
+  }
+}
   /* Second work card = Real Estate */
   .work-card:nth-child(2) {
     aspect-ratio: auto !important;
