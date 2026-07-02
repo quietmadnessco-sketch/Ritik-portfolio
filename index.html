@@ -1235,8 +1235,11 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <video id="heroVideo" class="hero-bg-video" autoplay muted loop playsinline poster="images/rotexthumb.png">
-  <source id="heroVideoSource" src="hero-video.mp4" type="video/mp4">
+ <video class="hero-bg-video hero-bg-video--desktop" autoplay muted loop playsinline>
+  <source src="hero-video.mp4" type="video/mp4">
+</video>
+<video class="hero-bg-video hero-bg-video--mobile" autoplay muted loop playsinline>
+  <source src="hero-video-mobile.mp4" type="video/mp4">
 </video>
   
   <div class="hero-video-overlay"></div>
@@ -1282,7 +1285,11 @@ footer{
 
 <style>
  
-  .hero { position: relative; overflow: hidden; }
+  .hero {
+  position: relative;
+  overflow: hidden;
+  background: #1a0f0f; /* dark base behind the video while it loads */
+}
 
 .hero-video-overlay {
   position: absolute;
