@@ -1283,19 +1283,25 @@ footer{
  
   .hero { position: relative; overflow: hidden; }
 
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,14,0.25) 0%, rgba(8,8,14,0.55) 100%);
+  z-index: 1;
+}
+
 .hero-bg-video {
-  position: absolute; top: 50%; left: 50%;
-  min-width: 100%; min-height: 100%;
-  width: auto; height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 0;
-  filter: brightness(.80) contrast(1);  /* lifts the dull look */
-}
-.hero-video-overlay {
-  position: absolute; inset: 0;
-  background: rgba(8,8,14,0.40);   /* was 0.62 — much lighter now */
-  z-index: 1;
+  filter: brightness(1.15) contrast(1.05);
 }
 /* your glows/noise sit above video but below text */
 .hero-noise, .hero-glow, .hero-glow2 { z-index: 2; }
