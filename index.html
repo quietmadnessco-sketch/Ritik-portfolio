@@ -1235,9 +1235,10 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-bg-video" autoplay muted loop playsinline poster="images/rotexthumb.png">
-    <source src="hero-video.mp4" type="video/mp4">
-  </video>
+  <video id="heroVideo" class="hero-bg-video" autoplay muted loop playsinline poster="images/rotexthumb.png">
+  <source id="heroVideoSource" src="hero-video.mp4" type="video/mp4">
+</video>
+  
   <div class="hero-video-overlay"></div>
   <div class="hero-noise"></div>
   <div class="hero-glow"></div>
@@ -2811,6 +2812,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+  (function() {
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    const video = document.getElementById('heroVideo');
+    const source = document.getElementById('heroVideoSource');
+    source.src = 'hero-video-mobile.mp4';
+    video.load();
+    video.play();
+  }
+})();
 </script>
 
 <script>
