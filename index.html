@@ -1310,9 +1310,6 @@ footer{
   z-index: 0;
   filter: brightness(1.15) contrast(1.05);
 }
-/* Desktop default: show ONLY the desktop video, hide the mobile one */
-.hero-bg-video--desktop { display: block; }
-.hero-bg-video--mobile  { display: none; }
 /* your glows/noise sit above video but below text */
 .hero-noise, .hero-glow, .hero-glow2 { z-index: 2; }
 /* text and buttons on top of everything */
@@ -1560,10 +1557,10 @@ footer{
     align-items: stretch;
   }
 }
-  /* Desktop hero video — fill the hero without distortion */
+  /* Desktop hero video — original size, no zoom */
 @media (min-width: 769px) {
   .hero-bg-video--desktop {
-    object-fit: cover;
+    object-fit: contain;
   }
 }
   /* Second work card = Real Estate */
