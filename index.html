@@ -2822,6 +2822,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     video.play();
   }
 })();
+  document.addEventListener('DOMContentLoaded', function() {
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    const video = document.getElementById('heroVideo');
+    const source = document.getElementById('heroVideoSource');
+    if (video && source) {
+      source.src = 'hero-video-mobile.mp4';
+      video.load();
+      video.play().catch(function(err) {
+        console.log('Video play failed:', err);
+      });
+    } else {
+      console.log('Video elements not found');
+    }
+  }
+});
 </script>
 
 <script>
