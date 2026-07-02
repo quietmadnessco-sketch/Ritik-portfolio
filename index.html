@@ -2031,20 +2031,21 @@ footer{
   .fab-success{padding:2rem 1.25rem}
   .fab-modal-head h4{font-size:17px}
 }
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
   .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    background: #1a0f0f;
   }
-  .hero-bg-video {
-    object-position: center 20%; /* 0% = top, 100% = bottom */
-}
+  .hero-bg-video--mobile {
+    object-fit: contain;
+  }
   .hero-inner {
-    padding-top: 90px;   /* clears your fixed nav so headline isn't hidden */
+    padding-top: 90px;
   }
   .hero h1 {
-    font-size: clamp(2.2rem, 11vw, 3rem);  /* smaller so full headline fits */
+    font-size: clamp(2.2rem, 11vw, 3rem);
   }
   .hero-proof {
     gap: 1rem;
