@@ -4,62 +4,115 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Video Production | Ritik & Co.</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#09090b;
+  --white:#fafaf9;
+  --accent:#10b981;
+  --accent-d:#059669;
+  --muted:#a1a1aa;
+  --border:#27272a;
+  --dark1:#111113;
+  --dark2:#18181b;
+  --ff-head:'Syne',sans-serif;
+  --ff-body:'Inter',sans-serif;
+}
 body{
-    background:#0f0f0f;
-    color:white;
-    font-family:Arial,sans-serif;
-    margin:0;
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--ff-body);
+  line-height:1.6;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
 }
-
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 20px;
+.glow{
+  position:absolute;top:-10%;right:-10%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,0.12) 0%,transparent 65%);
+  z-index:0;pointer-events:none;
 }
-
+.top-bar{
+  position:relative;z-index:1;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2rem;max-width:1100px;margin:0 auto;
+}
+.logo{font-family:var(--ff-head);font-size:15px;font-weight:800;color:var(--white)}
+.logo span{color:var(--accent)}
+.back-btn{
+  font-family:var(--ff-body);font-size:12px;font-weight:600;letter-spacing:0.3px;
+  color:var(--white);background:rgba(255,255,255,0.06);
+  border:1px solid var(--border);padding:8px 18px;border-radius:100px;
+  text-decoration:none;transition:all 0.2s;
+}
+.back-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--black)}
+.container{position:relative;z-index:1;max-width:1100px;margin:auto;padding:2rem 2rem 5rem}
+.eyebrow{
+  text-align:center;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+}
 h1{
-    text-align:center;
-    margin-bottom:15px;
+  font-family:var(--ff-head);font-weight:800;letter-spacing:-1.5px;
+  text-align:center;font-size:clamp(32px,5vw,48px);margin-bottom:15px;color:var(--white);
 }
-
-p{
-    text-align:center;
-    color:#bdbdbd;
-    margin-bottom:50px;
+p.sub{
+  text-align:center;color:var(--muted);margin-bottom:3.5rem;
+  font-weight:300;font-size:15px;max-width:480px;margin-left:auto;margin-right:auto;
 }
-
+.video-card{
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;margin-bottom:1.75rem;
+}
 video{
-    width:100%;
-    border-radius:15px;
-    margin-bottom:50px;
+  width:100%;display:block;background:#000;
+  aspect-ratio:16/9;object-fit:cover;
 }
+.cta-row{text-align:center;margin-top:3rem}
+.cta-btn{
+  display:inline-block;font-family:var(--ff-body);font-weight:600;font-size:13px;
+  color:var(--black);background:var(--accent);
+  padding:12px 28px;border-radius:100px;text-decoration:none;
+  transition:background 0.2s;
+}
+.cta-btn:hover{background:var(--accent-d)}
 </style>
-
 </head>
-
 <body>
+<div class="glow"></div>
 
-<div class="container">
-
-<h1>AI Video Production</h1>
-
-<p>AI-assisted video production combined with professional post-production.</p>
-
-<video controls>
-    <source src="Video-773.mp4" type="video/mp4">
-</video>
-
-<video controls>
-    <source src="Video-999.mp4" type="video/mp4">
-</video>
-
-<video controls>
-    <source src="lv_0_20260622200358.mp4" type="video/mp4">
-</video>
-
+<div class="top-bar">
+  <div class="logo">Ritik <span>&</span> Co.</div>
+  <a href="https://ritikandco.com" class="back-btn">&larr; Back to Main Site</a>
 </div>
 
+<div class="container">
+  <div class="eyebrow">AI-Assisted Production</div>
+  <h1>AI Video Production</h1>
+  <p class="sub">AI-assisted video production combined with professional post-production and technical precision.</p>
+
+  <div class="video-card">
+    <video controls preload="metadata">
+      <source src="/Ai-video/Video-773.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="video-card">
+    <video controls preload="metadata">
+      <source src="/Ai-video/Video-999.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="video-card">
+    <video controls preload="metadata">
+      <source src="/Ai-video/lv_0_20260622200358.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://ritikandco.com" class="cta-btn">Explore Full Portfolio</a>
+  </div>
+</div>
 </body>
 </html>
