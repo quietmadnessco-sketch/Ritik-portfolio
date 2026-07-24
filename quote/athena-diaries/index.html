@@ -567,6 +567,35 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
       </div>
     </div>
 
+<!-- ============ EXTRAS (works with either option) ============ -->
+<div style="margin:1.5rem 0 0.75rem;padding:0 0.2rem">
+  <div style="font-family:var(--ff-head);font-size:13px;font-weight:800;color:var(--black);letter-spacing:0.3px">Extras — Optional Add-ons</div>
+  <div style="font-size:11px;color:var(--muted);margin-top:2px">These can be added on top of either Option 1 or Option 2. Tick anything you'd like included — nothing here is added unless checked.</div>
+</div>
+<div id="extras-sections">
+
+  <div class="category" data-cat="extras">
+    <div class="cat-head" onclick="toggleCollapse(this)">
+      <div class="cat-head-left">
+        <div class="cat-num">+</div>
+        <div><div class="cat-title">Extras</div><div class="cat-meta">Replace these with your real add-ons</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.9rem">
+        <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('extras')">Check all</div>
+        <div class="chevron">▼</div>
+      </div>
+    </div>
+    <div class="cat-body">
+      <div class="item-grid">
+        <div class="item unchecked"><input type="checkbox" id="i-ex-item1"><label for="i-ex-item1">Extra item 1 (edit me)</label></div>
+        <div class="item unchecked"><input type="checkbox" id="i-ex-item2"><label for="i-ex-item2">Extra item 2 (edit me)</label></div>
+        <div class="item unchecked"><input type="checkbox" id="i-ex-item3"><label for="i-ex-item3">Extra item 3 (edit me)</label></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+    
     <div class="category" data-cat="sig-pdp">
       <div class="cat-head" onclick="toggleCollapse(this)">
         <div class="cat-head-left">
@@ -797,7 +826,40 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
       <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">Excludes optional apps, shipping, product photography, inventory, and taxes.</p>
     </div>
   </div>
-
+  
+<!-- EXCLUSIONS -->
+<div class="category">
+  <div class="cat-head" onclick="toggleCollapse(this)">
+    <div class="cat-head-left">
+      <div class="cat-num">⊘</div>
+      <div><div class="cat-title">Exclusions</div><div class="cat-meta">Not included unless specifically quoted</div></div>
+    </div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="cat-body">
+    <ul style="margin-top:0.9rem;padding-left:1.1rem;font-size:12.5px;color:#3f3f46;line-height:2">
+      <li>Logo Design</li>
+      <li>Brand Identity</li>
+      <li>Packaging Design</li>
+      <li>Product Photography</li>
+      <li>Product Videography</li>
+      <li>Fashion Design / Tech Packs</li>
+      <li>Product Manufacturing</li>
+      <li>Copywriting for all products</li>
+      <li>Inventory Management</li>
+      <li>Marketplace Listings (Amazon, Myntra, Ajio, etc.)</li>
+      <li>Paid Advertising (Meta/Google)</li>
+      <li>Social Media Management</li>
+      <li>Influencer Marketing</li>
+      <li>Ongoing Website Maintenance (after support period)</li>
+      <li>Custom App Development</li>
+      <li>ERP/POS Integrations</li>
+      <li>Multi-language or Multi-currency setup</li>
+      <li>International tax and shipping configuration</li>
+    </ul>
+  </div>
+</div>
+  
   <!-- NOTES -->
   <div class="category">
     <div class="cat-head" onclick="toggleCollapse(this)">
@@ -817,8 +879,8 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 </div>
 
 <div class="send-bar">
-  <a class="btn btn-secondary" id="emailBtn" href="#">✉️ Email Us</a>
-  <a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">✅ Send on WhatsApp</a>
+  <a class="btn btn-secondary" id="emailBtn" href="#" target="_blank" rel="noopener">Email Us</a>
+<a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
 </div>
 
 <div class="toast" id="toast">Opening email client…</div>
@@ -918,6 +980,16 @@ function buildSummaryText(){
     }
   });
   if(!uncheckedFound) text += "All recommended items kept as-is — no removals.\n\n";
+
+  // Extras apply to whichever package is currently selected
+  const extraBoxes = [...document.querySelectorAll('#extras-sections input[type=checkbox]')];
+  const extraChecked = extraBoxes.filter(b=>b.checked);
+  if(extraChecked.length){
+    text += `Extras Requested (add to ${planName}):\n`;
+    extraChecked.forEach(b=> text += `  + ${b.nextElementSibling.textContent}\n`);
+    text += `\n`;
+  }
+
   const notes = document.getElementById('clientNotes').value.trim();
   if(notes) text += `Additional Notes:\n${notes}\n`;
   return text;
@@ -926,11 +998,10 @@ function buildSummaryText(){
 function updateSendLinks(){
   const text = buildSummaryText();
   const encoded = encodeURIComponent(text);
-  document.getElementById('emailBtn').href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent('Athena Diaries — Proposal Response')}&body=${encoded}`;
-  // Note: wa.me/message/ links use a fixed preset message set in WhatsApp Business.
-  // We still attempt to pass ?text= — most devices honor it, but if WhatsApp
-  // ignores it and opens with its own preset text instead, use "Email Us" or
-  // copy your selections manually into the chat.
+  const subject = encodeURIComponent('Athena Diaries — Proposal Response');
+  // Gmail web compose — opens directly in the browser, works even with no
+  // desktop mail client configured (mailto: often fails silently for this reason).
+  document.getElementById('emailBtn').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADDRESS}&su=${subject}&body=${encoded}`;
   document.getElementById('whatsappBtn').href = `${WHATSAPP_LINK}?text=${encoded}`;
 }
 
