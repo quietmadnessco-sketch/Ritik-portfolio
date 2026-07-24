@@ -478,38 +478,68 @@ body{
   <!-- ============ LAUNCH STORE SECTIONS ============ -->
   <div id="launch-sections">
 
-    <div class="category collapsed" data-cat="exclusions">
+    <div class="category" data-cat="discovery">
   <div class="cat-head" onclick="toggleCollapse(this)">
     <div class="cat-head-left">
-      <div class="cat-num">⊘</div>
+      <div class="cat-num">1</div>
+
       <div>
-        <div class="cat-title">Additional Services</div>
-        <div class="cat-meta">
-          Optional services available at an additional cost — tick any you'd like included in your proposal.
-        </div>
+        <div class="cat-title">Discovery & Planning</div>
+        <div class="cat-meta">7 items</div>
       </div>
     </div>
 
-    <div style="display:flex;align-items:center;gap:0.9rem">
-      <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('exclusions')">
-        Add All
+    <div style="display:flex;align-items:center;gap:.9rem">
+      <div class="cat-toggle-all"
+           onclick="event.stopPropagation();toggleCategory('discovery')">
+        Uncheck all
       </div>
+
       <div class="chevron">▼</div>
     </div>
   </div>
 
   <div class="cat-body">
     <div class="item-grid">
-          <div class="item"><input type="checkbox" checked id="i-brand-research"><label for="i-brand-research">Brand Research</label></div>
-          <div class="item"><input type="checkbox" checked id="i-competitor-analysis"><label for="i-competitor-analysis">Competitor Analysis</label></div>
-          <div class="item"><input type="checkbox" checked id="i-site-structure"><label for="i-site-structure">Website Structure Planning</label></div>
-          <div class="item"><input type="checkbox" checked id="i-customer-journey"><label for="i-customer-journey">Customer Journey Planning</label></div>
-          <div class="item"><input type="checkbox" checked id="i-homepage-wireframe"><label for="i-homepage-wireframe">Homepage Wireframe</label></div>
-          <div class="item"><input type="checkbox" checked id="i-collection-arch"><label for="i-collection-arch">Collection Architecture</label></div>
-          <div class="item"><input type="checkbox" checked id="i-nav-planning"><label for="i-nav-planning">Navigation Planning</label></div>
-        </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-brand-research">
+        <label for="i-brand-research">Brand Research</label>
       </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-competitor-analysis">
+        <label for="i-competitor-analysis">Competitor Analysis</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-site-structure">
+        <label for="i-site-structure">Website Structure Planning</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-customer-journey">
+        <label for="i-customer-journey">Customer Journey Planning</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-homepage-wireframe">
+        <label for="i-homepage-wireframe">Homepage Wireframe</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-collection-arch">
+        <label for="i-collection-arch">Collection Architecture</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" checked id="i-nav-planning">
+        <label for="i-nav-planning">Navigation Planning</label>
+      </div>
+
     </div>
+  </div>
+</div>
 
     <div class="category" data-cat="uiux">
       <div class="cat-head" onclick="toggleCollapse(this)">
