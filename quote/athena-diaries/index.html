@@ -5,7 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Athena Diaries — Shopify Store Proposal | Ritik & Co.</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width:768px){
+
+body{
+    padding-bottom:130px;
+}
+
+/* Hero */
+
+.hero{
+    padding:2rem 1rem;
+}
+
+.hero-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.5rem;
+}
+
+.hero h1{
+    font-size:34px;
+}
+
+.hero p{
+    font-size:14px;
+}
+
+/* Instructions */
+
+.instructions{
+    margin:1rem;
+    padding:1rem;
+    flex-direction:column;
+}
+
+/* Wrapper */
+
+.wrap{
+    padding:1rem;
+}
+
+/* Tabs */
+
+.tabs{
+    flex-direction:column;
+}
+
+.tab{
+    width:100%;
+}
+
+/* Sticky summary */
+
+.summary-bar{
+    padding:.9rem 1rem;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.summary-left{
+    width:100%;
+    justify-content:space-between;
+}
+
+/* Cards */
+
+.cat-head{
+    padding:1rem;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.cat-head-left{
+    width:100%;
+}
+
+.cat-head > div:last-child{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Grid */
+
+.item-grid{
+    grid-template-columns:1fr;
+    gap:6px;
+}
+
+/* Price */
+
+.price-box{
+    padding:1.25rem;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.price-box-sub{
+    text-align:left;
+    max-width:100%;
+}
+
+/* Tables */
+
+.tp-table td{
+    display:block;
+    width:100%;
+    text-align:left !important;
+    padding:.45rem 0;
+}
+
+.tp-table tr{
+    display:block;
+    border-bottom:1px solid #e5e5e5;
+    padding:.6rem 0;
+}
+
+/* Notes */
+
+.notes-box textarea{
+    min-height:120px;
+}
+
+/* Floating Buttons */
+
+.send-bar{
+
+    bottom:20px;
+
+    left:20px;
+
+    right:20px;
+
+    width:auto;
+}
+
+.btn{
+
+    width:100%;
+
+    height:54px;
+
+    font-size:15px;
+}
+
+/* Footer */
+
+.footer-note{
+    padding:0 1rem;
+}
+
+}
+@media (max-width:480px){
+
+.hero h1{
+    font-size:28px;
+}
+
+.hero p{
+    font-size:13px;
+}
+
+.cat-title{
+    font-size:14px;
+}
+
+.cat-meta{
+    font-size:11px;
+}
+
+.item label{
+    font-size:13px;
+}
+
+.price-box-val{
+    font-size:36px;
+}
+
+.summary-count{
+    font-size:14px;
+}
+
+.btn{
+    height:50px;
+    font-size:14px;
+}
+
+}
+  <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --black:#09090b; --white:#fafaf9; --off:#f4f1ec;
