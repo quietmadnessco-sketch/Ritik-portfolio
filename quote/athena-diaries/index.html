@@ -232,7 +232,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
     </div>
     <div class="hero-eyebrow"><div class="dot"></div>Shopify Website Proposal</div>
     <h1>Athena Diaries <span>×</span> Ritik & Co.</h1>
-    <p>An interactive scope sheet — go through every item, uncheck anything you don't want, add notes where needed, and send it straight back. No calls needed to sort out scope.</p>
+    <p>An interactive scope sheet go through every item, uncheck anything you don't want, add notes where needed, and send it straight back. No calls needed to sort out scope.</p>
     <a class="back-link" href="https://www.ritikandco.com">← Back to ritikandco.com</a>
   </div>
 </div>
@@ -870,7 +870,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
         <tr><td>Shopify Subscription (Basic Plan)</td><td>₹2,000–₹3,000/month</td></tr>
         <tr><td>Domain Name (.com/.in) + Professional Business Email (1 Year – via GoDaddy)</td><td>₹1,600–₹2,000/year</td></tr>
         <tr><td>Paid Shopify Apps (Optional)</td><td>₹500–₹8,000/month</td></tr>
-        <tr><td>Payment Gateway Transaction Charges</td><td>~2% per transaction</td></tr>
+        <tr><td>Payment Gateway Transaction Charges</td><td>As per gateway rates</td></tr>
         <tr><td>Shipping Charges (Shiprocket/Delhivery, etc.)</td><td>As per courier rates</td></tr>
         <tr><td>SMS Notifications (Optional)</td><td>Usage-based</td></tr>
         <tr><td>Email Marketing Platform (Optional – Klaviyo/Mailchimp)</td><td>Free initially, paid as list grows</td></tr>
@@ -889,18 +889,49 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
     </div>
     <div class="cat-body">
       <table class="tp-table">
-        <tr><td>Website Development (Launch Store)</td><td>₹55,000</td></tr>
-        <tr><td>Shopify Subscription (First Month)</td><td>₹2,000–₹3,000</td></tr>
-        <tr><td>Domain + Professional Business Email (1 Year)</td><td>₹1,600–₹2,000</td></tr>
-        <tr><td>Third-Party App Licenses (Optional)</td><td>As required</td></tr>
-        <tr style="font-weight:700;color:var(--black)"><td>Estimated Initial Investment</td><td>₹58,600–₹60,000</td></tr>
+        <tr>
+    <td>Website Development (Launch Store)</td>
+    <td>₹55,000</td>
+</tr>
+
+<tr>
+    <td><strong>Mentorship Rate</strong></td>
+    <td style="color:#10b981;font-weight:700;">−₹10,000</td>
+</tr>
+
+<tr>
+    <td><strong>Website Development (After Mentorship Rate)</strong></td>
+    <td><strong>₹45,000</strong></td>
+</tr>
+
+<tr>
+    <td>Shopify Subscription (First Month)</td>
+    <td>₹2,000–₹3,000</td>
+</tr>
+
+<tr>
+    <td>Domain + Professional Business Email (1 Year)</td>
+    <td>₹1,600–₹2,000</td>
+</tr>
+
+<tr>
+    <td>Third-Party App Licenses (Optional)</td>
+    <td>As required</td>
+</tr>
+
+<tr style="font-weight:700;color:var(--black)">
+    <td>Estimated Initial Investment</td>
+    <td>₹48,600–₹50,000</td>
+</tr>
       </table>
-      <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">Excludes optional apps, shipping, product photography, inventory, and taxes.</p>
+      <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">
+A special <strong>Mentorship Rate</strong> has been applied to the website development fee. Excludes optional apps, shipping, product photography, inventory, and taxes.
+</p>
     </div>
   </div>
 
 <!-- EXCLUSIONS -->
-<div class="category collapsed" data-cat="exclusions">
+<div class="category collapsed" data-cat="Additional services">
   <div class="cat-head" onclick="toggleCollapse(this)">
     <div class="cat-head-left">
       <div class="cat-num">⊘</div>
@@ -1065,7 +1096,7 @@ function updateCount(){
   document.getElementById('totalCount').textContent = boxes.length;
   document.getElementById('progressFill').style.width = (checked / boxes.length * 100) + '%';
   document.getElementById('priceNote').textContent = checked === boxes.length
-    ? "Everything recommended is included — this is the confirmed base price."
+    ? "Everything recommended is included this is the confirmed base price."
     : `${boxes.length - checked} item(s) unchecked — final price to be revised based on your selection.`;
 }
 
