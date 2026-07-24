@@ -248,11 +248,11 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
   <div class="tabs">
     <div class="tab active" data-plan="launch" onclick="switchPlan('launch')">
       Option 1 — Launch Store
-      <span class="tprice">₹45,000 · 03–04 weeks</span>
+      <span class="tprice">₹55,000 · 03–04 weeks</span>
     </div>
     <div class="tab" data-plan="signature" onclick="switchPlan('signature')">
       Option 2 — Signature Store
-      <span class="tprice">₹75,000 · 4–5 weeks</span>
+      <span class="tprice">₹85,000 · 4–5 weeks</span>
     </div>
   </div>
 </div>
@@ -278,7 +278,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
   <div class="price-box">
     <div>
       <div class="price-box-label">Base Investment</div>
-      <div class="price-box-val" id="basePrice">₹45,000 <span>one-time</span></div>
+      <div class="price-box-val" id="basePrice">₹55,000 <span>one-time</span></div>
     </div>
     <div class="price-box-sub" id="priceNote">Final price is confirmed after review — unchecked items may reduce this figure.</div>
   </div>
@@ -895,12 +895,12 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 </tr>
 
 <tr>
-    <td><strong>Mentorship Rate</strong></td>
+    <td><strong>Mentee Rate</strong></td>
     <td style="color:#10b981;font-weight:700;">−₹10,000</td>
 </tr>
 
 <tr>
-    <td><strong>Website Development (After Mentorship Rate)</strong></td>
+    <td><strong>Website Development (After Mentee Rate)</strong></td>
     <td><strong>₹45,000</strong></td>
 </tr>
 
@@ -925,7 +925,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 </tr>
       </table>
       <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">
-A special <strong>Mentorship Rate</strong> has been applied to the website development fee. Excludes optional apps, shipping, product photography and inventory.
+A special <strong>Mentee Rate</strong> has been applied to the website development fee. Excludes optional apps, shipping, product photography and inventory.
 </p>
     </div>
   </div>
@@ -1137,8 +1137,8 @@ function resetAll(){
 /* ---------- SUMMARY TEXT BUILDER ---------- */
 function getSelectedPlanName(){
   return currentPlan === 'signature'
-    ? 'Option 2 – Signature Store (₹75,000)'
-    : 'Option 1 – Launch Store (₹45,000)';
+    ? 'Option 2 – Signature Store (₹85,000)'
+    : 'Option 1 – Launch Store (₹55,000)';
 }
 
 function buildSummaryText(){
