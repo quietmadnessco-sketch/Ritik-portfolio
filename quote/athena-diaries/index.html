@@ -1070,20 +1070,37 @@ function updateCount(){
 }
 
 function resetAll(){
-  document.querySelectorAll('input[type=checkbox]').forEach(b => {
-    b.checked = true;
-    b.closest('.item').classList.remove('unchecked');
-  });
-  document.querySelectorAll('.cat-toggle-all').forEach(l => l.textContent = 'Uncheck all');
-  updateCount();
-}
 
-document.addEventListener('change', (e) => {
-  if(e.target.type === 'checkbox'){
-    e.target.closest('.item').classList.toggle('unchecked', !e.target.checked);
+    document.querySelectorAll('input[type="checkbox"]').forEach(b => {
+
+        // Reset custom quote separately
+        if(b.id === "customQuoteBox"){
+            b.checked = false;
+            return;
+        }
+
+        // Exclusions should stay unchecked by default
+        if(b.closest('.category')?.dataset.cat === "exclusions"){
+            b.checked = false;
+        }else{
+            b.checked = true;
+        }
+
+        const item = b.closest('.item');
+
+        if(item){
+            item.classList.toggle('unchecked', !b.checked);
+        }
+
+    });
+
+    document.querySelectorAll('.cat-toggle-all').forEach(label=>{
+        label.textContent = "Uncheck all";
+    });
+
     updateCount();
-  }
-});
+
+}
 
 
 /* ---------- SUMMARY TEXT BUILDER ---------- */
