@@ -118,6 +118,34 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 .gate-box button{width:100%;padding:0.8rem;border:none;border-radius:8px;background:var(--accent);color:var(--white);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--ff-body)}
 .gate-box button:hover{background:var(--accent-d)}
 .gate-error{font-size:11.5px;color:#dc2626;margin-top:0.6rem;min-height:14px}
+
+  /* SUCCESS / RESULT MODAL */
+.success-overlay{position:fixed;inset:0;background:rgba(9,9,11,0.75);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.success-overlay.show{display:flex}
+.success-box{background:var(--white);border-radius:16px;padding:2.25rem 1.75rem;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.35)}
+.success-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;font-size:22px;font-weight:800;border:1px solid transparent}
+.success-icon.ok{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:var(--accent-d)}
+.success-icon.err{background:rgba(220,38,38,0.1);border-color:rgba(220,38,38,0.3);color:#dc2626}
+.success-box h2{font-family:var(--ff-head);font-size:19px;font-weight:800;color:var(--black);margin-bottom:0.6rem}
+.success-box p{font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:1.4rem}
+.success-box button{width:100%;padding:0.8rem;border:none;border-radius:8px;background:var(--dark1);color:var(--white);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--ff-body)}
+.success-box button:hover{background:var(--dark2)}
+.btn-loading{opacity:0.6;pointer-events:none}
+
+/* PRINT / PDF */
+.print-header{display:none}
+@media print{
+  .gate-overlay,.success-overlay,.send-bar,.toast,.summary-bar,.reset-btn,.cat-toggle-all,.instructions,.back-link,.tabs-wrap{display:none !important}
+  .category.collapsed .cat-body{display:block !important}
+  .category .chevron{display:none !important}
+  body{padding-bottom:0;background:#fff}
+  .hero{background:#fff;color:#000;padding:0 0 1rem}
+  .hero-glow{display:none}
+  .hero-logo,.hero-date,.hero-eyebrow,.hero h1,.hero p{color:#000 !important}
+  .hero h1 span,.hero-logo span{color:var(--accent-d) !important}
+  .print-header{display:block;font-family:var(--ff-head);font-size:14px;font-weight:800;color:#000;border:1px solid #ddd;border-radius:10px;padding:0.9rem 1.1rem;margin-bottom:1rem}
+  .category{break-inside:avoid;border:1px solid #ddd}
+}
 </style>
 </head>
 <body>
@@ -181,6 +209,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 
 <div class="wrap">
 
+  <div class="print-header" id="printHeader"></div>
   <div class="price-box">
     <div>
       <div class="price-box-label">Base Investment</div>
@@ -860,21 +889,36 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 
 </div>
 
-<div class="send-bar">
-  <button class="btn btn-secondary" id="emailBtn" type="button">Copy Email Draft</button>
-  <a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+<script>
+  <button class="btn btn-secondary" id="downloadPdfBtn" type="button">Download PDF</button>
+  <button class="btn btn-primary" id="submitProposal" type="button">Submit Proposal</button>
 </div>
 
+  <div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon" id="successIcon">✓</div>
+    <h2 id="successTitle">Proposal Submitted</h2>
+    <p id="successMessage">Thank you for reviewing the proposal. We've received your selections and will get back to you shortly.</p>
+    <button onclick="closeResultModal()">Close</button>
+  </div>
+</div>
 <div class="toast" id="toast">Copied to clipboard</div>
 
 <script>
-/* ============ ACCESS GATE ============
+/* ======================================================
+   ATHENA DIARIES PROPOSAL — APP SCRIPT
+   Sections: Access Gate | State | Plan Switching |
+   Category Helpers | Summary Text | Result Modal |
+   Submit (Formspree) | Download PDF | Init
+   ====================================================== */
+
+/* ---------- ACCESS GATE ----------
    NOTE: This is a simple front-door lock (obscurity), not real security —
    anyone who knows/guesses the code, or views the page source, can get in.
    For real access control, protect this URL at the hosting level
    (password-protected page / staging area) if your platform supports it. */
 const ACCESS_CODE = "ATHENA2026"; // change this to whatever code you want to share with the client
-if(sessionStorage === undefined){} // placeholder, storage not used per artifact rules elsewhere; fine in real hosting
+
 function checkGate(){
   const val = document.getElementById('gateInput').value.trim();
   if(val.toUpperCase() === ACCESS_CODE){
@@ -883,20 +927,30 @@ function checkGate(){
     document.getElementById('gateError').textContent = 'Incorrect code, please try again.';
   }
 }
-document.getElementById('gateInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkGate(); });
+document.getElementById('gateInput').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') checkGate();
+});
 
+
+/* ---------- STATE ---------- */
 let currentPlan = 'launch';
-const WHATSAPP_LINK = "https://wa.me/message/XKE5WXLOSFJUC1";
+const FORMSPREE_URL = "https://formspree.io/f/mrenyvew";
 
+
+/* ---------- PLAN SWITCHING ---------- */
 function switchPlan(plan){
   currentPlan = plan;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelector(`.tab[data-plan="${plan}"]`).classList.add('active');
-  document.getElementById('signature-sections').style.display = plan==='signature' ? 'block':'none';
-  document.getElementById('basePrice').innerHTML = plan==='signature' ? '₹85,000 <span>one-time</span>' : '₹55,000 <span>one-time</span>';
+  document.getElementById('signature-sections').style.display = plan === 'signature' ? 'block' : 'none';
+  document.getElementById('basePrice').innerHTML = plan === 'signature'
+    ? '₹85,000 <span>one-time</span>'
+    : '₹55,000 <span>one-time</span>';
   updateCount();
 }
 
+
+/* ---------- CATEGORY HELPERS ---------- */
 function toggleCollapse(headEl){
   headEl.parentElement.classList.toggle('collapsed');
 }
@@ -904,42 +958,54 @@ function toggleCollapse(headEl){
 function toggleCategory(cat){
   const wrap = document.querySelector(`.category[data-cat="${cat}"]`);
   const boxes = wrap.querySelectorAll('input[type=checkbox]');
-  const anyChecked = Array.from(boxes).some(b=>b.checked);
-  boxes.forEach(b=>{ b.checked = !anyChecked; b.closest('.item').classList.toggle('unchecked', !b.checked); });
-  const label = wrap.querySelector('.cat-toggle-all');
-  label.textContent = anyChecked ? 'Check all' : 'Uncheck all';
+  const anyChecked = Array.from(boxes).some(b => b.checked);
+  boxes.forEach(b => {
+    b.checked = !anyChecked;
+    b.closest('.item').classList.toggle('unchecked', !b.checked);
+  });
+  wrap.querySelector('.cat-toggle-all').textContent = anyChecked ? 'Check all' : 'Uncheck all';
   updateCount();
 }
 
 function getActiveBoxes(){
-  const container = currentPlan==='signature'
+  return currentPlan === 'signature'
     ? [...document.querySelectorAll('#launch-sections input[type=checkbox]'), ...document.querySelectorAll('#signature-sections input[type=checkbox]')]
     : [...document.querySelectorAll('#launch-sections input[type=checkbox]')];
-  return container;
 }
 
 function updateCount(){
   const boxes = getActiveBoxes();
-  const checked = boxes.filter(b=>b.checked).length;
+  const checked = boxes.filter(b => b.checked).length;
   document.getElementById('checkedCount').textContent = checked;
   document.getElementById('totalCount').textContent = boxes.length;
-  document.getElementById('progressFill').style.width = (checked/boxes.length*100)+'%';
-  document.getElementById('priceNote').textContent = checked===boxes.length
+  document.getElementById('progressFill').style.width = (checked / boxes.length * 100) + '%';
+  document.getElementById('priceNote').textContent = checked === boxes.length
     ? "Everything recommended is included — this is the confirmed base price."
-    : `${boxes.length-checked} item(s) unchecked — final price to be revised based on your selection.`;
+    : `${boxes.length - checked} item(s) unchecked — final price to be revised based on your selection.`;
 }
 
-document.addEventListener('change', (e)=>{
-  if(e.target.type==='checkbox'){
+function resetAll(){
+  document.querySelectorAll('input[type=checkbox]').forEach(b => {
+    b.checked = true;
+    b.closest('.item').classList.remove('unchecked');
+  });
+  document.querySelectorAll('.cat-toggle-all').forEach(l => l.textContent = 'Uncheck all');
+  updateCount();
+}
+
+document.addEventListener('change', (e) => {
+  if(e.target.type === 'checkbox'){
     e.target.closest('.item').classList.toggle('unchecked', !e.target.checked);
     updateCount();
   }
 });
 
-function resetAll(){
-  document.querySelectorAll('input[type=checkbox]').forEach(b=>{b.checked=true; b.closest('.item').classList.remove('unchecked');});
-  document.querySelectorAll('.cat-toggle-all').forEach(l=>l.textContent='Uncheck all');
-  updateCount();
+
+/* ---------- SUMMARY TEXT BUILDER ---------- */
+function getSelectedPlanName(){
+  return currentPlan === 'signature'
+    ? 'Option 2 – Signature Store (₹85,000)'
+    : 'Option 1 – Launch Store (₹55,000)';
 }
 
 function buildSummaryText(){
@@ -950,32 +1016,31 @@ function buildSummaryText(){
     text += `Custom package requested.\n\n`;
     text += `The client would like a fully custom package instead of the standard options — please prepare a custom quote based on the notes below.\n\n`;
   } else {
-    const planName = currentPlan==='signature' ? 'Option 2 – Signature Store' : 'Option 1 – Launch Store';
-    text += `Selected Package:\n✓ ${planName}\n\n`;
+    text += `Selected Package:\n✓ ${getSelectedPlanName()}\n\n`;
 
-    const cats = currentPlan==='signature'
+    const cats = currentPlan === 'signature'
       ? [...document.querySelectorAll('#launch-sections .category'), ...document.querySelectorAll('#signature-sections .category')]
       : [...document.querySelectorAll('#launch-sections .category')];
 
     const removedLines = [];
-    cats.forEach(cat=>{
-      cat.querySelectorAll('input[type=checkbox]').forEach(b=>{
+    cats.forEach(cat => {
+      cat.querySelectorAll('input[type=checkbox]').forEach(b => {
         if(!b.checked) removedLines.push(b.nextElementSibling.textContent);
       });
     });
 
     if(removedLines.length){
       text += `Removed Items\n`;
-      removedLines.forEach(l=> text += `• ${l}\n`);
+      removedLines.forEach(l => text += `• ${l}\n`);
       text += `\n`;
     }
   }
 
-  // Anything ticked in Exclusions = a requested add-on, shown as "Additional Services"
-  const exclChecked = [...document.querySelectorAll('.category[data-cat="exclusions"] input[type=checkbox]')].filter(b=>b.checked);
+  // Anything ticked in Exclusions = a requested add-on
+  const exclChecked = [...document.querySelectorAll('.category[data-cat="exclusions"] input[type=checkbox]')].filter(b => b.checked);
   if(exclChecked.length){
     text += `Additional Services\n`;
-    exclChecked.forEach(b=> text += `✓ ${b.nextElementSibling.textContent}\n`);
+    exclChecked.forEach(b => text += `✓ ${b.nextElementSibling.textContent}\n`);
     text += `\n`;
   }
 
@@ -985,32 +1050,83 @@ function buildSummaryText(){
   return text.trim();
 }
 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(()=> t.classList.remove('show'), 3500);
+
+/* ---------- RESULT MODAL (replaces alert()) ---------- */
+function showResultModal(success, title, message){
+  const overlay = document.getElementById('successOverlay');
+  const icon = document.getElementById('successIcon');
+  icon.textContent = success ? '✓' : '!';
+  icon.className = 'success-icon ' + (success ? 'ok' : 'err');
+  document.getElementById('successTitle').textContent = title;
+  document.getElementById('successMessage').textContent = message;
+  overlay.classList.add('show');
 }
 
-document.getElementById('emailBtn').addEventListener('click', async ()=>{
-  const text = buildSummaryText();
+function closeResultModal(){
+  document.getElementById('successOverlay').classList.remove('show');
+}
+
+
+/* ---------- SUBMIT (Formspree) ---------- */
+document.getElementById('submitProposal').addEventListener('click', async function(){
+  const btn = this;
+  const proposal = buildSummaryText();
+
+  btn.classList.add('btn-loading');
+  btn.textContent = 'Submitting…';
+
   try{
-    await navigator.clipboard.writeText(text);
-    showToast('Copied! Opening Gmail — paste (Ctrl/Cmd+V) into a new email.');
-  }catch(err){
-    showToast('Could not copy automatically — please select and copy the text manually.');
+    const response = await fetch(FORMSPREE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        Proposal: proposal,
+        Package: getSelectedPlanName(),
+        Notes: document.getElementById('clientNotes').value
+      })
+    });
+
+    if(response.ok){
+      showResultModal(
+        true,
+        'Proposal Submitted',
+        "Thank you for reviewing the proposal. We've received your selections and will get back to you shortly."
+      );
+    } else {
+      showResultModal(
+        false,
+        'Something Went Wrong',
+        "We couldn't submit your proposal right now. Please try again in a moment."
+      );
+    }
+  } catch(error){
+    showResultModal(
+      false,
+      'Network Error',
+      "Please check your connection and try again."
+    );
+  } finally {
+    btn.classList.remove('btn-loading');
+    btn.textContent = 'Submit Proposal';
   }
-  window.open('https://mail.google.com/mail/u/0/#inbox?compose=new', '_blank');
 });
 
-document.getElementById('whatsappBtn').addEventListener('click', ()=>{
-  const text = buildSummaryText();
-  document.getElementById('whatsappBtn').href = `${WHATSAPP_LINK}?text=${encodeURIComponent(text)}`;
+
+/* ---------- DOWNLOAD PDF (print-to-PDF) ---------- */
+document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+  const customQuote = document.getElementById('customQuoteBox').checked;
+  document.getElementById('printHeader').innerHTML = customQuote
+    ? `Custom Package Requested — see Notes section for details`
+    : `Selected Package: ${getSelectedPlanName()}`;
+  window.print();
 });
 
+
+/* ---------- INIT ---------- */
 updateCount();
-updateSendLinks();
 </script>
 
 </body>
