@@ -871,37 +871,58 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
   </div>
 </div>
   
-  <!-- NOTES -->
+   <!-- NOTES -->
   <div class="category">
     <div class="cat-head" onclick="toggleCollapse(this)">
       <div class="cat-head-left">
         <div class="cat-num">✎</div>
-        <div><div class="cat-title">Additional Notes / Requests</div><div class="cat-meta">Anything to add, remove, or clarify</div></div>
+        <div>
+          <div class="cat-title">Additional Notes / Requests</div>
+          <div class="cat-meta">Anything to add, remove, or clarify</div>
+        </div>
       </div>
       <div class="chevron">▼</div>
     </div>
+
     <div class="cat-body notes-box">
       <textarea id="clientNotes" placeholder="e.g. Please add a size-chart PDF download, or we'd like 15 products instead of 12..."></textarea>
     </div>
   </div>
 
-  <p class="footer-note">Ritik & Co. — Brand & Visual Studio · Pune, India · ritikandco.com · ritik@ritikandco.com</p>
+  <p class="footer-note">
+    Ritik & Co. — Brand & Visual Studio · Pune, India · ritikandco.com · ritik@ritikandco.com
+  </p>
 
+</div> <!-- End .wrap -->
+
+<!-- Bottom Action Bar -->
+<div class="send-bar">
+  <button class="btn btn-secondary" id="downloadPdfBtn" type="button">
+    Download PDF
+  </button>
+
+  <button class="btn btn-primary" id="submitProposal" type="button">
+    Submit Proposal
+  </button>
 </div>
 
-  <button class="btn btn-secondary" id="downloadPdfBtn" type="button">Download PDF</button>
-  <button class="btn btn-primary" id="submitProposal" type="button">Submit Proposal</button>
-</div>
-
-  <div class="success-overlay" id="successOverlay">
+<!-- Success Modal -->
+<div class="success-overlay" id="successOverlay">
   <div class="success-box">
     <div class="success-icon" id="successIcon">✓</div>
+
     <h2 id="successTitle">Proposal Submitted</h2>
-    <p id="successMessage">Thank you for reviewing the proposal. We've received your selections and will get back to you shortly.</p>
+
+    <p id="successMessage">
+      Thank you for reviewing the proposal. We've received your selections and will get back to you shortly.
+    </p>
+
     <button onclick="closeResultModal()">Close</button>
   </div>
 </div>
+
 <div class="toast" id="toast">Copied to clipboard</div>
+
 
 <script>
 /* ======================================================
