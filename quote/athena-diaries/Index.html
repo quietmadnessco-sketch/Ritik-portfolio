@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athena Diaries — Shopify Store Proposal | Ritik & Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#09090b; --white:#fafaf9; --off:#f4f1ec;
+  --accent:#10b981; --accent-d:#059669;
+  --dark1:#111113; --dark2:#18181b; --dark3:#27272a;
+  --muted:#71717a; --border:#27272a; --border-light:#e4e4e7;
+  --text-d:#a1a1aa;
+  --ff-head:'Syne',sans-serif; --ff-body:'Inter',sans-serif;
+}
+body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-height:1.6;padding-bottom:100px}
+
+/* HEADER */
+.hero{background:var(--black);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-40%;right:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.18) 0%,transparent 65%)}
+.hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:0.5rem}
+.hero-logo{font-family:var(--ff-head);font-size:16px;font-weight:800;color:var(--white)}
+.hero-logo span{color:var(--accent)}
+.hero-date{font-size:11px;color:var(--muted);letter-spacing:0.5px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);color:var(--accent);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.25rem}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.hero h1{font-family:var(--ff-head);font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--white);margin-bottom:0.75rem}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:14px;font-weight:300;color:rgba(250,250,249,0.6);max-width:520px;line-height:1.8}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-d);text-decoration:none;margin-top:1.1rem;border:1px solid var(--border);padding:6px 12px;border-radius:8px;transition:all .2s}
+.back-link:hover{color:var(--white);border-color:var(--muted)}
+
+/* INSTRUCTIONS BAR */
+.instructions{max-width:900px;margin:1.25rem auto 0;background:var(--white);border:1px solid var(--border-light);border-radius:12px;padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:flex-start}
+.instructions .ico{font-size:20px;flex-shrink:0}
+.instructions p{font-size:12.5px;color:#3f3f46;line-height:1.7}
+.instructions strong{color:var(--black)}
+
+/* TABS */
+.tabs-wrap{max-width:900px;margin:1.5rem auto 0;padding:0 1.5rem}
+.tabs{display:flex;gap:0.6rem;background:var(--white);border:1px solid var(--border-light);border-radius:12px;padding:6px}
+.tab{flex:1;text-align:center;padding:0.9rem 0.5rem;border-radius:9px;cursor:pointer;font-family:var(--ff-head);font-weight:700;font-size:13px;color:var(--muted);transition:all .2s;user-select:none}
+.tab .tprice{display:block;font-size:11px;font-weight:500;margin-top:2px;color:var(--muted)}
+.tab.active{background:var(--dark1);color:var(--white)}
+.tab.active .tprice{color:var(--accent)}
+
+.wrap{max-width:900px;margin:0 auto;padding:1.5rem}
+
+/* SUMMARY BAR */
+.summary-bar{position:sticky;top:0;z-index:50;background:rgba(9,9,11,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0.85rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.summary-left{display:flex;align-items:center;gap:0.9rem}
+.summary-count{font-family:var(--ff-head);font-weight:800;color:var(--white);font-size:15px}
+.summary-count span{color:var(--accent)}
+.progress-track{width:120px;height:5px;background:var(--dark3);border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:10px;transition:width .25s}
+.reset-btn{font-size:11px;color:var(--text-d);background:none;border:1px solid var(--border);padding:5px 11px;border-radius:6px;cursor:pointer;font-family:var(--ff-body)}
+.reset-btn:hover{color:var(--white);border-color:var(--muted)}
+
+/* CATEGORY CARD */
+.category{background:var(--white);border:1px solid var(--border-light);border-radius:14px;margin-bottom:1rem;overflow:hidden}
+.cat-head{padding:1.1rem 1.4rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:1rem}
+.cat-head-left{display:flex;align-items:center;gap:0.75rem}
+.cat-num{font-family:var(--ff-head);font-size:11px;font-weight:700;color:var(--accent);background:rgba(16,185,129,0.1);width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-title{font-family:var(--ff-head);font-size:14.5px;font-weight:700;color:var(--black)}
+.cat-meta{font-size:10.5px;color:var(--muted);margin-top:1px}
+.cat-toggle-all{font-size:10.5px;color:var(--accent-d);font-weight:600;cursor:pointer;white-space:nowrap}
+.chevron{font-size:11px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.category.collapsed .chevron{transform:rotate(-90deg)}
+.category.collapsed .cat-body{display:none}
+.cat-body{padding:0 1.4rem 1.2rem;border-top:1px solid var(--border-light)}
+.item-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 1.2rem;margin-top:1rem}
+@media(max-width:600px){.item-grid{grid-template-columns:1fr}}
+.item{display:flex;align-items:flex-start;gap:0.6rem;padding:0.45rem 0;cursor:pointer}
+.item input{margin-top:3px;width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.item label{font-size:12.5px;color:#3f3f46;cursor:pointer;line-height:1.5}
+.item.unchecked label{color:var(--muted);text-decoration:line-through;text-decoration-color:#d4d4d8}
+
+/* PRICE BOX */
+.price-box{background:var(--dark1);border-radius:14px;padding:1.5rem;color:var(--white);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.price-box-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-d);margin-bottom:0.3rem}
+.price-box-val{font-family:var(--ff-head);font-size:26px;font-weight:800}
+.price-box-val span{color:var(--accent);font-size:14px;font-weight:500;margin-left:6px}
+.price-box-sub{font-size:11px;color:var(--text-d);max-width:280px;text-align:right}
+
+/* THIRD PARTY TABLE */
+.tp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:0.75rem}
+.tp-table td{padding:0.6rem 0;border-bottom:1px solid var(--border-light);vertical-align:top}
+.tp-table td:first-child{color:#3f3f46;padding-right:1rem}
+.tp-table td:last-child{color:var(--muted);text-align:right;white-space:nowrap}
+
+/* NOTES */
+.notes-box textarea{width:100%;min-height:90px;border:1px solid var(--border-light);border-radius:10px;padding:0.9rem;font-family:var(--ff-body);font-size:12.5px;resize:vertical;color:var(--black)}
+.notes-box textarea:focus{outline:none;border-color:var(--accent)}
+
+/* SEND BAR */
+.send-bar{position:fixed;bottom:0;left:0;right:0;background:var(--black);border-top:1px solid var(--border);padding:1rem 1.5rem;display:flex;justify-content:center;gap:0.75rem;z-index:60;flex-wrap:wrap}
+.btn{font-family:var(--ff-body);font-weight:600;font-size:13px;padding:0.85rem 1.4rem;border-radius:9px;cursor:pointer;border:none;display:flex;align-items:center;gap:6px;text-decoration:none}
+.btn-primary{background:var(--accent);color:var(--white)}
+.btn-primary:hover{background:var(--accent-d)}
+.btn-secondary{background:transparent;border:1px solid var(--border);color:var(--white)}
+.btn-secondary:hover{border-color:var(--muted)}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--white);color:var(--black);font-size:12px;font-weight:600;padding:0.6rem 1.1rem;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.2);opacity:0;pointer-events:none;transition:opacity .25s;z-index:70}
+.toast.show{opacity:1}
+
+/* footer */
+.footer-note{text-align:center;font-size:10.5px;color:var(--muted);margin:1.5rem 0}
+
+/* GATE */
+.gate-overlay{position:fixed;inset:0;background:var(--black);z-index:999;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.gate-box{background:var(--white);border-radius:16px;padding:2rem 1.75rem;max-width:340px;width:100%;text-align:center}
+.gate-box h2{font-family:var(--ff-head);font-size:18px;margin-bottom:0.5rem}
+.gate-box p{font-size:12.5px;color:var(--muted);margin-bottom:1.25rem}
+.gate-box input{width:100%;padding:0.8rem;border:1px solid var(--border-light);border-radius:8px;font-size:14px;text-align:center;margin-bottom:0.75rem;letter-spacing:2px}
+.gate-box input:focus{outline:none;border-color:var(--accent)}
+.gate-box button{width:100%;padding:0.8rem;border:none;border-radius:8px;background:var(--accent);color:var(--white);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--ff-body)}
+.gate-box button:hover{background:var(--accent-d)}
+.gate-error{font-size:11.5px;color:#dc2626;margin-top:0.6rem;min-height:14px}
+</style>
+</head>
+<body>
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <h2>Private Proposal</h2>
+    <p>Enter the access code shared with you to view this quotation.</p>
+    <input type="password" id="gateInput" placeholder="Access code" maxlength="20">
+    <button onclick="checkGate()">Unlock</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-logo">Ritik <span>&</span> Co.</div>
+      <div class="hero-date">Prepared July 24, 2026</div>
+    </div>
+    <div class="hero-eyebrow"><div class="dot"></div>Shopify Website Proposal</div>
+    <h1>Athena Diaries <span>×</span> Ritik & Co.</h1>
+    <p>An interactive scope sheet — go through every item, uncheck anything you don't want, add notes where needed, and send it straight back. No calls needed to sort out scope.</p>
+    <a class="back-link" href="https://www.ritikandco.com">← Back to ritikandco.com</a>
+  </div>
+</div>
+
+<div class="instructions">
+  <div class="ico">✅</div>
+  <p><strong>How this works:</strong> Everything is pre-checked as recommended. Switch between the two package tabs below, untick anything you'd like removed, and use the notes box for anything you'd like added instead. When you're done, tap <strong>"Email Us"</strong> or <strong>"Send on WhatsApp"</strong> at the bottom — it'll compile your exact selections so we can revise the final price and confirm scope in one message, no back-and-forth needed.</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab active" data-plan="launch" onclick="switchPlan('launch')">
+      Option 1 — Launch Store
+      <span class="tprice">₹55,000 · 15–20 days</span>
+    </div>
+    <div class="tab" data-plan="signature" onclick="switchPlan('signature')">
+      Option 2 — Signature Store
+      <span class="tprice">₹85,000 · 20–30 days</span>
+    </div>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-left">
+    <div class="summary-count"><span id="checkedCount">0</span>/<span id="totalCount">0</span> included</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">Reset to recommended</button>
+</div>
+
+<div class="wrap">
+
+  <div class="price-box">
+    <div>
+      <div class="price-box-label">Base Investment</div>
+      <div class="price-box-val" id="basePrice">₹55,000 <span>one-time</span></div>
+    </div>
+    <div class="price-box-sub" id="priceNote">Final price is confirmed after review — unchecked items may reduce this figure.</div>
+  </div>
+
+  <!-- ============ LAUNCH STORE SECTIONS ============ -->
+  <div id="launch-sections">
+
+    <div class="category" data-cat="discovery">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">1</div>
+          <div><div class="cat-title">Discovery & Planning</div><div class="cat-meta">7 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('discovery')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-brand-research"><label for="i-brand-research">Brand Research</label></div>
+          <div class="item"><input type="checkbox" checked id="i-competitor-analysis"><label for="i-competitor-analysis">Competitor Analysis</label></div>
+          <div class="item"><input type="checkbox" checked id="i-site-structure"><label for="i-site-structure">Website Structure Planning</label></div>
+          <div class="item"><input type="checkbox" checked id="i-customer-journey"><label for="i-customer-journey">Customer Journey Planning</label></div>
+          <div class="item"><input type="checkbox" checked id="i-homepage-wireframe"><label for="i-homepage-wireframe">Homepage Wireframe</label></div>
+          <div class="item"><input type="checkbox" checked id="i-collection-arch"><label for="i-collection-arch">Collection Architecture</label></div>
+          <div class="item"><input type="checkbox" checked id="i-nav-planning"><label for="i-nav-planning">Navigation Planning</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="uiux">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">2</div>
+          <div><div class="cat-title">UI/UX Design</div><div class="cat-meta">12 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('uiux')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-custom-home"><label for="i-custom-home">Fully Custom Homepage</label></div>
+          <div class="item"><input type="checkbox" checked id="i-mobile-first"><label for="i-mobile-first">Mobile First Design</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tablet-resp"><label for="i-tablet-resp">Tablet Responsive</label></div>
+          <div class="item"><input type="checkbox" checked id="i-desktop-resp"><label for="i-desktop-resp">Desktop Responsive</label></div>
+          <div class="item"><input type="checkbox" checked id="i-typography"><label for="i-typography">Premium Typography</label></div>
+          <div class="item"><input type="checkbox" checked id="i-brand-color"><label for="i-brand-color">Brand Color Implementation</label></div>
+          <div class="item"><input type="checkbox" checked id="i-cta-design"><label for="i-cta-design">Custom CTA Design</label></div>
+          <div class="item"><input type="checkbox" checked id="i-button-styles"><label for="i-button-styles">Premium Button Styles</label></div>
+          <div class="item"><input type="checkbox" checked id="i-icons"><label for="i-icons">Premium Icons</label></div>
+          <div class="item"><input type="checkbox" checked id="i-scroll-anim"><label for="i-scroll-anim">Scroll Animations</label></div>
+          <div class="item"><input type="checkbox" checked id="i-hover-anim"><label for="i-hover-anim">Hover Animations</label></div>
+          <div class="item"><input type="checkbox" checked id="i-micro-int"><label for="i-micro-int">Micro Interactions</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="pages">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">3</div>
+          <div><div class="cat-title">Website Pages</div><div class="cat-meta">14 pages</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('pages')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-p-home"><label for="i-p-home">Home</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-shop"><label for="i-p-shop">Shop</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-collections"><label for="i-p-collections">Collections</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-pdp"><label for="i-p-pdp">Product Detail Page</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-about"><label for="i-p-about">About Athena Diaries</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-contact"><label for="i-p-contact">Contact Us</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-faq"><label for="i-p-faq">FAQ</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-shipping"><label for="i-p-shipping">Shipping Policy</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-return"><label for="i-p-return">Return Policy</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-privacy"><label for="i-p-privacy">Privacy Policy</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-terms"><label for="i-p-terms">Terms & Conditions</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-tracking"><label for="i-p-tracking">Order Tracking Page</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-search"><label for="i-p-search">Search Results</label></div>
+          <div class="item"><input type="checkbox" checked id="i-p-404"><label for="i-p-404">404 Page</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="products">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">4</div>
+          <div><div class="cat-title">Product Setup — 12 Products</div><div class="cat-meta">Per-product fields</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('products')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-pr-images"><label for="i-pr-images">Product Images</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-price"><label for="i-pr-price">Price</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-compare"><label for="i-pr-compare">Compare Price</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-sku"><label for="i-pr-sku">SKU</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-barcode"><label for="i-pr-barcode">Barcode (if available)</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-inventory"><label for="i-pr-inventory">Inventory</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-collections"><label for="i-pr-collections">Collections</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-variants"><label for="i-pr-variants">Product Variants</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-size"><label for="i-pr-size">Size Options</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-color"><label for="i-pr-color">Color Variants</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-tags"><label for="i-pr-tags">Product Tags</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-categories"><label for="i-pr-categories">Product Categories</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-desc"><label for="i-pr-desc">Product Description Formatting</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-fabric"><label for="i-pr-fabric">Fabric Information</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-wash"><label for="i-pr-wash">Wash Care</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-seotitle"><label for="i-pr-seotitle">SEO Meta Title</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-seodesc"><label for="i-pr-seodesc">SEO Meta Description</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pr-alt"><label for="i-pr-alt">Alt Text</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="collections">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">5</div>
+          <div><div class="cat-title">Collections — Up to 8</div><div class="cat-meta">Example set</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('collections')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-c-new"><label for="i-c-new">New Arrivals</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-lounge"><label for="i-c-lounge">Lounge Sets</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-sleep"><label for="i-c-sleep">Sleepwear</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-dresses"><label for="i-c-dresses">Dresses</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-cami"><label for="i-c-cami">Camisoles</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-cotton"><label for="i-c-cotton">Cotton Collection</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-satin"><label for="i-c-satin">Satin Collection</label></div>
+          <div class="item"><input type="checkbox" checked id="i-c-best"><label for="i-c-best">Best Sellers</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="shopping">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">6</div>
+          <div><div class="cat-title">Shopping Experience</div><div class="cat-meta">12 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('shopping')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-s-search"><label for="i-s-search">Search</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-filters"><label for="i-s-filters">Product Filters</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-sorting"><label for="i-s-sorting">Sorting</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-wishlist"><label for="i-s-wishlist">Wishlist</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-related"><label for="i-s-related">Related Products</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-recent"><label for="i-s-recent">Recently Viewed</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-announce"><label for="i-s-announce">Announcement Bar</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-sticky"><label for="i-s-sticky">Sticky Add To Cart</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-reviews"><label for="i-s-reviews">Customer Reviews</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-newsletter"><label for="i-s-newsletter">Newsletter Signup</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-whatsapp"><label for="i-s-whatsapp">WhatsApp Chat</label></div>
+          <div class="item"><input type="checkbox" checked id="i-s-forms"><label for="i-s-forms">Contact Forms</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="payment">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">7</div>
+          <div><div class="cat-title">Payment Gateway</div><div class="cat-meta">Activation fees paid directly to provider</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('payment')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-pay-razorpay"><label for="i-pay-razorpay">Razorpay</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-cashfree"><label for="i-pay-cashfree">Cashfree</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-phonepe"><label for="i-pay-phonepe">PhonePe PG</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-upi"><label for="i-pay-upi">UPI</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-cards"><label for="i-pay-cards">Cards</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-netbanking"><label for="i-pay-netbanking">Net Banking</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-wallets"><label for="i-pay-wallets">Wallets</label></div>
+          <div class="item"><input type="checkbox" checked id="i-pay-cod"><label for="i-pay-cod">Cash on Delivery</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="shipping">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">8</div>
+          <div><div class="cat-title">Shipping Setup</div><div class="cat-meta">5 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('shipping')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sh-shiprocket"><label for="i-sh-shiprocket">Shiprocket Integration</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sh-charges"><label for="i-sh-charges">Delivery Charges</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sh-zones"><label for="i-sh-zones">Shipping Zones</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sh-cod"><label for="i-sh-cod">COD Configuration</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sh-free"><label for="i-sh-free">Free Shipping Rules</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="marketing">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">9</div>
+          <div><div class="cat-title">Marketing Setup</div><div class="cat-meta">7 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('marketing')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-m-ga4"><label for="i-m-ga4">Google Analytics 4</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-gsc"><label for="i-m-gsc">Google Search Console</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-pixel"><label for="i-m-pixel">Meta Pixel</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-catalog"><label for="i-m-catalog">Facebook Catalog</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-igshop"><label for="i-m-igshop">Instagram Shopping Preparation</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-whatsapp"><label for="i-m-whatsapp">WhatsApp Integration</label></div>
+          <div class="item"><input type="checkbox" checked id="i-m-newsletter"><label for="i-m-newsletter">Newsletter Signup</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="seo">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">10</div>
+          <div><div class="cat-title">SEO</div><div class="cat-meta">7 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('seo')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-seo-home"><label for="i-seo-home">Homepage SEO</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-collection"><label for="i-seo-collection">Collection SEO</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-product"><label for="i-seo-product">Product SEO</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-image"><label for="i-seo-image">Image Optimization</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-sitemap"><label for="i-seo-sitemap">Sitemap</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-robots"><label for="i-seo-robots">Robots.txt</label></div>
+          <div class="item"><input type="checkbox" checked id="i-seo-url"><label for="i-seo-url">URL Optimization</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="speed">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">11</div>
+          <div><div class="cat-title">Speed Optimization</div><div class="cat-meta">4 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('speed')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sp-compress"><label for="i-sp-compress">Image Compression</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sp-lazy"><label for="i-sp-lazy">Lazy Loading</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sp-mobile"><label for="i-sp-mobile">Mobile Optimization</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sp-cwv"><label for="i-sp-cwv">Core Web Vitals Optimization</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="security">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">12</div>
+          <div><div class="cat-title">Security</div><div class="cat-meta">3 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('security')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sec-ssl"><label for="i-sec-ssl">SSL Configuration</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sec-spam"><label for="i-sec-spam">Spam Protection</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sec-shopify"><label for="i-sec-shopify">Shopify Security Configuration</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="training">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">13</div>
+          <div><div class="cat-title">Training</div><div class="cat-meta">6 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('training')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-tr-dashboard"><label for="i-tr-dashboard">Shopify Dashboard</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tr-upload"><label for="i-tr-upload">Product Upload</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tr-inventory"><label for="i-tr-inventory">Inventory Management</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tr-orders"><label for="i-tr-orders">Order Management</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tr-discount"><label for="i-tr-discount">Discount Creation</label></div>
+          <div class="item"><input type="checkbox" checked id="i-tr-coupon"><label for="i-tr-coupon">Coupon Management</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="support">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">14</div>
+          <div><div class="cat-title">Support — 30 Days</div><div class="cat-meta">3 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('support')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sup-tech"><label for="i-sup-tech">30 Days Technical Support</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sup-bugs"><label for="i-sup-bugs">Bug Fixes</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sup-minor"><label for="i-sup-minor">Minor Changes</label></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ SIGNATURE-ONLY ADD-ON SECTIONS ============ -->
+  <div id="signature-sections" style="display:none">
+
+    <div class="category" data-cat="sig-brand">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">15</div>
+          <div><div class="cat-title">Premium Brand Experience</div><div class="cat-meta">8 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-brand')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-luxhome"><label for="i-sig-luxhome">Luxury Homepage</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-story"><label for="i-sig-story">Storytelling Sections</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-showcase"><label for="i-sig-showcase">Interactive Collection Showcase</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-lifestyle"><label for="i-sig-lifestyle">Lifestyle Image Galleries</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-timeline"><label for="i-sig-timeline">Brand Story Timeline</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-why"><label for="i-sig-why">"Why Athena Diaries" Section</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-fabricstory"><label for="i-sig-fabricstory">Fabric Story Section</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-bodyposi"><label for="i-sig-bodyposi">Body Positivity Section</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-pdp">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">16</div>
+          <div><div class="cat-title">Premium Product Pages</div><div class="cat-meta">10 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-pdp')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-sizeguide"><label for="i-sig-sizeguide">Interactive Size Guide</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-fabricguide"><label for="i-sig-fabricguide">Fabric Guide</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-washcare2"><label for="i-sig-washcare2">Wash Care</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-shiptimeline"><label for="i-sig-shiptimeline">Shipping Timeline</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-returninfo"><label for="i-sig-returninfo">Returns Information</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-prodstory"><label for="i-sig-prodstory">Product Story</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-zoom"><label for="i-sig-zoom">Zoom Gallery</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-video"><label for="i-sig-video">Video Support</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-tabs"><label for="i-sig-tabs">Product Tabs</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-stickypanel"><label for="i-sig-stickypanel">Sticky Purchase Panel</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-shop">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">17</div>
+          <div><div class="cat-title">Advanced Shopping Features</div><div class="cat-meta">10 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-shop')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-advwishlist"><label for="i-sig-advwishlist">Advanced Wishlist</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-quickview"><label for="i-sig-quickview">Quick View</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-swatches"><label for="i-sig-swatches">Color Swatches</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-fbt"><label for="i-sig-fbt">Frequently Bought Together</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-recentview2"><label for="i-sig-recentview2">Recently Viewed</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-backstock"><label for="i-sig-backstock">Back In Stock Alerts</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-advsearch"><label for="i-sig-advsearch">Advanced Search</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-smartfilter"><label for="i-sig-smartfilter">Smart Filters</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-sizereco"><label for="i-sig-sizereco">Size Recommendation App</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-badges"><label for="i-sig-badges">Product Badges</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-marketing">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">18</div>
+          <div><div class="cat-title">Marketing Automation</div><div class="cat-meta">8 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-marketing')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-klaviyo"><label for="i-sig-klaviyo">Klaviyo Setup</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-welcome"><label for="i-sig-welcome">Welcome Email</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-abandoned"><label for="i-sig-abandoned">Abandoned Cart Email</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-newslettertpl"><label for="i-sig-newslettertpl">Newsletter Template</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-igfeed"><label for="i-sig-igfeed">Instagram Feed</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-pinterest"><label for="i-sig-pinterest">Pinterest Feed</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-socialshare"><label for="i-sig-socialshare">Social Sharing</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-advpixel"><label for="i-sig-advpixel">Advanced Pixel Events</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-conversion">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">19</div>
+          <div><div class="cat-title">Conversion Optimization</div><div class="cat-meta">7 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-conversion')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-bundle"><label for="i-sig-bundle">Bundle Offers</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-giftcards"><label for="i-sig-giftcards">Gift Cards</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-discountrules"><label for="i-sig-discountrules">Discount Rules</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-exitintent"><label for="i-sig-exitintent">Exit Intent Popup</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-trustbadges"><label for="i-sig-trustbadges">Trust Badges</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-countdown"><label for="i-sig-countdown">Countdown Timer</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-saleslabels"><label for="i-sig-saleslabels">Sales Labels</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-blog">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">20</div>
+          <div><div class="cat-title">Blog</div><div class="cat-meta">4 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-blog')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-blogsetup"><label for="i-sig-blogsetup">Blog Setup</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-blogcats"><label for="i-sig-blogcats">Categories</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-blogseo"><label for="i-sig-blogseo">SEO Structure</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-journal"><label for="i-sig-journal">Journal Layout</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-seo">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">21</div>
+          <div><div class="cat-title">Premium SEO</div><div class="cat-meta">5 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-seo')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-schema"><label for="i-sig-schema">Schema Markup</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-richsnippets"><label for="i-sig-richsnippets">Rich Snippets</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-collectionseo2"><label for="i-sig-collectionseo2">Collection SEO</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-blogseo2"><label for="i-sig-blogseo2">Blog SEO</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-advimgopt"><label for="i-sig-advimgopt">Advanced Image Optimization</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-perf">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">22</div>
+          <div><div class="cat-title">Premium Performance</div><div class="cat-meta">3 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-perf')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-advspeed"><label for="i-sig-advspeed">Advanced Speed Optimization</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-premcwv"><label for="i-sig-premcwv">Premium Core Web Vitals</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-perftest"><label for="i-sig-perftest">Performance Testing</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="sig-support">
+      <div class="cat-head" onclick="toggleCollapse(this)">
+        <div class="cat-head-left">
+          <div class="cat-num">23</div>
+          <div><div class="cat-title">Priority Support — 60 Days</div><div class="cat-meta">3 items</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.9rem">
+          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('sig-support')">Uncheck all</div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="item-grid">
+          <div class="item"><input type="checkbox" checked id="i-sig-60days"><label for="i-sig-60days">60 Days Support</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-priorityassist"><label for="i-sig-priorityassist">Priority Assistance</label></div>
+          <div class="item"><input type="checkbox" checked id="i-sig-healthcheck"><label for="i-sig-healthcheck">Monthly Health Check (First Month)</label></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- THIRD PARTY COSTS (informational, not checkboxes) -->
+  <div class="category">
+    <div class="cat-head" onclick="toggleCollapse(this)">
+      <div class="cat-head-left">
+        <div class="cat-num">₹</div>
+        <div><div class="cat-title">Third-Party Costs — Paid Directly by Client</div><div class="cat-meta">Not included in the development fee</div></div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="cat-body">
+      <table class="tp-table">
+        <tr><td>Shopify Subscription (Basic Plan)</td><td>₹2,000–₹3,000/month</td></tr>
+        <tr><td>Domain Name (.com/.in) + Professional Business Email (1 Year – via GoDaddy)</td><td>₹1,600–₹2,000/year</td></tr>
+        <tr><td>Paid Shopify Apps (Optional)</td><td>₹500–₹8,000/month</td></tr>
+        <tr><td>Payment Gateway Transaction Charges</td><td>~2% per transaction</td></tr>
+        <tr><td>Shipping Charges (Shiprocket/Delhivery, etc.)</td><td>As per courier rates</td></tr>
+        <tr><td>SMS Notifications (Optional)</td><td>Usage-based</td></tr>
+        <tr><td>Email Marketing Platform (Optional – Klaviyo/Mailchimp)</td><td>Free initially, paid as list grows</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ESTIMATED INITIAL INVESTMENT -->
+  <div class="category">
+    <div class="cat-head" onclick="toggleCollapse(this)">
+      <div class="cat-head-left">
+        <div class="cat-num">Σ</div>
+        <div><div class="cat-title">Estimated Initial Investment</div><div class="cat-meta">Based on Option 1 — Launch Store</div></div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="cat-body">
+      <table class="tp-table">
+        <tr><td>Website Development (Launch Store)</td><td>₹55,000</td></tr>
+        <tr><td>Shopify Subscription (First Month)</td><td>₹2,000–₹3,000</td></tr>
+        <tr><td>Domain + Professional Business Email (1 Year)</td><td>₹1,600–₹2,000</td></tr>
+        <tr><td>Third-Party App Licenses (Optional)</td><td>As required</td></tr>
+        <tr style="font-weight:700;color:var(--black)"><td>Estimated Initial Investment</td><td>₹58,600–₹60,000</td></tr>
+      </table>
+      <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">Excludes optional apps, shipping, product photography, inventory, and taxes.</p>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="category">
+    <div class="cat-head" onclick="toggleCollapse(this)">
+      <div class="cat-head-left">
+        <div class="cat-num">✎</div>
+        <div><div class="cat-title">Additional Notes / Requests</div><div class="cat-meta">Anything to add, remove, or clarify</div></div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="cat-body notes-box">
+      <textarea id="clientNotes" placeholder="e.g. Please add a size-chart PDF download, or we'd like 15 products instead of 12..."></textarea>
+    </div>
+  </div>
+
+  <p class="footer-note">Ritik & Co. — Brand & Visual Studio · Pune, India · ritikandco.com · ritik@ritikandco.com</p>
+
+</div>
+
+<div class="send-bar">
+  <a class="btn btn-secondary" id="emailBtn" href="#">✉️ Email Us</a>
+  <a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">✅ Send on WhatsApp</a>
+</div>
+
+<div class="toast" id="toast">Opening email client…</div>
+
+<script>
+/* ============ ACCESS GATE ============
+   NOTE: This is a simple front-door lock (obscurity), not real security —
+   anyone who knows/guesses the code, or views the page source, can get in.
+   For real access control, protect this URL at the hosting level
+   (password-protected page / staging area) if your platform supports it. */
+const ACCESS_CODE = "ATHENA2026"; // change this to whatever code you want to share with the client
+if(sessionStorage === undefined){} // placeholder, storage not used per artifact rules elsewhere; fine in real hosting
+function checkGate(){
+  const val = document.getElementById('gateInput').value.trim();
+  if(val.toUpperCase() === ACCESS_CODE){
+    document.getElementById('gateOverlay').style.display = 'none';
+  } else {
+    document.getElementById('gateError').textContent = 'Incorrect code, please try again.';
+  }
+}
+document.getElementById('gateInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkGate(); });
+
+let currentPlan = 'launch';
+const WHATSAPP_LINK = "https://wa.me/message/XKE5WXLOSFJUC1";
+const EMAIL_ADDRESS = "contact@ritikandco.com";
+
+function switchPlan(plan){
+  currentPlan = plan;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`.tab[data-plan="${plan}"]`).classList.add('active');
+  document.getElementById('signature-sections').style.display = plan==='signature' ? 'block':'none';
+  document.getElementById('basePrice').innerHTML = plan==='signature' ? '₹85,000 <span>one-time</span>' : '₹55,000 <span>one-time</span>';
+  updateCount();
+}
+
+function toggleCollapse(headEl){
+  headEl.parentElement.classList.toggle('collapsed');
+}
+
+function toggleCategory(cat){
+  const wrap = document.querySelector(`.category[data-cat="${cat}"]`);
+  const boxes = wrap.querySelectorAll('input[type=checkbox]');
+  const anyChecked = Array.from(boxes).some(b=>b.checked);
+  boxes.forEach(b=>{ b.checked = !anyChecked; b.closest('.item').classList.toggle('unchecked', !b.checked); });
+  const label = wrap.querySelector('.cat-toggle-all');
+  label.textContent = anyChecked ? 'Check all' : 'Uncheck all';
+  updateCount();
+}
+
+function getActiveBoxes(){
+  const container = currentPlan==='signature'
+    ? [...document.querySelectorAll('#launch-sections input[type=checkbox]'), ...document.querySelectorAll('#signature-sections input[type=checkbox]')]
+    : [...document.querySelectorAll('#launch-sections input[type=checkbox]')];
+  return container;
+}
+
+function updateCount(){
+  const boxes = getActiveBoxes();
+  const checked = boxes.filter(b=>b.checked).length;
+  document.getElementById('checkedCount').textContent = checked;
+  document.getElementById('totalCount').textContent = boxes.length;
+  document.getElementById('progressFill').style.width = (checked/boxes.length*100)+'%';
+  document.getElementById('priceNote').textContent = checked===boxes.length
+    ? "Everything recommended is included — this is the confirmed base price."
+    : `${boxes.length-checked} item(s) unchecked — final price to be revised based on your selection.`;
+}
+
+document.addEventListener('change', (e)=>{
+  if(e.target.type==='checkbox'){
+    e.target.closest('.item').classList.toggle('unchecked', !e.target.checked);
+    updateCount();
+  }
+});
+
+function resetAll(){
+  document.querySelectorAll('input[type=checkbox]').forEach(b=>{b.checked=true; b.closest('.item').classList.remove('unchecked');});
+  document.querySelectorAll('.cat-toggle-all').forEach(l=>l.textContent='Uncheck all');
+  updateCount();
+}
+
+function buildSummaryText(){
+  const planName = currentPlan==='signature' ? 'Option 2 — Signature Store (₹85,000)' : 'Option 1 — Launch Store (₹55,000)';
+  let text = `ATHENA DIARIES — SHOPIFY PROPOSAL RESPONSE\nSelected Package: ${planName}\n\n`;
+  const cats = currentPlan==='signature'
+    ? [...document.querySelectorAll('#launch-sections .category'), ...document.querySelectorAll('#signature-sections .category')]
+    : [...document.querySelectorAll('#launch-sections .category')];
+  let uncheckedFound = false;
+  cats.forEach(cat=>{
+    const boxes = cat.querySelectorAll('input[type=checkbox]');
+    const unchecked = Array.from(boxes).filter(b=>!b.checked);
+    if(unchecked.length){
+      uncheckedFound = true;
+      const title = cat.querySelector('.cat-title').textContent;
+      text += `Remove from "${title}":\n`;
+      unchecked.forEach(b=> text += `  - ${b.nextElementSibling.textContent}\n`);
+      text += `\n`;
+    }
+  });
+  if(!uncheckedFound) text += "All recommended items kept as-is — no removals.\n\n";
+  const notes = document.getElementById('clientNotes').value.trim();
+  if(notes) text += `Additional Notes:\n${notes}\n`;
+  return text;
+}
+
+function updateSendLinks(){
+  const text = buildSummaryText();
+  const encoded = encodeURIComponent(text);
+  document.getElementById('emailBtn').href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent('Athena Diaries — Proposal Response')}&body=${encoded}`;
+  // Note: wa.me/message/ links use a fixed preset message set in WhatsApp Business.
+  // We still attempt to pass ?text= — most devices honor it, but if WhatsApp
+  // ignores it and opens with its own preset text instead, use "Email Us" or
+  // copy your selections manually into the chat.
+  document.getElementById('whatsappBtn').href = `${WHATSAPP_LINK}?text=${encoded}`;
+}
+
+document.getElementById('emailBtn').addEventListener('click', updateSendLinks);
+document.getElementById('whatsappBtn').addEventListener('click', updateSendLinks);
+
+updateCount();
+updateSendLinks();
+</script>
+
+</body>
+</html>
