@@ -286,19 +286,28 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
   <!-- ============ LAUNCH STORE SECTIONS ============ -->
   <div id="launch-sections">
 
-    <div class="category" data-cat="discovery">
-      <div class="cat-head" onclick="toggleCollapse(this)">
-        <div class="cat-head-left">
-          <div class="cat-num">1</div>
-          <div><div class="cat-title">Discovery & Planning</div><div class="cat-meta">7 items</div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:0.9rem">
-          <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('discovery')">Uncheck all</div>
-          <div class="chevron">▼</div>
+    <div class="category collapsed" data-cat="exclusions">
+  <div class="cat-head" onclick="toggleCollapse(this)">
+    <div class="cat-head-left">
+      <div class="cat-num">⊘</div>
+      <div>
+        <div class="cat-title">Additional Services</div>
+        <div class="cat-meta">
+          Optional services available at an additional cost — tick any you'd like included in your proposal.
         </div>
       </div>
-      <div class="cat-body">
-        <div class="item-grid">
+    </div>
+
+    <div style="display:flex;align-items:center;gap:0.9rem">
+      <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('exclusions')">
+        Add All
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+  </div>
+
+  <div class="cat-body">
+    <div class="item-grid">
           <div class="item"><input type="checkbox" checked id="i-brand-research"><label for="i-brand-research">Brand Research</label></div>
           <div class="item"><input type="checkbox" checked id="i-competitor-analysis"><label for="i-competitor-analysis">Competitor Analysis</label></div>
           <div class="item"><input type="checkbox" checked id="i-site-structure"><label for="i-site-structure">Website Structure Planning</label></div>
@@ -981,7 +990,10 @@ A special <strong>Mentee Rate</strong> has been applied to the website developme
     </div>
 
     <div class="cat-body notes-box">
-      <textarea id="clientNotes" placeholder="e.g. placeholder="e.g. Please add a Loyalty Program, Gift Cards, or an FAQ page."..."></textarea>
+      <textarea
+id="clientNotes"
+placeholder="e.g. Please add a Loyalty Program, Gift Cards, an FAQ page, or mention any custom requirements...">
+</textarea>
     </div>
   </div>
 
