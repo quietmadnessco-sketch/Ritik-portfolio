@@ -148,7 +148,7 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 
 <div class="instructions">
   <div class="ico">✅</div>
-  <p><strong>How this works:</strong> Everything is pre-checked as recommended. Switch between the two package tabs below, untick anything you'd like removed, and use the notes box for anything you'd like added instead. When you're done, tap <strong>"Email Us"</strong> or <strong>"Send on WhatsApp"</strong> at the bottom — it'll compile your exact selections so we can revise the final price and confirm scope in one message, no back-and-forth needed.</p>
+<p><strong>How this works:</strong> Everything is pre checked as recommended. Switch between the two package tabs below, untick anything you'd like removed, and use the notes box for anything you'd like added instead. When you're done, tap <strong>"Copy Email Draft"</strong> or <strong>"Send on WhatsApp"</strong> at the bottom it'll compile your exact selections so we can revise the final price and confirm scope in one message, no back and forth needed.</p>
 </div>
 
 <div class="tabs-wrap">
@@ -162,6 +162,13 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
       <span class="tprice">₹85,000 · 20–30 days</span>
     </div>
   </div>
+</div>
+
+<div style="max-width:900px;margin:1rem auto 0;padding:0 1.5rem">
+  <label style="display:flex;align-items:center;gap:0.6rem;background:var(--white);border:1px solid var(--border-light);border-radius:12px;padding:0.9rem 1.1rem;cursor:pointer;font-size:12.5px;color:#3f3f46">
+    <input type="checkbox" id="customQuoteBox" style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0">
+    I would like a completely custom package.
+  </label>
 </div>
 
 <div class="summary-bar">
@@ -567,35 +574,6 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
       </div>
     </div>
 
-<!-- ============ EXTRAS (works with either option) ============ -->
-<div style="margin:1.5rem 0 0.75rem;padding:0 0.2rem">
-  <div style="font-family:var(--ff-head);font-size:13px;font-weight:800;color:var(--black);letter-spacing:0.3px">Extras — Optional Add-ons</div>
-  <div style="font-size:11px;color:var(--muted);margin-top:2px">These can be added on top of either Option 1 or Option 2. Tick anything you'd like included — nothing here is added unless checked.</div>
-</div>
-<div id="extras-sections">
-
-  <div class="category" data-cat="extras">
-    <div class="cat-head" onclick="toggleCollapse(this)">
-      <div class="cat-head-left">
-        <div class="cat-num">+</div>
-        <div><div class="cat-title">Extras</div><div class="cat-meta">Replace these with your real add-ons</div></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:0.9rem">
-        <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('extras')">Check all</div>
-        <div class="chevron">▼</div>
-      </div>
-    </div>
-    <div class="cat-body">
-      <div class="item-grid">
-        <div class="item unchecked"><input type="checkbox" id="i-ex-item1"><label for="i-ex-item1">Extra item 1 (edit me)</label></div>
-        <div class="item unchecked"><input type="checkbox" id="i-ex-item2"><label for="i-ex-item2">Extra item 2 (edit me)</label></div>
-        <div class="item unchecked"><input type="checkbox" id="i-ex-item3"><label for="i-ex-item3">Extra item 3 (edit me)</label></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-    
     <div class="category" data-cat="sig-pdp">
       <div class="cat-head" onclick="toggleCollapse(this)">
         <div class="cat-head-left">
@@ -826,37 +804,41 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
       <p style="font-size:10.5px;color:var(--muted);margin-top:0.6rem">Excludes optional apps, shipping, product photography, inventory, and taxes.</p>
     </div>
   </div>
-  
+
 <!-- EXCLUSIONS -->
-<div class="category">
+<div class="category collapsed" data-cat="exclusions">
   <div class="cat-head" onclick="toggleCollapse(this)">
     <div class="cat-head-left">
       <div class="cat-num">⊘</div>
-      <div><div class="cat-title">Exclusions</div><div class="cat-meta">Not included unless specifically quoted</div></div>
+      <div><div class="cat-title">Exclusions</div><div class="cat-meta">Not included unless quoted separately — tick any you'd like added</div></div>
     </div>
-    <div class="chevron">▼</div>
+    <div style="display:flex;align-items:center;gap:0.9rem">
+      <div class="cat-toggle-all" onclick="event.stopPropagation();toggleCategory('exclusions')">Check all</div>
+      <div class="chevron">▼</div>
+    </div>
   </div>
   <div class="cat-body">
-    <ul style="margin-top:0.9rem;padding-left:1.1rem;font-size:12.5px;color:#3f3f46;line-height:2">
-      <li>Logo Design</li>
-      <li>Brand Identity</li>
-      <li>Packaging Design</li>
-      <li>Product Photography</li>
-      <li>Product Videography</li>
-      <li>Fashion Design / Tech Packs</li>
-      <li>Product Manufacturing</li>
-      <li>Copywriting for all products</li>
-      <li>Inventory Management</li>
-      <li>Marketplace Listings (Amazon, Myntra, Ajio, etc.)</li>
-      <li>Paid Advertising (Meta/Google)</li>
-      <li>Social Media Management</li>
-      <li>Influencer Marketing</li>
-      <li>Ongoing Website Maintenance (after support period)</li>
-      <li>Custom App Development</li>
-      <li>ERP/POS Integrations</li>
-      <li>Multi-language or Multi-currency setup</li>
-      <li>International tax and shipping configuration</li>
-    </ul>
+    <div class="item-grid">
+      <div class="item unchecked"><input type="checkbox" id="i-excl-logo"><label for="i-excl-logo">Logo Design</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-brandid"><label for="i-excl-brandid">Brand Identity</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-packaging"><label for="i-excl-packaging">Packaging Design</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-photo"><label for="i-excl-photo">Product Photography</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-video"><label for="i-excl-video">Product Videography</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-techpack"><label for="i-excl-techpack">Fashion Design / Tech Packs</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-manufacturing"><label for="i-excl-manufacturing">Product Manufacturing</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-copy"><label for="i-excl-copy">Product Copywriting</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-inventory"><label for="i-excl-inventory">Inventory Management</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-marketplace"><label for="i-excl-marketplace">Marketplace Listings (Amazon, Myntra, Ajio)</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-ads"><label for="i-excl-ads">Paid Advertising (Meta / Google)</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-social"><label for="i-excl-social">Social Media Management</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-influencer"><label for="i-excl-influencer">Influencer Marketing</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-maintenance"><label for="i-excl-maintenance">Website Maintenance (After Support Period)</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-customapp"><label for="i-excl-customapp">Custom App Development</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-erp"><label for="i-excl-erp">ERP / POS Integrations</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-multilang"><label for="i-excl-multilang">Multi-language Setup</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-multicurr"><label for="i-excl-multicurr">Multi-currency Setup</label></div>
+      <div class="item unchecked"><input type="checkbox" id="i-excl-intltax"><label for="i-excl-intltax">International Tax & Shipping Configuration</label></div>
+    </div>
   </div>
 </div>
   
@@ -879,11 +861,11 @@ body{background:var(--off);color:var(--black);font-family:var(--ff-body);line-he
 </div>
 
 <div class="send-bar">
-  <a class="btn btn-secondary" id="emailBtn" href="#" target="_blank" rel="noopener">Email Us</a>
-<a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+  <button class="btn btn-secondary" id="emailBtn" type="button">Copy Email Draft</button>
+  <a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
 </div>
 
-<div class="toast" id="toast">Opening email client…</div>
+<div class="toast" id="toast">Copied to clipboard</div>
 
 <script>
 /* ============ ACCESS GATE ============
@@ -905,7 +887,6 @@ document.getElementById('gateInput').addEventListener('keydown', (e)=>{ if(e.key
 
 let currentPlan = 'launch';
 const WHATSAPP_LINK = "https://wa.me/message/XKE5WXLOSFJUC1";
-const EMAIL_ADDRESS = "contact@ritikandco.com";
 
 function switchPlan(plan){
   currentPlan = plan;
@@ -962,51 +943,71 @@ function resetAll(){
 }
 
 function buildSummaryText(){
-  const planName = currentPlan==='signature' ? 'Option 2 — Signature Store (₹85,000)' : 'Option 1 — Launch Store (₹55,000)';
-  let text = `ATHENA DIARIES — SHOPIFY PROPOSAL RESPONSE\nSelected Package: ${planName}\n\n`;
-  const cats = currentPlan==='signature'
-    ? [...document.querySelectorAll('#launch-sections .category'), ...document.querySelectorAll('#signature-sections .category')]
-    : [...document.querySelectorAll('#launch-sections .category')];
-  let uncheckedFound = false;
-  cats.forEach(cat=>{
-    const boxes = cat.querySelectorAll('input[type=checkbox]');
-    const unchecked = Array.from(boxes).filter(b=>!b.checked);
-    if(unchecked.length){
-      uncheckedFound = true;
-      const title = cat.querySelector('.cat-title').textContent;
-      text += `Remove from "${title}":\n`;
-      unchecked.forEach(b=> text += `  - ${b.nextElementSibling.textContent}\n`);
+  const customQuote = document.getElementById('customQuoteBox').checked;
+  let text = `Athena Diaries Proposal Response\n\n`;
+
+  if(customQuote){
+    text += `Custom package requested.\n\n`;
+    text += `The client would like a fully custom package instead of the standard options — please prepare a custom quote based on the notes below.\n\n`;
+  } else {
+    const planName = currentPlan==='signature' ? 'Option 2 – Signature Store' : 'Option 1 – Launch Store';
+    text += `Selected Package:\n✓ ${planName}\n\n`;
+
+    const cats = currentPlan==='signature'
+      ? [...document.querySelectorAll('#launch-sections .category'), ...document.querySelectorAll('#signature-sections .category')]
+      : [...document.querySelectorAll('#launch-sections .category')];
+
+    const removedLines = [];
+    cats.forEach(cat=>{
+      cat.querySelectorAll('input[type=checkbox]').forEach(b=>{
+        if(!b.checked) removedLines.push(b.nextElementSibling.textContent);
+      });
+    });
+
+    if(removedLines.length){
+      text += `Removed Items\n`;
+      removedLines.forEach(l=> text += `• ${l}\n`);
       text += `\n`;
     }
-  });
-  if(!uncheckedFound) text += "All recommended items kept as-is — no removals.\n\n";
+  }
 
-  // Extras apply to whichever package is currently selected
-  const extraBoxes = [...document.querySelectorAll('#extras-sections input[type=checkbox]')];
-  const extraChecked = extraBoxes.filter(b=>b.checked);
-  if(extraChecked.length){
-    text += `Extras Requested (add to ${planName}):\n`;
-    extraChecked.forEach(b=> text += `  + ${b.nextElementSibling.textContent}\n`);
+  // Anything ticked in Exclusions = a requested add-on, shown as "Additional Services"
+  const exclChecked = [...document.querySelectorAll('.category[data-cat="exclusions"] input[type=checkbox]')].filter(b=>b.checked);
+  if(exclChecked.length){
+    text += `Additional Services\n`;
+    exclChecked.forEach(b=> text += `✓ ${b.nextElementSibling.textContent}\n`);
     text += `\n`;
   }
 
   const notes = document.getElementById('clientNotes').value.trim();
-  if(notes) text += `Additional Notes:\n${notes}\n`;
-  return text;
+  if(notes) text += `Notes\n${notes}\n`;
+
+  return text.trim();
 }
 
-function updateSendLinks(){
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=> t.classList.remove('show'), 3500);
+}
+
+document.getElementById('emailBtn').addEventListener('click', async ()=>{
   const text = buildSummaryText();
-  const encoded = encodeURIComponent(text);
-  const subject = encodeURIComponent('Athena Diaries — Proposal Response');
-  // Gmail web compose — opens directly in the browser, works even with no
-  // desktop mail client configured (mailto: often fails silently for this reason).
-  document.getElementById('emailBtn').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADDRESS}&su=${subject}&body=${encoded}`;
-  document.getElementById('whatsappBtn').href = `${WHATSAPP_LINK}?text=${encoded}`;
-}
+  try{
+    await navigator.clipboard.writeText(text);
+    showToast('Copied! Opening Gmail — paste (Ctrl/Cmd+V) into a new email.');
+  }catch(err){
+    showToast('Could not copy automatically — please select and copy the text manually.');
+  }
+  window.open('https://mail.google.com/mail/u/0/#inbox?compose=new', '_blank');
+});
 
-document.getElementById('emailBtn').addEventListener('click', updateSendLinks);
-document.getElementById('whatsappBtn').addEventListener('click', updateSendLinks);
+document.getElementById('whatsappBtn').addEventListener('click', ()=>{
+  const text = buildSummaryText();
+  document.getElementById('whatsappBtn').href = `${WHATSAPP_LINK}?text=${encodeURIComponent(text)}`;
+});
 
 updateCount();
 updateSendLinks();
