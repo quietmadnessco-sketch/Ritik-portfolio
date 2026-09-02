@@ -52,6 +52,8 @@
 
 html {
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -386,6 +388,8 @@ main {
     line-height: .92;
 
     letter-spacing: -.03em;
+
+    overflow-wrap: break-word;
 }
 
 
@@ -1194,9 +1198,13 @@ footer strong {
 
     .hero h1 {
 
-        font-size: 58px;
+        font-size: clamp(36px, 13vw, 58px);
 
-        line-height: .94;
+        line-height: .96;
+
+        letter-spacing: -.02em;
+
+        word-break: break-word;
     }
 
 
