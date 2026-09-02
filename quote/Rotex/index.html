@@ -6,95 +6,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rotex Catalogue — Quotation | Ritik & Co</title>
-
-<!-- =========================================================
-     FONTS
-========================================================= -->
+<title>Rotex Catalogue — Ritik & Co.</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 
 <style>
 
 /* =========================================================
-   VARIABLES
+   RITIK & CO — CORE
 ========================================================= */
 
 :root {
 
-    --bg: #050706;
+    --black: #030504;
+    --black-2: #060807;
 
-    --surface: rgba(13, 17, 15, 0.72);
-    --surface-solid: #0d110f;
+    --white: #f2f4f2;
+    --soft: #b7beb9;
+    --muted: #707a74;
 
-    --text: #f3f5f3;
-    --text-soft: #c5ccc8;
-    --text-muted: #7f8983;
+    --green: #19d875;
+    --green-light: #24e982;
 
-    --green: #20d477;
-    --green-bright: #27e982;
+    --line: rgba(255,255,255,.065);
+    --line-green: rgba(25,216,117,.28);
 
-    --green-soft: rgba(32, 212, 119, 0.08);
-    --green-glow: rgba(32, 212, 119, 0.12);
-
-    --border: rgba(255, 255, 255, 0.085);
-    --border-green: rgba(32, 212, 119, 0.30);
-
-    --max-width: 1120px;
+    --max: 1180px;
 }
 
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
 
 html {
     scroll-behavior: smooth;
 }
 
-body {
 
-    min-height: 100vh;
+body {
 
     background:
 
         radial-gradient(
-            circle at 78% 8%,
-            rgba(32, 212, 119, 0.13) 0%,
-            rgba(32, 212, 119, 0.055) 20%,
-            transparent 46%
+            700px 500px at 75% 5%,
+            rgba(25,216,117,.045),
+            transparent 70%
         ),
 
         radial-gradient(
-            circle at 8% 65%,
-            rgba(25, 150, 85, 0.055) 0%,
-            transparent 38%
+            500px 500px at 0% 70%,
+            rgba(25,216,117,.018),
+            transparent 75%
         ),
 
-        linear-gradient(
-            135deg,
-            #040505 0%,
-            #07100b 48%,
-            #050807 100%
-        );
+        var(--black);
 
-    color: var(--text);
+    color: var(--white);
 
     font-family: "DM Sans", sans-serif;
-
-    line-height: 1.5;
 
     -webkit-font-smoothing: antialiased;
 
@@ -103,7 +80,7 @@ body {
 
 
 /* =========================================================
-   AMBIENT BACKGROUND
+   SUBTLE GRID
 ========================================================= */
 
 body::before {
@@ -116,53 +93,53 @@ body::before {
 
     pointer-events: none;
 
-    background:
+    opacity: .28;
+
+    background-image:
 
         linear-gradient(
-            115deg,
-            transparent 0%,
-            rgba(32, 212, 119, 0.015) 45%,
-            transparent 75%
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
         );
+
+    background-size: 90px 90px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
 
     z-index: -1;
 }
 
 
 /* =========================================================
-   PAGE
+   MAIN
 ========================================================= */
 
-.page {
+main {
 
     width: min(
-        calc(100% - 48px),
-        var(--max-width)
+        calc(100% - 80px),
+        var(--max)
     );
 
-    margin: 38px auto 80px;
-
-    position: relative;
-
-    border-left: 1px solid rgba(255,255,255,0.025);
-
-    border-right: 1px solid rgba(255,255,255,0.025);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.012),
-            rgba(32,212,119,0.008)
-        );
+    margin: 0 auto;
 }
 
 
 /* =========================================================
-   TOP BAR
+   NAV
 ========================================================= */
 
-.topbar {
+.nav {
 
     display: flex;
 
@@ -170,7 +147,9 @@ body::before {
 
     justify-content: space-between;
 
-    padding-bottom: 62px;
+    padding-top: 28px;
+
+    padding-bottom: 90px;
 }
 
 
@@ -178,29 +157,88 @@ body::before {
 
     font-family: "Manrope", sans-serif;
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: 800;
 
-    letter-spacing: -0.065em;
-
-    color: #f1f3f1;
+    letter-spacing: -.07em;
 }
+
 
 .logo span {
     color: var(--green);
 }
 
 
-.top-date {
+.back-btn {
 
-    color: var(--text-muted);
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.018);
+
+    color: var(--soft);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition: all .25s ease;
+}
+
+
+.back-btn:hover {
+
+    color: var(--white);
+
+    border-color: var(--line-green);
+
+    background: rgba(25,216,117,.035);
+
+    box-shadow:
+        0 0 25px rgba(25,216,117,.055);
+}
+
+
+.back-arrow {
+
+    color: var(--green);
+
+    font-size: 13px;
+
+    transition: transform .25s ease;
+}
+
+
+.back-btn:hover .back-arrow {
+    transform: translateX(-3px);
+}
+
+
+.date {
+
+    position: absolute;
+
+    right: 40px;
+
+    top: 32px;
+
+    color: #555e59;
 
     font-size: 9px;
 
-    font-weight: 500;
-
-    letter-spacing: 0.03em;
+    letter-spacing: .03em;
 }
 
 
@@ -212,15 +250,23 @@ body::before {
 
     position: relative;
 
-    padding-bottom: 88px;
+    min-height: 650px;
 
-    border-bottom: 1px solid var(--border);
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 70px 0 110px;
+
+    border-bottom: 1px solid var(--line);
 
     overflow: hidden;
 }
 
 
-/* GREEN ATMOSPHERE */
+/* subtle green light */
 
 .hero::after {
 
@@ -228,24 +274,23 @@ body::before {
 
     position: absolute;
 
-    width: 650px;
+    width: 800px;
 
-    height: 420px;
+    height: 500px;
 
-    right: -250px;
+    right: -350px;
 
-    top: -170px;
+    top: -180px;
 
     background:
 
         radial-gradient(
             circle,
-            rgba(32,212,119,0.12) 0%,
-            rgba(32,212,119,0.045) 35%,
-            transparent 70%
+            rgba(25,216,117,.065),
+            transparent 68%
         );
 
-    filter: blur(15px);
+    filter: blur(30px);
 
     pointer-events: none;
 }
@@ -255,219 +300,119 @@ body::before {
    LABEL
 ========================================================= */
 
-.label {
+.eyebrow {
 
     position: relative;
 
-    z-index: 1;
+    z-index: 2;
 
-    display: inline-flex;
+    display: flex;
 
     align-items: center;
 
     gap: 9px;
 
-    padding: 8px 13px;
+    width: fit-content;
 
-    margin-bottom: 29px;
+    margin-bottom: 28px;
 
-    border: 1px solid var(--border-green);
-
-    border-radius: 999px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(32,212,119,0.085),
-            rgba(5,10,7,0.45)
-        );
-
-    color: var(--green-bright);
+    color: var(--green-light);
 
     font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 0.16em;
+    letter-spacing: .16em;
 
     text-transform: uppercase;
-
-    box-shadow:
-
-        0 0 18px rgba(32,212,119,0.045);
 }
 
 
-.label-dot {
+.eyebrow::before {
 
-    width: 5px;
+    content: "";
 
-    height: 5px;
+    width: 28px;
+
+    height: 1px;
+
+    background: var(--green);
+}
+
+
+.dot {
+
+    width: 4px;
+
+    height: 4px;
 
     border-radius: 50%;
 
-    background: var(--green-bright);
+    background: var(--green);
 
     box-shadow:
-        0 0 8px rgba(32,212,119,0.65);
+        0 0 9px rgba(25,216,117,.7);
 }
 
 
 /* =========================================================
-   HERO TITLE
+   TITLE
 ========================================================= */
 
 .hero h1 {
 
     position: relative;
 
-    z-index: 1;
+    z-index: 2;
 
     max-width: 1000px;
 
     font-family: "Manrope", sans-serif;
 
     font-size: clamp(
-        62px,
-        9vw,
-        112px
+        72px,
+        10vw,
+        142px
     );
 
     font-weight: 800;
 
-    line-height: 0.88;
+    line-height: .84;
 
-    letter-spacing: -0.085em;
+    letter-spacing: -.09em;
 }
 
 
-.hero h1 .green {
+.hero h1 span {
 
-    color: var(--green-bright);
+    display: block;
+
+    color: var(--green-light);
 
     text-shadow:
-
-        0 0 55px rgba(32,212,119,0.07);
+        0 0 60px rgba(25,216,117,.06);
 }
 
 
 /* =========================================================
-   HERO DESCRIPTION
+   DESCRIPTION
 ========================================================= */
 
 .hero-description {
 
     position: relative;
 
-    z-index: 1;
+    z-index: 2;
 
-    max-width: 610px;
+    max-width: 580px;
 
-    margin-top: 30px;
+    margin-top: 38px;
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 12px;
 
-    line-height: 1.85;
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-btn {
-
-    position: relative;
-
-    z-index: 2;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-top: 27px;
-
-    padding: 11px 17px;
-
-    border: 1px solid rgba(32,212,119,0.42);
-
-    border-radius: 10px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(32,212,119,0.095),
-            rgba(6,10,8,0.58)
-        );
-
-    color: #e9edea;
-
-    text-decoration: none;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    box-shadow:
-
-        0 0 0 1px rgba(32,212,119,0.018),
-
-        0 0 20px rgba(32,212,119,0.075),
-
-        inset 0 1px 0 rgba(255,255,255,0.04);
-
-    transition:
-
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-.back-btn:hover {
-
-    transform: translateY(-2px);
-
-    border-color: rgba(32,212,119,0.72);
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(32,212,119,0.15),
-            rgba(5,12,8,0.72)
-        );
-
-    box-shadow:
-
-        0 0 28px rgba(32,212,119,0.15),
-
-        inset 0 1px 0 rgba(255,255,255,0.055);
-}
-
-
-.back-arrow {
-
-    color: var(--green-bright);
-
-    font-size: 14px;
-
-    line-height: 1;
-
-    transition: transform 0.25s ease;
-}
-
-
-.back-btn:hover .back-arrow {
-
-    transform: translateX(-3px);
+    line-height: 1.9;
 }
 
 
@@ -479,44 +424,52 @@ body::before {
 
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
 
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
 }
 
 
 .meta-item {
 
-    padding: 25px 0;
+    min-height: 125px;
 
-    border-right: 1px solid var(--border);
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding-right: 35px;
+
+    border-right: 1px solid var(--line);
 }
 
 
-.meta-item:nth-child(2),
-.meta-item:nth-child(3) {
-
-    padding-left: 29px;
+.meta-item:not(:first-child) {
+    padding-left: 35px;
 }
 
 
 .meta-item:last-child {
-
     border-right: none;
 }
 
 
 .meta-label {
 
-    margin-bottom: 7px;
+    margin-bottom: 9px;
 
-    color: var(--text-muted);
+    color: #555e59;
 
     font-size: 8px;
 
     font-weight: 700;
 
-    letter-spacing: 0.17em;
+    letter-spacing: .17em;
 
     text-transform: uppercase;
 }
@@ -524,7 +477,7 @@ body::before {
 
 .meta-value {
 
-    color: var(--text);
+    color: var(--white);
 
     font-size: 12px;
 
@@ -538,75 +491,65 @@ body::before {
 
 .content {
 
-    padding-top: 88px;
+    padding: 115px 0 100px;
 }
 
-
-/* =========================================================
-   SECTION
-========================================================= */
 
 .section {
 
-    margin-bottom: 105px;
+    margin-bottom: 125px;
 }
 
 
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.section-head {
+.section-header {
 
     display: flex;
 
-    align-items: center;
+    align-items: baseline;
 
-    gap: 12px;
+    gap: 15px;
 
-    margin-bottom: 27px;
+    margin-bottom: 35px;
 }
 
 
 .section-number {
 
-    color: var(--green-bright);
+    color: var(--green);
 
     font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: 0.13em;
+    letter-spacing: .13em;
 }
 
 
 .section-title {
 
-    color: var(--text);
-
     font-family: "Manrope", sans-serif;
 
-    font-size: 15px;
+    font-size: 17px;
 
     font-weight: 800;
 
-    letter-spacing: -0.025em;
+    letter-spacing: -.035em;
 
     text-transform: uppercase;
 }
 
 
-.section-intro {
+.section-description {
 
-    max-width: 700px;
+    max-width: 650px;
 
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 11px;
 
-    line-height: 1.85;
+    line-height: 1.9;
 }
 
 
@@ -616,23 +559,7 @@ body::before {
 
 .scope {
 
-    overflow: hidden;
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.015),
-            rgba(32,212,119,0.012)
-        );
-
-    box-shadow:
-
-        0 20px 60px rgba(0,0,0,0.12);
+    border-top: 1px solid var(--line);
 }
 
 
@@ -640,58 +567,46 @@ body::before {
 
     display: grid;
 
-    grid-template-columns: 55px 1fr 30px;
+    grid-template-columns:
+        65px
+        1fr
+        30px;
 
     align-items: center;
 
-    min-height: 76px;
+    min-height: 88px;
 
-    padding: 15px 21px;
+    border-bottom: 1px solid var(--line);
 
-    border-bottom: 1px solid var(--border);
-
-    transition:
-
-        background 0.25s ease,
-        padding 0.25s ease;
-}
-
-
-.scope-row:last-child {
-
-    border-bottom: none;
+    transition: background .25s ease;
 }
 
 
 .scope-row:hover {
 
-    background: rgba(32,212,119,0.025);
+    background:
 
-    padding-left: 25px;
+        linear-gradient(
+            90deg,
+            rgba(25,216,117,.025),
+            transparent
+        );
 }
 
 
-.scope-no {
+.scope-number {
 
-    color: var(--green-bright);
+    color: #59635d;
 
-    font-size: 8px;
+    font-size: 9px;
 
-    font-weight: 800;
-
-    letter-spacing: 0.08em;
-}
-
-
-.scope-main {
-
-    padding-right: 20px;
+    font-weight: 700;
 }
 
 
 .scope-title {
 
-    color: var(--text);
+    color: var(--white);
 
     font-size: 11px;
 
@@ -701,13 +616,11 @@ body::before {
 
 .scope-description {
 
-    margin-top: 4px;
+    margin-top: 5px;
 
-    color: var(--text-muted);
+    color: #68716c;
 
     font-size: 9px;
-
-    line-height: 1.55;
 }
 
 
@@ -715,45 +628,57 @@ body::before {
 
     color: var(--green);
 
-    font-size: 14px;
-
-    text-align: right;
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   PRICE
+   INVESTMENT
 ========================================================= */
 
-.price-card {
+.investment {
+
+    position: relative;
+
+    padding: 50px 0;
+
+    border-top: 1px solid var(--line);
+
+    border-bottom: 1px solid var(--line);
 
     overflow: hidden;
+}
 
-    border: 1px solid var(--border-green);
 
-    border-radius: 10px;
+.investment::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+
+    height: 450px;
+
+    right: -200px;
+
+    top: -180px;
 
     background:
 
         radial-gradient(
-            circle at 85% 10%,
-            rgba(32,212,119,0.07),
-            transparent 38%
-        ),
-
-        linear-gradient(
-            135deg,
-            rgba(32,212,119,0.035),
-            rgba(8,11,9,0.72)
+            circle,
+            rgba(25,216,117,.045),
+            transparent 70%
         );
 
-    box-shadow:
-
-        0 0 45px rgba(32,212,119,0.035);
+    pointer-events: none;
 }
 
 
-.price-top {
+.investment-inner {
+
+    position: relative;
 
     display: flex;
 
@@ -761,55 +686,69 @@ body::before {
 
     justify-content: space-between;
 
-    padding: 31px;
+    gap: 30px;
 }
 
 
-.price-title {
+.investment-label {
 
-    color: var(--text);
+    color: var(--green);
 
-    font-family: "Manrope", sans-serif;
-
-    font-size: 17px;
+    font-size: 8px;
 
     font-weight: 800;
 
-    letter-spacing: -0.035em;
+    letter-spacing: .17em;
+
+    text-transform: uppercase;
 }
 
 
-.price-description {
+.investment-title {
+
+    margin-top: 15px;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    letter-spacing: -.04em;
+}
+
+
+.investment-note {
 
     margin-top: 7px;
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 9px;
 }
 
 
-.price-value {
-
-    color: var(--text);
+.price {
 
     font-family: "Manrope", sans-serif;
 
-    font-size: 35px;
+    font-size: clamp(
+        35px,
+        5vw,
+        60px
+    );
 
     font-weight: 800;
 
-    letter-spacing: -0.06em;
+    letter-spacing: -.075em;
 
     white-space: nowrap;
 }
 
 
-.price-value span {
+.price small {
 
-    margin-left: 6px;
-
-    color: var(--green-bright);
+    color: var(--green);
 
     font-family: "DM Sans", sans-serif;
 
@@ -817,89 +756,46 @@ body::before {
 
     font-weight: 700;
 
-    letter-spacing: 0.1em;
-}
-
-
-.price-bottom {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 16px 31px;
-
-    border-top: 1px solid var(--border);
-
-    color: var(--text-muted);
-
-    font-size: 9px;
-}
-
-
-.price-bottom strong {
-
-    color: var(--text-soft);
-
-    font-weight: 600;
+    letter-spacing: .12em;
 }
 
 
 /* =========================================================
-   FEATURE GRID
+   FEATURES
 ========================================================= */
 
 .feature-grid {
 
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+        1fr 1fr;
 
-    gap: 10px;
+    border-top: 1px solid var(--line);
+
+    border-left: 1px solid var(--line);
 }
 
 
 .feature {
 
-    min-height: 155px;
+    min-height: 205px;
 
-    padding: 25px;
+    padding: 30px;
 
-    border: 1px solid var(--border);
+    border-right: 1px solid var(--line);
 
-    border-radius: 9px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.014),
-            rgba(32,212,119,0.008)
-        );
+    border-bottom: 1px solid var(--line);
 
     transition:
-
-        border-color 0.25s ease,
-        transform 0.25s ease,
-        background 0.25s ease;
+        background .25s ease;
 }
 
 
 .feature:hover {
 
-    transform: translateY(-2px);
-
-    border-color: rgba(32,212,119,0.22);
-
     background:
-
-        linear-gradient(
-            145deg,
-            rgba(32,212,119,0.025),
-            rgba(255,255,255,0.012)
-        );
+        rgba(25,216,117,.018);
 }
 
 
@@ -911,37 +807,35 @@ body::before {
 
     font-weight: 800;
 
-    letter-spacing: 0.14em;
+    letter-spacing: .15em;
 }
 
 
 .feature h3 {
 
-    margin-top: 18px;
-
-    color: var(--text);
+    margin-top: 35px;
 
     font-family: "Manrope", sans-serif;
 
-    font-size: 13px;
+    font-size: 14px;
 
     font-weight: 800;
 
-    letter-spacing: -0.025em;
+    letter-spacing: -.035em;
 }
 
 
 .feature p {
 
-    max-width: 390px;
+    max-width: 410px;
 
-    margin-top: 9px;
+    margin-top: 10px;
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 9px;
 
-    line-height: 1.8;
+    line-height: 1.85;
 }
 
 
@@ -949,9 +843,9 @@ body::before {
    ADDITIONAL SERVICES
 ========================================================= */
 
-.service-list {
+.services {
 
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--line);
 }
 
 
@@ -959,21 +853,24 @@ body::before {
 
     display: grid;
 
-    grid-template-columns: 210px 1fr 30px;
+    grid-template-columns:
+        250px
+        1fr
+        30px;
 
-    gap: 25px;
+    gap: 30px;
 
     align-items: center;
 
-    padding: 24px 0;
+    min-height: 100px;
 
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
 }
 
 
 .service-title {
 
-    color: var(--text);
+    color: var(--white);
 
     font-size: 11px;
 
@@ -983,7 +880,7 @@ body::before {
 
 .service-description {
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 9px;
 
@@ -994,42 +891,33 @@ body::before {
 .service-arrow {
 
     color: var(--green);
-
-    font-size: 14px;
-
-    text-align: right;
 }
 
 
 /* =========================================================
-   INFO CARDS
+   INFO
 ========================================================= */
 
 .info-grid {
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
-    gap: 10px;
+    gap: 1px;
+
+    background: var(--line);
 }
 
 
-.info-card {
+.info {
 
-    padding: 28px;
+    min-height: 220px;
 
-    border: 1px solid var(--border);
+    padding: 35px;
 
-    border-radius: 9px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.014),
-            rgba(32,212,119,0.008)
-        );
+    background: var(--black);
 }
 
 
@@ -1041,37 +929,37 @@ body::before {
 
     font-weight: 800;
 
-    letter-spacing: 0.16em;
+    letter-spacing: .16em;
 
     text-transform: uppercase;
 }
 
 
-.info-card h3 {
+.info h3 {
 
-    margin-top: 18px;
-
-    color: var(--text);
+    margin-top: 35px;
 
     font-family: "Manrope", sans-serif;
 
-    font-size: 14px;
+    font-size: 16px;
 
     font-weight: 800;
 
-    letter-spacing: -0.03em;
+    letter-spacing: -.04em;
 }
 
 
-.info-card p {
+.info p {
 
-    margin-top: 10px;
+    max-width: 450px;
 
-    color: var(--text-muted);
+    margin-top: 12px;
+
+    color: var(--muted);
 
     font-size: 9px;
 
-    line-height: 1.85;
+    line-height: 1.9;
 }
 
 
@@ -1083,41 +971,19 @@ body::before {
 
     display: flex;
 
+    align-items: flex-start;
+
     gap: 18px;
 
-    padding: 23px 25px;
+    padding: 28px 0;
 
-    border: 1px solid rgba(32,212,119,0.20);
+    border-top: 1px solid var(--line);
 
-    border-radius: 9px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(32,212,119,0.045),
-            rgba(5,10,7,0.38)
-        );
+    border-bottom: 1px solid var(--line);
 }
 
 
-.timeline-icon {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    width: 30px;
-
-    height: 30px;
-
-    border: 1px solid rgba(32,212,119,0.34);
-
-    border-radius: 7px;
+.timeline-mark {
 
     color: var(--green);
 
@@ -1127,8 +993,6 @@ body::before {
 
 .timeline h3 {
 
-    color: var(--text);
-
     font-size: 11px;
 
     font-weight: 700;
@@ -1137,15 +1001,15 @@ body::before {
 
 .timeline p {
 
-    max-width: 700px;
+    max-width: 680px;
 
-    margin-top: 5px;
+    margin-top: 6px;
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 9px;
 
-    line-height: 1.8;
+    line-height: 1.85;
 }
 
 
@@ -1155,13 +1019,7 @@ body::before {
 
 .terms {
 
-    overflow: hidden;
-
-    border: 1px solid var(--border);
-
-    border-radius: 9px;
-
-    background: rgba(13,17,15,0.48);
+    border-top: 1px solid var(--line);
 }
 
 
@@ -1169,23 +1027,13 @@ body::before {
 
     display: grid;
 
-    grid-template-columns: 32px 1fr;
+    grid-template-columns:
+        55px
+        1fr;
 
-    padding: 15px 20px;
+    padding: 18px 0;
 
-    border-bottom: 1px solid var(--border);
-
-    color: var(--text-muted);
-
-    font-size: 9px;
-
-    line-height: 1.7;
-}
-
-
-.term:last-child {
-
-    border-bottom: none;
+    border-bottom: 1px solid var(--line);
 }
 
 
@@ -1196,6 +1044,16 @@ body::before {
     font-size: 8px;
 
     font-weight: 800;
+}
+
+
+.term-text {
+
+    color: #777f7a;
+
+    font-size: 9px;
+
+    line-height: 1.8;
 }
 
 
@@ -1211,59 +1069,41 @@ body::before {
 
     justify-content: space-between;
 
-    margin-top: 35px;
+    margin-top: 45px;
 
-    padding: 29px 31px;
+    padding: 35px 0;
 
-    border: 1px solid rgba(32,212,119,0.28);
+    border-top: 1px solid rgba(25,216,117,.25);
 
-    border-radius: 10px;
-
-    background:
-
-        radial-gradient(
-            circle at 90% 50%,
-            rgba(32,212,119,0.075),
-            transparent 42%
-        ),
-
-        rgba(10,15,12,0.75);
-
-    box-shadow:
-
-        0 0 35px rgba(32,212,119,0.035);
+    border-bottom: 1px solid rgba(25,216,117,.25);
 }
 
 
 .total-label {
 
-    color: var(--text-muted);
+    color: var(--muted);
 
     font-size: 8px;
 
     font-weight: 800;
 
-    letter-spacing: 0.17em;
+    letter-spacing: .16em;
 
     text-transform: uppercase;
 }
 
 
-.total-value {
+.total-price {
 
-    color: var(--green-bright);
+    color: var(--green-light);
 
     font-family: "Manrope", sans-serif;
 
-    font-size: 30px;
+    font-size: 38px;
 
     font-weight: 800;
 
-    letter-spacing: -0.06em;
-
-    text-shadow:
-
-        0 0 25px rgba(32,212,119,0.08);
+    letter-spacing: -.065em;
 }
 
 
@@ -1271,29 +1111,24 @@ body::before {
    FOOTER
 ========================================================= */
 
-.footer {
+footer {
 
     display: flex;
 
-    align-items: center;
-
     justify-content: space-between;
 
-    padding-top: 25px;
+    padding: 30px 0 45px;
 
-    margin-top: 50px;
+    border-top: 1px solid var(--line);
 
-    border-top: 1px solid var(--border);
-
-    color: var(--text-muted);
+    color: #505954;
 
     font-size: 8px;
 }
 
 
-.footer strong {
-
-    color: var(--text-soft);
+footer strong {
+    color: #8a928d;
 }
 
 
@@ -1301,41 +1136,43 @@ body::before {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
-    .page {
-
-        width: calc(100% - 26px);
-
-        margin-top: 22px;
-
-        margin-bottom: 50px;
+    main {
+        width: calc(100% - 34px);
     }
 
 
-    .topbar {
+    .nav {
+        padding-top: 22px;
+        padding-bottom: 60px;
+    }
 
-        padding-bottom: 50px;
+
+    .date {
+        display: none;
     }
 
 
     .hero {
 
-        padding-bottom: 60px;
+        min-height: 570px;
+
+        padding: 50px 0 70px;
     }
 
 
     .hero h1 {
 
-        font-size: 58px;
+        font-size: 64px;
 
-        line-height: 0.92;
+        line-height: .88;
     }
 
 
     .hero-description {
 
-        font-size: 11px;
+        font-size: 10px;
     }
 
 
@@ -1346,91 +1183,87 @@ body::before {
 
 
     .meta-item,
-    .meta-item:nth-child(2),
-    .meta-item:nth-child(3) {
+    .meta-item:not(:first-child) {
 
-        padding: 17px 0;
+        min-height: 90px;
+
+        padding: 20px 0;
 
         border-right: none;
 
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--line);
     }
 
 
     .meta-item:last-child {
-
         border-bottom: none;
     }
 
 
     .content {
-
-        padding-top: 65px;
+        padding-top: 80px;
     }
 
 
     .section {
-
-        margin-bottom: 75px;
+        margin-bottom: 90px;
     }
 
 
     .scope-row {
 
-        grid-template-columns: 36px 1fr 20px;
-
-        padding: 16px 15px;
+        grid-template-columns:
+            40px
+            1fr
+            20px;
     }
 
 
-    .scope-row:hover {
-
-        padding-left: 18px;
-    }
-
-
-    .feature-grid,
-    .info-grid {
+    .feature-grid {
 
         grid-template-columns: 1fr;
     }
 
 
-    .price-top {
+    .feature {
+        min-height: 180px;
+    }
+
+
+    .investment-inner {
 
         align-items: flex-start;
 
         flex-direction: column;
-
-        gap: 25px;
-
-        padding: 24px;
     }
 
 
-    .price-value {
-
-        font-size: 31px;
-    }
-
-
-    .price-bottom {
-
-        padding: 15px 24px;
+    .price {
+        font-size: 40px;
     }
 
 
     .service {
 
-        grid-template-columns: 1fr 20px;
+        grid-template-columns:
+            1fr
+            20px;
 
-        gap: 8px;
+        gap: 10px;
+
+        padding: 22px 0;
     }
 
 
     .service-description {
 
-        grid-column: 1 / 2;
+        grid-column: 1;
+    }
+
+
+    .info-grid {
+
+        grid-template-columns: 1fr;
     }
 
 
@@ -1440,19 +1273,15 @@ body::before {
 
         flex-direction: column;
 
-        gap: 13px;
-
-        padding: 25px;
+        gap: 15px;
     }
 
 
-    .footer {
-
-        align-items: flex-start;
+    footer {
 
         flex-direction: column;
 
-        gap: 8px;
+        gap: 10px;
     }
 
 }
@@ -1465,34 +1294,15 @@ body::before {
 @media print {
 
     body {
-
-        background: #fff;
-
-        color: #000;
+        background: white;
+        color: black;
     }
-
-
-    .page {
-
-        width: 100%;
-
-        margin: 0;
-
-        border: none;
-
-        background: none;
-    }
-
 
     .back-btn {
-
         display: none;
     }
 
-
-    .hero::after,
     body::before {
-
         display: none;
     }
 
@@ -1506,35 +1316,46 @@ body::before {
 <body>
 
 
-<!-- =========================================================
-     HIDDEN MESSAGE
-========================================================= -->
-
 <!--
-    Jai Shree Ganesh 🙏
-    Sawariya Seth Ki Jai 🙏
+=============================================================
+JAI SHREE GANESH 🙏
+SAWARIYA SETH KI JAI 🙏
+=============================================================
 -->
 
 
-<div class="page">
+<main>
 
 
 <!-- =========================================================
-     TOP BAR
+     NAV
 ========================================================= -->
 
-<header class="topbar">
+<nav class="nav">
 
     <div class="logo">
         RITIK <span>&</span> CO.
     </div>
 
 
-    <div class="top-date">
-        Prepared September 02, 2026
-    </div>
+    <a
+        href="https://www.ritikandco.com/"
+        class="back-btn"
+    >
 
-</header>
+        <span class="back-arrow">←</span>
+
+        Back to Main Site
+
+    </a>
+
+</nav>
+
+
+<div class="date">
+    Prepared September 02, 2026
+</div>
+
 
 
 <!-- =========================================================
@@ -1544,9 +1365,9 @@ body::before {
 <section class="hero">
 
 
-    <div class="label">
+    <div class="eyebrow">
 
-        <span class="label-dot"></span>
+        <span class="dot"></span>
 
         Catalogue Design / RC-ROTEX-001
 
@@ -1555,9 +1376,9 @@ body::before {
 
     <h1>
 
-        Rotex<br>
+        Rotex
 
-        <span class="green">
+        <span>
             Catalogue.
         </span>
 
@@ -1575,26 +1396,12 @@ body::before {
     </p>
 
 
-    <a
-        href="https://www.ritikandco.com/"
-        class="back-btn"
-    >
-
-        <span class="back-arrow">
-            ←
-        </span>
-
-        Back to ritikandco.com
-
-    </a>
-
-
 </section>
 
 
 
 <!-- =========================================================
-     PROJECT META
+     META
 ========================================================= -->
 
 <section class="meta">
@@ -1643,31 +1450,31 @@ body::before {
 
 
 
-<main class="content">
+<div class="content">
 
 
 
 <!-- =========================================================
-     01 PROJECT SCOPE
+     01 PROJECT OVERVIEW
 ========================================================= -->
 
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             01
         </span>
 
         <h2 class="section-title">
-            Project Scope
+            Project Overview
         </h2>
 
     </div>
 
 
-    <p class="section-intro">
+    <p class="section-description">
 
         The scope covers catalogue design, layout,
         formatting and standard image preparation.
@@ -1682,219 +1489,178 @@ body::before {
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                01
-            </div>
+            <div class="scope-number">01</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Catalogue Cover & Visual Direction
                 </div>
 
                 <div class="scope-description">
-                    Establishing the overall visual direction
-                    and cover design.
+                    Establishing the overall visual direction and cover design.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                02
-            </div>
+            <div class="scope-number">02</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Complete Catalogue Page Layout
                 </div>
 
                 <div class="scope-description">
-                    Page-by-page design, grids, spacing,
-                    typography and composition.
+                    Page-by-page design, grids, spacing, typography and composition.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                03
-            </div>
+            <div class="scope-number">03</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Product Page Design
                 </div>
 
                 <div class="scope-description">
-                    Structured presentation of product
-                    information and visual hierarchy.
+                    Structured presentation of product information and visual hierarchy.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                04
-            </div>
+            <div class="scope-number">04</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Product Information Formatting
                 </div>
 
                 <div class="scope-description">
-                    Formatting and placement of
-                    client-provided product information.
+                    Formatting and placement of client-provided product information.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                05
-            </div>
+            <div class="scope-number">05</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Specifications & Tables
                 </div>
 
                 <div class="scope-description">
-                    Formatting and placement of supplied
-                    technical specifications and tables.
+                    Formatting and placement of supplied technical specifications and tables.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                06
-            </div>
+            <div class="scope-number">06</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Technical Drawings
                 </div>
 
                 <div class="scope-description">
-                    Placement and formatting of
-                    client-provided technical drawings.
+                    Placement and formatting of client-provided technical drawings.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                07
-            </div>
+            <div class="scope-number">07</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Image Editing
                 </div>
 
                 <div class="scope-description">
-                    Background removal, colour correction,
-                    cropping, resizing, cleanup and basic retouching.
+                    Background removal, colour correction, cropping,
+                    resizing, cleanup and basic retouching.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                08
-            </div>
+            <div class="scope-number">08</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Typography & Visual Consistency
                 </div>
 
                 <div class="scope-description">
-                    Typography, spacing, grids and consistent
-                    visual treatment throughout the catalogue.
+                    Typography, spacing, grids and consistent visual treatment.
                 </div>
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
 
         <div class="scope-row">
 
-            <div class="scope-no">
-                09
-            </div>
+            <div class="scope-number">09</div>
 
-            <div class="scope-main">
+            <div>
 
                 <div class="scope-title">
                     Final Artwork
@@ -1906,9 +1672,7 @@ body::before {
 
             </div>
 
-            <div class="scope-arrow">
-                ↗
-            </div>
+            <div class="scope-arrow">↗</div>
 
         </div>
 
@@ -1920,13 +1684,13 @@ body::before {
 
 
 <!-- =========================================================
-     02 PROJECT INVESTMENT
+     02 INVESTMENT
 ========================================================= -->
 
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             02
@@ -1939,32 +1703,36 @@ body::before {
     </div>
 
 
-    <div class="price-card">
+    <div class="investment">
 
 
-        <div class="price-top">
+        <div class="investment-inner">
 
 
             <div>
 
-                <div class="price-title">
+                <div class="investment-label">
                     Catalogue Design
                 </div>
 
-                <div class="price-description">
+                <div class="investment-title">
+                    Complete Catalogue
+                </div>
+
+                <div class="investment-note">
                     Up to 20 catalogue pages
                 </div>
 
             </div>
 
 
-            <div class="price-value">
+            <div class="price">
 
                 ₹25,000
 
-                <span>
+                <small>
                     / 20 PAGES
-                </span>
+                </small>
 
             </div>
 
@@ -1972,40 +1740,48 @@ body::before {
         </div>
 
 
-        <div class="price-bottom">
+    </div>
 
-            <span>
-                Additional pages
-            </span>
 
-            <strong>
-                ₹1,250 / page
-            </strong>
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:18px 0;
+        color:#626b65;
+        font-size:9px;
+        border-bottom:1px solid var(--line);
+    ">
 
-        </div>
+        <span>
+            Additional pages
+        </span>
 
+        <strong style="color:#9aa29d;">
+            ₹1,250 / page
+        </strong>
 
     </div>
+
 
 </section>
 
 
 
 <!-- =========================================================
-     03 INCLUDED IN SCOPE
+     03 INCLUDED
 ========================================================= -->
 
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             03
         </span>
 
         <h2 class="section-title">
-            Included in the Scope
+            Included
         </h2>
 
     </div>
@@ -2135,7 +1911,7 @@ body::before {
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             04
@@ -2148,16 +1924,15 @@ body::before {
     </div>
 
 
-    <p class="section-intro">
+    <p class="section-description">
 
-        Certain production requirements fall outside
-        standard catalogue design and will be quoted
-        separately where required.
+        Certain production requirements fall outside standard
+        catalogue design and will be quoted separately where required.
 
     </p>
 
 
-    <div class="service-list">
+    <div class="services">
 
 
         <div class="service">
@@ -2167,16 +1942,12 @@ body::before {
             </div>
 
             <div class="service-description">
-
-                3D modelling, product visualisation and
-                rendering will be priced separately based
-                on complexity and the number of renders required.
-
+                3D modelling, product visualisation and rendering
+                will be priced separately based on complexity and
+                number of renders required.
             </div>
 
-            <div class="service-arrow">
-                ↗
-            </div>
+            <div class="service-arrow">↗</div>
 
         </div>
 
@@ -2188,16 +1959,11 @@ body::before {
             </div>
 
             <div class="service-description">
-
-                Technical drawings that require manual
-                recreation from supplied references will
-                be quoted separately according to complexity.
-
+                Technical drawings requiring manual recreation
+                from supplied references will be quoted separately.
             </div>
 
-            <div class="service-arrow">
-                ↗
-            </div>
+            <div class="service-arrow">↗</div>
 
         </div>
 
@@ -2215,7 +1981,7 @@ body::before {
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             05
@@ -2231,7 +1997,7 @@ body::before {
     <div class="info-grid">
 
 
-        <div class="info-card">
+        <div class="info">
 
             <div class="info-label">
                 Revisions
@@ -2242,18 +2008,16 @@ body::before {
             </h3>
 
             <p>
-
                 Three complete rounds of revisions are included.
                 Each round may include changes across the entire
                 catalogue, including complete page changes,
                 provided the work remains within the agreed scope.
-
             </p>
 
         </div>
 
 
-        <div class="info-card">
+        <div class="info">
 
             <div class="info-label">
                 Payment
@@ -2264,11 +2028,9 @@ body::before {
             </h3>
 
             <p>
-
                 50% advance payment is required to begin the project.
                 The remaining 50% is payable upon completion and
                 before release of final high-resolution files.
-
             </p>
 
         </div>
@@ -2287,7 +2049,7 @@ body::before {
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             06
@@ -2302,11 +2064,9 @@ body::before {
 
     <div class="timeline">
 
-
-        <div class="timeline-icon">
+        <div class="timeline-mark">
             →
         </div>
-
 
         <div>
 
@@ -2315,16 +2075,12 @@ body::before {
             </h3>
 
             <p>
-
-                The final timeline will be confirmed once all
-                required catalogue content, product information,
-                imagery, specifications and technical material
-                have been received from Rotex.
-
+                The final timeline will be confirmed once all required
+                catalogue content, product information, imagery,
+                specifications and technical material have been received.
             </p>
 
         </div>
-
 
     </div>
 
@@ -2339,7 +2095,7 @@ body::before {
 <section class="section">
 
 
-    <div class="section-head">
+    <div class="section-header">
 
         <span class="section-number">
             07
@@ -2356,177 +2112,109 @@ body::before {
 
 
         <div class="term">
-
-            <div class="term-number">
-                01
-            </div>
-
-            <div>
+            <div class="term-number">01</div>
+            <div class="term-text">
                 The quotation includes catalogue design for up to 20 pages.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                02
-            </div>
-
-            <div>
+            <div class="term-number">02</div>
+            <div class="term-text">
                 Additional pages will be charged at ₹1,250 per page.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                03
-            </div>
-
-            <div>
+            <div class="term-number">03</div>
+            <div class="term-text">
                 Product information, imagery, specifications and technical
                 material will be supplied by the client.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                04
+            <div class="term-number">04</div>
+            <div class="term-text">
+                Standard image editing is included within the catalogue design scope.
             </div>
-
-            <div>
-                Standard image editing is included within the catalogue
-                design scope.
-            </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                05
-            </div>
-
-            <div>
+            <div class="term-number">05</div>
+            <div class="term-text">
                 3D renders and manually recreated technical drawings are
                 additional services and will be quoted separately.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                06
+            <div class="term-number">06</div>
+            <div class="term-text">
+                Three complete revision rounds are included within the agreed project scope.
             </div>
-
-            <div>
-                Three complete revision rounds are included within the
-                agreed project scope.
-            </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                07
+            <div class="term-number">07</div>
+            <div class="term-text">
+                Work requested outside the agreed scope will be quoted separately before execution.
             </div>
-
-            <div>
-                Work requested outside the agreed scope will be quoted
-                separately before execution.
-            </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                08
+            <div class="term-number">08</div>
+            <div class="term-text">
+                Major changes to the approved project direction may be treated as additional work.
             </div>
-
-            <div>
-                Major changes to the approved project direction may be
-                treated as additional work.
-            </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                09
-            </div>
-
-            <div>
+            <div class="term-number">09</div>
+            <div class="term-text">
                 Product specifications and technical information supplied
                 by the client remain the client's responsibility for accuracy.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                10
-            </div>
-
-            <div>
+            <div class="term-number">10</div>
+            <div class="term-text">
                 Final high-resolution and print-ready files will be released
                 after receipt of the outstanding payment.
             </div>
-
         </div>
 
 
         <div class="term">
-
-            <div class="term-number">
-                11
-            </div>
-
-            <div>
+            <div class="term-number">11</div>
+            <div class="term-text">
                 This quotation is valid for 15 days from the date of issue.
             </div>
-
         </div>
 
 
     </div>
 
 
-
-    <!-- =====================================================
-         TOTAL
-    ====================================================== -->
-
-
     <div class="total">
-
 
         <div class="total-label">
             Total Project Fee
         </div>
 
-
-        <div class="total-value">
+        <div class="total-price">
             ₹25,000
         </div>
-
 
     </div>
 
@@ -2535,37 +2223,28 @@ body::before {
 
 
 
-</main>
-
-
-
 <!-- =========================================================
      FOOTER
 ========================================================= -->
 
-<footer class="footer">
-
+<footer>
 
     <div>
-
-        <strong>Ritik & Co</strong>
-
+        <strong>Ritik & Co.</strong>
         &nbsp; / &nbsp;
-
         Creative Design & Digital Solutions
-
     </div>
-
 
     <div>
         RC / ROTEX / 001
     </div>
 
-
 </footer>
 
 
 </div>
+
+</main>
 
 
 </body>
