@@ -11,29 +11,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
 <style>
 
 /* =========================================================
    RITIK & CO — CORE
+   (brand system matched to site: Syne / Inter, #10b981 accent)
 ========================================================= */
 
 :root {
 
-    --black: #030504;
-    --black-2: #060807;
+    --black: #09090b;
+    --black-2: #111113;
 
-    --white: #f2f4f2;
-    --soft: #b7beb9;
-    --muted: #707a74;
+    --white: #fafaf9;
+    --soft: #d4d4d8;
+    --muted: #71717a;
 
-    --green: #19d875;
-    --green-light: #24e982;
+    --green: #10b981;
+    --green-light: #34d399;
 
-    --line: rgba(255,255,255,.065);
-    --line-green: rgba(25,216,117,.28);
+    --line: rgba(255,255,255,.08);
+    --line-green: rgba(16,185,129,.28);
+
+    --ff-head: "Syne", sans-serif;
+    --ff-body: "Inter", sans-serif;
 
     --max: 1180px;
 }
@@ -57,13 +61,13 @@ body {
 
         radial-gradient(
             700px 500px at 75% 5%,
-            rgba(25,216,117,.045),
+            rgba(16,185,129,.06),
             transparent 70%
         ),
 
         radial-gradient(
             500px 500px at 0% 70%,
-            rgba(25,216,117,.018),
+            rgba(16,185,129,.025),
             transparent 75%
         ),
 
@@ -71,7 +75,7 @@ body {
 
     color: var(--white);
 
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--ff-body);
 
     -webkit-font-smoothing: antialiased;
 
@@ -98,13 +102,13 @@ body::before {
     background-image:
 
         linear-gradient(
-            rgba(255,255,255,.018) 1px,
+            rgba(255,255,255,.02) 1px,
             transparent 1px
         ),
 
         linear-gradient(
             90deg,
-            rgba(255,255,255,.018) 1px,
+            rgba(255,255,255,.02) 1px,
             transparent 1px
         );
 
@@ -155,13 +159,13 @@ main {
 
 .logo {
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
     font-size: 16px;
 
     font-weight: 800;
 
-    letter-spacing: -.07em;
+    letter-spacing: -.03em;
 }
 
 
@@ -184,7 +188,7 @@ main {
 
     border-radius: 8px;
 
-    background: rgba(255,255,255,.018);
+    background: rgba(255,255,255,.02);
 
     color: var(--soft);
 
@@ -193,6 +197,8 @@ main {
     font-size: 10px;
 
     font-weight: 600;
+
+    letter-spacing: .02em;
 
     transition: all .25s ease;
 }
@@ -204,10 +210,10 @@ main {
 
     border-color: var(--line-green);
 
-    background: rgba(25,216,117,.035);
+    background: rgba(16,185,129,.05);
 
     box-shadow:
-        0 0 25px rgba(25,216,117,.055);
+        0 0 25px rgba(16,185,129,.08);
 }
 
 
@@ -234,7 +240,7 @@ main {
 
     top: 32px;
 
-    color: #555e59;
+    color: #55555c;
 
     font-size: 9px;
 
@@ -286,7 +292,7 @@ main {
 
         radial-gradient(
             circle,
-            rgba(25,216,117,.065),
+            rgba(16,185,129,.08),
             transparent 68%
         );
 
@@ -351,7 +357,7 @@ main {
     background: var(--green);
 
     box-shadow:
-        0 0 9px rgba(25,216,117,.7);
+        0 0 9px rgba(16,185,129,.7);
 }
 
 
@@ -367,19 +373,19 @@ main {
 
     max-width: 1000px;
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
     font-size: clamp(
-        72px,
-        10vw,
-        142px
+        60px,
+        9vw,
+        118px
     );
 
     font-weight: 800;
 
-    line-height: .84;
+    line-height: .92;
 
-    letter-spacing: -.09em;
+    letter-spacing: -.03em;
 }
 
 
@@ -390,7 +396,7 @@ main {
     color: var(--green-light);
 
     text-shadow:
-        0 0 60px rgba(25,216,117,.06);
+        0 0 60px rgba(16,185,129,.08);
 }
 
 
@@ -410,7 +416,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 12px;
+    font-weight: 300;
+
+    font-size: 13px;
 
     line-height: 1.9;
 }
@@ -463,13 +471,13 @@ main {
 
     margin-bottom: 9px;
 
-    color: #555e59;
+    color: #55555c;
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: .17em;
+    letter-spacing: .15em;
 
     text-transform: uppercase;
 }
@@ -479,7 +487,7 @@ main {
 
     color: var(--white);
 
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: 600;
 }
@@ -517,23 +525,23 @@ main {
 
     color: var(--green);
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 800;
 
-    letter-spacing: .13em;
+    letter-spacing: .1em;
 }
 
 
 .section-title {
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
-    font-size: 17px;
+    font-size: 18px;
 
     font-weight: 800;
 
-    letter-spacing: -.035em;
+    letter-spacing: -.02em;
 
     text-transform: uppercase;
 }
@@ -547,7 +555,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 11px;
+    font-weight: 300;
+
+    font-size: 12px;
 
     line-height: 1.9;
 }
@@ -588,7 +598,7 @@ main {
 
         linear-gradient(
             90deg,
-            rgba(25,216,117,.025),
+            rgba(16,185,129,.035),
             transparent
         );
 }
@@ -596,9 +606,9 @@ main {
 
 .scope-number {
 
-    color: #59635d;
+    color: #5a5a62;
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 700;
 }
@@ -608,7 +618,7 @@ main {
 
     color: var(--white);
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 700;
 }
@@ -618,9 +628,9 @@ main {
 
     margin-top: 5px;
 
-    color: #68716c;
+    color: #7c7c85;
 
-    font-size: 9px;
+    font-size: 10px;
 }
 
 
@@ -668,7 +678,7 @@ main {
 
         radial-gradient(
             circle,
-            rgba(25,216,117,.045),
+            rgba(16,185,129,.06),
             transparent 70%
         );
 
@@ -694,11 +704,11 @@ main {
 
     color: var(--green);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: .17em;
+    letter-spacing: .16em;
 
     text-transform: uppercase;
 }
@@ -708,13 +718,13 @@ main {
 
     margin-top: 15px;
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
-    font-size: 19px;
+    font-size: 20px;
 
     font-weight: 800;
 
-    letter-spacing: -.04em;
+    letter-spacing: -.02em;
 }
 
 
@@ -724,23 +734,23 @@ main {
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-size: 10px;
 }
 
 
 .price {
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
     font-size: clamp(
-        35px,
+        34px,
         5vw,
-        60px
+        56px
     );
 
     font-weight: 800;
 
-    letter-spacing: -.075em;
+    letter-spacing: -.03em;
 
     white-space: nowrap;
 }
@@ -750,13 +760,13 @@ main {
 
     color: var(--green);
 
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--ff-body);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: .12em;
+    letter-spacing: .1em;
 }
 
 
@@ -795,7 +805,7 @@ main {
 .feature:hover {
 
     background:
-        rgba(25,216,117,.018);
+        rgba(16,185,129,.025);
 }
 
 
@@ -803,11 +813,11 @@ main {
 
     color: var(--green);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: .15em;
+    letter-spacing: .12em;
 }
 
 
@@ -815,13 +825,13 @@ main {
 
     margin-top: 35px;
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
-    font-size: 14px;
+    font-size: 15px;
 
     font-weight: 800;
 
-    letter-spacing: -.035em;
+    letter-spacing: -.02em;
 }
 
 
@@ -833,7 +843,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-weight: 300;
+
+    font-size: 10px;
 
     line-height: 1.85;
 }
@@ -872,7 +884,7 @@ main {
 
     color: var(--white);
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 700;
 }
@@ -882,7 +894,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-weight: 300;
+
+    font-size: 10px;
 
     line-height: 1.8;
 }
@@ -925,11 +939,11 @@ main {
 
     color: var(--green);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: .16em;
+    letter-spacing: .15em;
 
     text-transform: uppercase;
 }
@@ -939,13 +953,13 @@ main {
 
     margin-top: 35px;
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
-    font-size: 16px;
+    font-size: 17px;
 
     font-weight: 800;
 
-    letter-spacing: -.04em;
+    letter-spacing: -.02em;
 }
 
 
@@ -957,7 +971,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-weight: 300;
+
+    font-size: 10px;
 
     line-height: 1.9;
 }
@@ -993,7 +1009,7 @@ main {
 
 .timeline h3 {
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 700;
 }
@@ -1007,7 +1023,9 @@ main {
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-weight: 300;
+
+    font-size: 10px;
 
     line-height: 1.85;
 }
@@ -1041,7 +1059,7 @@ main {
 
     color: var(--green);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 800;
 }
@@ -1049,9 +1067,11 @@ main {
 
 .term-text {
 
-    color: #777f7a;
+    color: #8c8c94;
 
-    font-size: 9px;
+    font-weight: 300;
+
+    font-size: 10px;
 
     line-height: 1.8;
 }
@@ -1073,9 +1093,9 @@ main {
 
     padding: 35px 0;
 
-    border-top: 1px solid rgba(25,216,117,.25);
+    border-top: 1px solid rgba(16,185,129,.25);
 
-    border-bottom: 1px solid rgba(25,216,117,.25);
+    border-bottom: 1px solid rgba(16,185,129,.25);
 }
 
 
@@ -1083,11 +1103,11 @@ main {
 
     color: var(--muted);
 
-    font-size: 8px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: .16em;
+    letter-spacing: .15em;
 
     text-transform: uppercase;
 }
@@ -1097,13 +1117,13 @@ main {
 
     color: var(--green-light);
 
-    font-family: "Manrope", sans-serif;
+    font-family: var(--ff-head);
 
-    font-size: 38px;
+    font-size: 36px;
 
     font-weight: 800;
 
-    letter-spacing: -.065em;
+    letter-spacing: -.02em;
 }
 
 
@@ -1121,14 +1141,16 @@ footer {
 
     border-top: 1px solid var(--line);
 
-    color: #505954;
+    color: #5c5c64;
 
-    font-size: 8px;
+    font-size: 9px;
 }
 
 
 footer strong {
-    color: #8a928d;
+    color: #a3a3ab;
+    font-family: var(--ff-head);
+    font-weight: 700;
 }
 
 
@@ -1164,15 +1186,15 @@ footer strong {
 
     .hero h1 {
 
-        font-size: 64px;
+        font-size: 58px;
 
-        line-height: .88;
+        line-height: .94;
     }
 
 
     .hero-description {
 
-        font-size: 10px;
+        font-size: 11px;
     }
 
 
@@ -1239,7 +1261,7 @@ footer strong {
 
 
     .price {
-        font-size: 40px;
+        font-size: 38px;
     }
 
 
@@ -1314,14 +1336,6 @@ footer strong {
 
 
 <body>
-
-
-<!--
-=============================================================
-JAI SHREE GANESH 🙏
-SAWARIYA SETH KI JAI 🙏
-=============================================================
--->
 
 
 <main>
@@ -1747,8 +1761,8 @@ SAWARIYA SETH KI JAI 🙏
         display:flex;
         justify-content:space-between;
         padding:18px 0;
-        color:#626b65;
-        font-size:9px;
+        color:#75757d;
+        font-size:10px;
         border-bottom:1px solid var(--line);
     ">
 
@@ -1756,7 +1770,7 @@ SAWARIYA SETH KI JAI 🙏
             Additional pages
         </span>
 
-        <strong style="color:#9aa29d;">
+        <strong style="color:#c4c4cb;">
             ₹1,250 / page
         </strong>
 
