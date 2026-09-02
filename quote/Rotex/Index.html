@@ -8,19 +8,40 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
     :root {
       --bg: #080b0a;
       --surface: #0e1311;
-      --surface-light: #131916;
+      --surface-2: #121815;
+
       --text: #f1f5f3;
-      --muted: #8f9993;
+      --text-soft: #d9e0dc;
+      --muted: #8e9892;
+
       --line: #242d29;
+
       --green: #20d477;
+      --green-dark: #0c5f39;
       --green-soft: rgba(32, 212, 119, 0.08);
+
+      --black: #040605;
     }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
       margin: 0;
@@ -33,38 +54,45 @@
     }
 
     body {
-      background: #040605;
+      background: var(--black);
       color: var(--text);
+
       font-family: "DM Sans", sans-serif;
+
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* =========================
-       BACK TO WEBSITE
-    ========================= */
 
-    .site-nav {
+    /* =========================================================
+       CLIENT NAVIGATION
+       Hidden by default.
+       Appears only when URL contains:
+       ?client=rotex
+    ========================================================= */
+
+    #clientNavigation {
+      display: none;
       width: min(100% - 40px, 1000px);
-      margin: 25px auto 0;
-      display: flex;
-      justify-content: flex-start;
+      margin: 24px auto 0;
     }
 
     .back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
+
+      padding: 11px 16px;
 
       color: var(--muted);
+      background: rgba(14, 19, 17, 0.85);
+
+      border: 1px solid var(--line);
+
       text-decoration: none;
 
       font-size: 12px;
       font-weight: 600;
-
-      padding: 10px 15px;
-
-      border: 1px solid var(--line);
-      background: rgba(14, 19, 17, 0.75);
 
       transition:
         color 0.25s ease,
@@ -75,42 +103,46 @@
 
     .back-btn:hover {
       color: var(--text);
+
       border-color: var(--green);
+
       background: var(--green-soft);
+
       transform: translateX(-3px);
     }
 
     .back-arrow {
       color: var(--green);
-      font-size: 14px;
+      font-size: 15px;
     }
 
 
-    /* =========================
-       MAIN DOCUMENT
-    ========================= */
+    /* =========================================================
+       MAIN QUOTATION
+    ========================================================= */
 
     .page {
       width: min(100% - 40px, 1000px);
-      margin: 18px auto 60px;
+
+      margin: 18px auto 70px;
 
       background: var(--bg);
 
       border: 1px solid #1b231f;
 
       box-shadow:
-        0 30px 100px rgba(0, 0, 0, 0.35);
+        0 35px 100px rgba(0, 0, 0, 0.35);
     }
 
 
-    /* =========================
+    /* =========================================================
        HEADER
-    ========================= */
+    ========================================================= */
 
     .topbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
 
       padding: 25px 45px;
 
@@ -123,7 +155,7 @@
       font-size: 18px;
       font-weight: 800;
 
-      letter-spacing: -0.05em;
+      letter-spacing: -0.055em;
     }
 
     .brand span {
@@ -131,22 +163,23 @@
     }
 
     .document-type {
+      color: var(--muted);
+
       font-size: 10px;
       font-weight: 700;
 
-      letter-spacing: 0.17em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-
-      color: var(--muted);
     }
 
 
-    /* =========================
+    /* =========================================================
        HERO
-    ========================= */
+    ========================================================= */
 
     .hero {
       position: relative;
+
       overflow: hidden;
 
       padding: 82px 45px 70px;
@@ -157,11 +190,11 @@
 
       position: absolute;
 
-      width: 420px;
-      height: 420px;
+      width: 430px;
+      height: 430px;
 
       right: -200px;
-      top: -220px;
+      top: -230px;
 
       border-radius: 50%;
 
@@ -169,12 +202,14 @@
 
       opacity: 0.055;
 
-      filter: blur(70px);
+      filter: blur(80px);
 
       pointer-events: none;
     }
 
     .eyebrow {
+      position: relative;
+
       display: flex;
       align-items: center;
       gap: 10px;
@@ -210,7 +245,7 @@
 
       line-height: 0.92;
 
-      letter-spacing: -0.07em;
+      letter-spacing: -0.075em;
 
       font-weight: 800;
     }
@@ -220,20 +255,21 @@
     }
 
     .hero-copy {
-      max-width: 590px;
+      max-width: 600px;
 
       margin-top: 30px;
 
       color: var(--muted);
 
       font-size: 14px;
+
       line-height: 1.85;
     }
 
 
-    /* =========================
-       META
-    ========================= */
+    /* =========================================================
+       PROJECT META
+    ========================================================= */
 
     .meta {
       display: grid;
@@ -271,9 +307,9 @@
     }
 
 
-    /* =========================
+    /* =========================================================
        CONTENT
-    ========================= */
+    ========================================================= */
 
     .content {
       padding: 70px 45px;
@@ -312,15 +348,17 @@
 
       font-size: 25px;
 
+      line-height: 1.2;
+
       letter-spacing: -0.04em;
 
       font-weight: 700;
     }
 
     .section-intro {
-      max-width: 690px;
+      max-width: 700px;
 
-      margin-bottom: 27px;
+      margin-bottom: 28px;
 
       color: var(--muted);
 
@@ -330,9 +368,9 @@
     }
 
 
-    /* =========================
-       SCOPE
-    ========================= */
+    /* =========================================================
+       PROJECT SCOPE
+    ========================================================= */
 
     .scope {
       border-top: 1px solid var(--line);
@@ -355,17 +393,21 @@
     }
 
     .scope-text {
-      color: #dce3df;
+      color: var(--text-soft);
 
       font-size: 13px;
+
+      line-height: 1.65;
     }
 
 
-    /* =========================
+    /* =========================================================
        PRICING
-    ========================= */
+    ========================================================= */
 
     .pricing {
+      overflow: hidden;
+
       border: 1px solid var(--line);
 
       background: var(--surface);
@@ -373,12 +415,12 @@
 
     .pricing-main {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
 
       padding: 30px;
-
-      border-bottom: 1px solid var(--line);
     }
 
     .pricing-title {
@@ -397,22 +439,26 @@
     }
 
     .main-price {
-      font-family: "Manrope", sans-serif;
-
       color: var(--green);
 
-      font-size: 29px;
+      font-family: "Manrope", sans-serif;
+
+      font-size: 30px;
       font-weight: 800;
 
       letter-spacing: -0.05em;
+
+      white-space: nowrap;
     }
 
     .pricing-extra {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
 
       padding: 19px 30px;
+
+      border-top: 1px solid var(--line);
     }
 
     .pricing-extra span:first-child {
@@ -427,9 +473,9 @@
     }
 
 
-    /* =========================
-       INCLUDED FEATURES
-    ========================= */
+    /* =========================================================
+       INCLUDED
+    ========================================================= */
 
     .included-grid {
       display: grid;
@@ -439,7 +485,7 @@
     }
 
     .included-item {
-      padding: 25px;
+      padding: 26px;
 
       border-bottom: 1px solid var(--line);
     }
@@ -448,12 +494,12 @@
       border-right: 1px solid var(--line);
     }
 
-    .included-item:nth-last-child(-n+2) {
+    .included-item:nth-last-child(-n + 2) {
       border-bottom: none;
     }
 
     .included-title {
-      margin-bottom: 7px;
+      margin-bottom: 8px;
 
       font-family: "Manrope", sans-serif;
 
@@ -466,13 +512,13 @@
 
       font-size: 12px;
 
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
 
-    /* =========================
+    /* =========================================================
        ADDITIONAL SERVICES
-    ========================= */
+    ========================================================= */
 
     .additional-grid {
       display: grid;
@@ -482,7 +528,7 @@
     }
 
     .additional-card {
-      padding: 27px;
+      padding: 28px;
 
       background: var(--surface);
 
@@ -502,7 +548,7 @@
     }
 
     .additional-card h3 {
-      margin-bottom: 9px;
+      margin-bottom: 10px;
 
       font-family: "Manrope", sans-serif;
 
@@ -516,13 +562,13 @@
 
       font-size: 12px;
 
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
 
-    /* =========================
-       REVISIONS / PAYMENT
-    ========================= */
+    /* =========================================================
+       REVISION / PAYMENT
+    ========================================================= */
 
     .info-grid {
       display: grid;
@@ -532,7 +578,7 @@
     }
 
     .info-card {
-      padding: 28px;
+      padding: 29px;
 
       background: var(--surface);
 
@@ -557,6 +603,8 @@
       font-family: "Manrope", sans-serif;
 
       font-size: 18px;
+
+      letter-spacing: -0.025em;
     }
 
     .info-card p {
@@ -568,9 +616,62 @@
     }
 
 
-    /* =========================
+    /* =========================================================
+       TIMELINE HIGHLIGHT
+    ========================================================= */
+
+    .timeline-box {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+
+      gap: 20px;
+
+      padding: 27px;
+
+      background: var(--green-soft);
+
+      border: 1px solid rgba(32, 212, 119, 0.18);
+    }
+
+    .timeline-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 46px;
+      height: 46px;
+
+      color: var(--green);
+
+      border: 1px solid rgba(32, 212, 119, 0.3);
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .timeline-title {
+      margin-bottom: 7px;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .timeline-text {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =========================================================
        TERMS
-    ========================= */
+    ========================================================= */
 
     .terms {
       border-top: 1px solid var(--line);
@@ -588,7 +689,7 @@
 
       font-size: 12px;
 
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     .term::before {
@@ -598,18 +699,20 @@
     }
 
 
-    /* =========================
+    /* =========================================================
        TOTAL
-    ========================= */
+    ========================================================= */
 
     .total {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
 
       margin-top: 48px;
 
-      padding: 29px 31px;
+      padding: 30px 32px;
 
       background: var(--green);
 
@@ -620,30 +723,32 @@
       font-size: 10px;
       font-weight: 800;
 
-      letter-spacing: 0.13em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
     .total-price {
       font-family: "Manrope", sans-serif;
 
-      font-size: 30px;
+      font-size: 31px;
       font-weight: 800;
 
       letter-spacing: -0.05em;
+
+      white-space: nowrap;
     }
 
 
-    /* =========================
+    /* =========================================================
        FOOTER
-    ========================= */
+    ========================================================= */
 
     footer {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
 
-      padding: 27px 45px;
+      padding: 28px 45px;
 
       border-top: 1px solid var(--line);
 
@@ -654,18 +759,20 @@
 
     footer strong {
       color: var(--text);
+      font-weight: 700;
     }
 
 
-    /* =========================
+    /* =========================================================
        MOBILE
-    ========================= */
+    ========================================================= */
 
     @media (max-width: 700px) {
 
-      .site-nav {
-        width: min(100% - 28px, 1000px);
-        margin-top: 15px;
+      #clientNavigation {
+        width: calc(100% - 28px);
+
+        margin-top: 14px;
       }
 
       .page {
@@ -679,6 +786,10 @@
 
       .topbar {
         padding: 22px 24px;
+      }
+
+      .document-type {
+        display: none;
       }
 
       .hero {
@@ -697,6 +808,7 @@
         padding: 18px 24px;
 
         border-right: none;
+
         border-bottom: 1px solid var(--line);
       }
 
@@ -714,7 +826,7 @@
         border-right: none;
       }
 
-      .included-item:nth-last-child(-n+2) {
+      .included-item:nth-last-child(-n + 2) {
         border-bottom: 1px solid var(--line);
       }
 
@@ -725,8 +837,6 @@
       .pricing-main {
         align-items: flex-start;
         flex-direction: column;
-
-        gap: 20px;
       }
 
       .pricing-extra {
@@ -736,11 +846,13 @@
         gap: 7px;
       }
 
+      .timeline-box {
+        grid-template-columns: 1fr;
+      }
+
       .total {
         align-items: flex-start;
         flex-direction: column;
-
-        gap: 12px;
       }
 
       footer {
@@ -754,25 +866,27 @@
     }
 
 
-    /* =========================
-       PRINT / PDF
-    ========================= */
+    /* =========================================================
+       PRINT
+    ========================================================= */
 
     @media print {
 
       body {
-        background: white;
+        background: #fff;
       }
 
-      .site-nav {
-        display: none;
+      #clientNavigation {
+        display: none !important;
       }
 
       .page {
         width: 100%;
+
         margin: 0;
 
         border: none;
+
         box-shadow: none;
       }
 
@@ -784,7 +898,8 @@
       .pricing,
       .additional-card,
       .info-card,
-      .included-item {
+      .included-item,
+      .timeline-box {
         break-inside: avoid;
       }
     }
@@ -796,20 +911,34 @@
 <body>
 
 
-  <!-- BACK TO MAIN WEBSITE -->
+  <!-- =======================================================
+       PRIVATE CLIENT BUTTON
 
-  <nav class="site-nav">
+       Hidden normally.
 
-    <a href="/" class="back-btn">
+       Visible only when URL is:
+       ?client=rotex
+
+       Example:
+       /quote/Rotex?client=rotex
+  ======================================================== -->
+
+  <div id="clientNavigation">
+
+    <a
+      href="https://www.ritikandco.com/"
+      class="back-btn"
+    >
       <span class="back-arrow">←</span>
-      Back to Main Site
+      Back to Ritik & Co
     </a>
 
-  </nav>
+  </div>
 
 
-
-  <!-- QUOTATION -->
+  <!-- =======================================================
+       QUOTATION
+  ======================================================== -->
 
   <main class="page">
 
@@ -844,10 +973,10 @@
       </h1>
 
       <p class="hero-copy">
-        A complete catalogue design service focused on turning
-        Rotex's existing product information and technical content
-        into a clear, structured and professionally designed
-        catalogue ready for digital and print use.
+        Catalogue design and visual production for Rotex,
+        transforming client-provided product information,
+        specifications and imagery into a structured,
+        professional catalogue for digital and print use.
       </p>
 
     </section>
@@ -857,6 +986,7 @@
     <!-- PROJECT INFORMATION -->
 
     <section class="meta">
+
 
       <div class="meta-item">
 
@@ -896,14 +1026,19 @@
 
       </div>
 
+
     </section>
 
 
 
+    <!-- CONTENT -->
+
     <div class="content">
 
 
-      <!-- 01 -->
+      <!-- =====================================================
+           01 — PROJECT SCOPE
+      ====================================================== -->
 
       <section class="section">
 
@@ -931,74 +1066,119 @@
 
 
           <div class="scope-item">
-            <div class="scope-number">01</div>
+
+            <div class="scope-number">
+              01
+            </div>
+
             <div class="scope-text">
               Complete catalogue layout and visual design
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">02</div>
+
+            <div class="scope-number">
+              02
+            </div>
+
             <div class="scope-text">
               Cover and section page design
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">03</div>
+
+            <div class="scope-number">
+              03
+            </div>
+
             <div class="scope-text">
               Product page layouts and information hierarchy
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">04</div>
+
+            <div class="scope-number">
+              04
+            </div>
+
             <div class="scope-text">
               Formatting and placement of client-provided content
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">05</div>
+
+            <div class="scope-number">
+              05
+            </div>
+
             <div class="scope-text">
               Formatting of product specifications, tables and technical information
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">06</div>
+
+            <div class="scope-number">
+              06
+            </div>
+
             <div class="scope-text">
               Placement and formatting of client-provided technical drawings
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">07</div>
-            <div class="scope-text">
-              Image editing including background removal, colour correction, cropping, cleanup and basic retouching
+
+            <div class="scope-number">
+              07
             </div>
+
+            <div class="scope-text">
+              Image editing including background removal, colour correction, cropping, resizing, cleanup and basic retouching
+            </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">08</div>
+
+            <div class="scope-number">
+              08
+            </div>
+
             <div class="scope-text">
               Typography, spacing, grids and visual hierarchy
             </div>
+
           </div>
 
 
           <div class="scope-item">
-            <div class="scope-number">09</div>
-            <div class="scope-text">
-              Final print-ready artwork and digital PDF
+
+            <div class="scope-number">
+              09
             </div>
+
+            <div class="scope-text">
+              Final print-ready artwork and digital PDF delivery
+            </div>
+
           </div>
 
 
@@ -1008,7 +1188,9 @@
 
 
 
-      <!-- 02 -->
+      <!-- =====================================================
+           02 — PROJECT INVESTMENT
+      ====================================================== -->
 
       <section class="section">
 
@@ -1042,6 +1224,7 @@
 
             </div>
 
+
             <div class="main-price">
               ₹25,000
             </div>
@@ -1068,7 +1251,9 @@
 
 
 
-      <!-- 03 -->
+      <!-- =====================================================
+           03 — INCLUDED
+      ====================================================== -->
 
       <section class="section">
 
@@ -1124,7 +1309,7 @@
 
             <div class="included-text">
               Background removal, colour correction, cropping,
-              cleanup, resizing and basic retouching.
+              resizing, cleanup and basic retouching.
             </div>
 
           </div>
@@ -1137,8 +1322,8 @@
             </div>
 
             <div class="included-text">
-              Formatting of client-provided tables,
-              specifications and technical drawings.
+              Formatting and placement of client-provided
+              tables, specifications and technical drawings.
             </div>
 
           </div>
@@ -1151,8 +1336,8 @@
             </div>
 
             <div class="included-text">
-              High-resolution print-ready artwork and
-              final digital PDF delivery.
+              High-resolution print-ready artwork and final
+              digital PDF delivery.
             </div>
 
           </div>
@@ -1165,8 +1350,8 @@
             </div>
 
             <div class="included-text">
-              Three complete rounds of revisions across
-              the agreed catalogue scope.
+              Three complete rounds of revisions across the
+              agreed catalogue scope.
             </div>
 
           </div>
@@ -1178,7 +1363,9 @@
 
 
 
-      <!-- 04 -->
+      <!-- =====================================================
+           04 — ADDITIONAL SERVICES
+      ====================================================== -->
 
       <section class="section">
 
@@ -1217,8 +1404,8 @@
 
             <p>
               3D modelling, product visualisation and rendering
-              will be charged separately based on the complexity
-              and number of renders required.
+              will be charged separately based on the complexity,
+              modelling requirements and number of renders required.
             </p>
 
           </div>
@@ -1235,9 +1422,9 @@
             </h3>
 
             <p>
-              Technical drawings that need to be manually
-              recreated from client-provided references will
-              be quoted separately according to complexity.
+              Technical drawings that need to be manually recreated
+              from client-provided references will be quoted separately
+              according to complexity and requirements.
             </p>
 
           </div>
@@ -1249,7 +1436,9 @@
 
 
 
-      <!-- 05 -->
+      <!-- =====================================================
+           05 — REVISIONS & PAYMENT
+      ====================================================== -->
 
       <section class="section">
 
@@ -1281,11 +1470,10 @@
 
             <p>
               Three complete revision rounds are included.
-              Each round may contain changes across the
-              entire catalogue, including complete page
-              redesigns or replacement of existing layouts,
-              provided the changes remain within the agreed
-              project scope.
+              Each round may contain changes across the entire
+              catalogue, including complete page redesigns or
+              replacement of existing layouts, provided the
+              changes remain within the agreed project scope.
             </p>
 
           </div>
@@ -1302,10 +1490,10 @@
             </h3>
 
             <p>
-              50% advance payment is required to initiate
-              the project. The remaining 50% is payable
-              upon completion and before release of final
-              high-resolution and print-ready files.
+              50% advance payment is required to initiate the
+              project. The remaining 50% is payable upon completion
+              and before release of final high-resolution and
+              print-ready files.
             </p>
 
           </div>
@@ -1317,7 +1505,9 @@
 
 
 
-      <!-- 06 -->
+      <!-- =====================================================
+           06 — TIMELINE
+      ====================================================== -->
 
       <section class="section">
 
@@ -1334,23 +1524,42 @@
         </div>
 
 
-        <p class="section-intro">
-          The final delivery timeline will be confirmed once
-          the complete content, product information and final
-          page count have been received from Rotex.
-        </p>
+        <div class="timeline-box">
 
 
-        <p class="section-intro">
-          Delays in receiving content, feedback or approvals
-          may affect the final delivery timeline.
-        </p>
+          <div class="timeline-icon">
+            06
+          </div>
+
+
+          <div>
+
+            <div class="timeline-title">
+              Confirmed After Content Delivery
+            </div>
+
+            <div class="timeline-text">
+              The final delivery timeline will be confirmed once
+              the complete catalogue content, product information,
+              imagery, technical material and final page requirements
+              have been received from Rotex.
+              <br><br>
+              Delays in receiving content, feedback or approvals
+              may affect the final delivery timeline.
+            </div>
+
+          </div>
+
+
+        </div>
 
       </section>
 
 
 
-      <!-- 07 -->
+      <!-- =====================================================
+           07 — TERMS
+      ====================================================== -->
 
       <section class="section">
 
@@ -1386,7 +1595,7 @@
 
 
           <div class="term">
-            Standard image editing such as background removal, colour correction, cropping and basic cleanup is included.
+            Standard image editing including background removal, colour correction, cropping, resizing and basic cleanup is included.
           </div>
 
 
@@ -1431,7 +1640,9 @@
 
 
 
-      <!-- TOTAL -->
+      <!-- =====================================================
+           TOTAL
+      ====================================================== -->
 
       <div class="total">
 
@@ -1450,7 +1661,9 @@
 
 
 
-    <!-- FOOTER -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer>
 
@@ -1467,6 +1680,44 @@
 
 
   </main>
+
+
+
+  <!-- =======================================================
+       PRIVATE CLIENT VISIBILITY SCRIPT
+
+       Normal:
+       /quote/Rotex
+
+       Rotex:
+       /quote/Rotex?client=rotex
+  ======================================================== -->
+
+  <script>
+
+    (function () {
+
+      const params = new URLSearchParams(
+        window.location.search
+      );
+
+      const client =
+        params.get("client");
+
+      if (client === "rotex") {
+
+        const navigation =
+          document.getElementById("clientNavigation");
+
+        if (navigation) {
+          navigation.style.display = "block";
+        }
+
+      }
+
+    })();
+
+  </script>
 
 
 </body>
