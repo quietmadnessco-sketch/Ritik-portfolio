@@ -166,7 +166,7 @@ function calc(){
       }
     }
   });
-  updateTotals(subtotal);
+  return updateTotals(subtotal);
 }
 function subtotalFromRows(){
   let subtotal=0;
@@ -210,10 +210,10 @@ function clearEditor(){currentId=null;setCurrency("INR");$("receiptNo").value=ne
 function openEditor(r=null){$("dashboardView").classList.remove("active");$("editorView").classList.add("active","printable");r?loadReceipt(r):clearEditor();window.scrollTo({top:0,behavior:"smooth"})}
 function backToDashboard(){$("editorView").classList.remove("active","printable");$("dashboardView").classList.add("active");renderReceipts();window.scrollTo({top:0,behavior:"smooth"})}
 function loadReceipt(r){currentId=r.id;setCurrency(r.currency||"INR");$("receiptNo").value=r.number;$("receiptDate").value=r.date;$("clientName").value=r.clientName||"";$("contactName").value=r.contactName||"";$("clientEmail").value=r.clientEmail||"";$("paid").value=r.paid||0;$("notes").value=r.notes||"";$("showQty").checked=r.showQty!==false;$("showRate").checked=r.showRate!==false;$("enableDiscount").checked=!!r.discountEnabled;$("discountType").value=r.discountType||"percent";$("discountValue").value=r.discountValue||0;toggleDiscount();$("items").innerHTML="";(r.items?.length?r.items:[{description:"",qty:1,rate:0}]).forEach(addRow);setColumnVisibility();loadSignature();calc()}
-function formData(){let c=calc();return{id:currentId||((crypto&&crypto.randomUUID)?crypto.randomUUID():("rc-"+Date.now()+"-"+Math.random().toString(36).slice(2))),number:$('receiptNo').value,date:$('receiptDate').value,clientName:$('clientName').value.trim(),contactName:$('contactName').value.trim(),clientEmail:$('clientEmail').value.trim(),items:collectItems(),showQty:$('showQty').checked,showRate:$('showRate').checked,currency:getCurrency(),subtotal:c.subtotal,discount:c.discount,total:c.total,discountEnabled:$('enableDiscount').checked,discountType:$('discountType').value,discountValue:parseMoneyValue($('discountValue').value),paid:c.paid,balance:c.balance,status:c.status,notes:$('notes').value}}
+function formData(){let c=calc();return{id:currentId||((typeof crypto!=="undefined"&&crypto.randomUUID)?crypto.randomUUID():("rc-"+Date.now()+"-"+Math.random().toString(36).slice(2))),number:$('receiptNo').value,date:$('receiptDate').value,clientName:$('clientName').value.trim(),contactName:$('contactName').value.trim(),clientEmail:$('clientEmail').value.trim(),items:collectItems(),showQty:$('showQty').checked,showRate:$('showRate').checked,currency:getCurrency(),subtotal:c.subtotal,discount:c.discount,total:c.total,discountEnabled:$('enableDiscount').checked,discountType:$('discountType').value,discountValue:parseMoneyValue($('discountValue').value),paid:c.paid,balance:c.balance,status:c.status,notes:$('notes').value}}
 function saveReceipt(){try{let r=formData();if(!r.clientName){toast("Add a client / company name first.");$("clientName").focus();return null}let a=getReceipts(),i=a.findIndex(x=>x.id===r.id);if(i>=0)a[i]=r;else a.unshift(r);if(!setReceipts(a))return null;currentId=r.id;ensureCounter();renderReceipts();toast("Receipt saved — "+r.number);return r}catch(e){console.error(e);toast("Could not save receipt. Please try again.");return null}}
 function saveAndPrint(){const r=saveReceipt();if(!r)return;setTimeout(()=>{try{window.print()}catch(e){console.error(e);toast("Saved, but print could not open.")}},80)}
-function duplicateReceipt(id){let r=getReceipts().find(x=>x.id===id);if(!r)return;openEditor({...r,id:((crypto&&crypto.randomUUID)?crypto.randomUUID():("rc-"+Date.now()+"-"+Math.random().toString(36).slice(2))),number:nextNo(),date:new Date().toISOString().slice(0,10)});toast("Duplicate created")}
+function duplicateReceipt(id){let r=getReceipts().find(x=>x.id===id);if(!r)return;openEditor({...r,id:((typeof crypto!=="undefined"&&crypto.randomUUID)?crypto.randomUUID():("rc-"+Date.now()+"-"+Math.random().toString(36).slice(2))),number:nextNo(),date:new Date().toISOString().slice(0,10)});toast("Duplicate created")}
 function editReceipt(id){let r=getReceipts().find(x=>x.id===id);if(r)openEditor(r)}
 function deleteReceipt(id){if(!confirm("Delete this receipt permanently from this browser?"))return;setReceipts(getReceipts().filter(x=>x.id!==id));renderReceipts();toast("Receipt deleted")}
 function dashboardMoney(a,key){
