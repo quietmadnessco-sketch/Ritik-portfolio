@@ -1,345 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ritik & Co. — Receipt</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --black:#09090b; --white:#faf9f7; --accent:#10b981; --accent-d:#059669;
-  --muted:#71717a; --border:#e4e4e7; --text:#3f3f46;
-  --ff-head:'Syne',sans-serif; --ff-body:'Inter',sans-serif;
-}
-html{-webkit-text-size-adjust:100%}
-body{
-  background:#e9e9e7; color:var(--black); font-family:var(--ff-body);
-  line-height:1.6; padding-top:calc(56px + env(safe-area-inset-top,0px));
-  padding-bottom:env(safe-area-inset-bottom,0px);
-  min-height:100%;
-}
-.bar{
-  position:fixed;top:0;left:0;right:0;z-index:10;
-  background:var(--black); padding:12px 1.5rem; padding-top:calc(12px + env(safe-area-inset-top,0px));
-  display:flex;align-items:center;justify-content:space-between;
-}
-.bar-label{font-family:var(--ff-head);font-size:13px;font-weight:700;color:var(--white)}
-.bar-label span{color:var(--accent)}
-.bar-btn{
-  background:var(--accent);color:#fff;font-family:var(--ff-body);font-size:12px;font-weight:600;
-  padding:8px 18px;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.3px;
-}
-.bar-btn:hover{background:var(--accent-d)}
-.sheet{
-  width:210mm;max-width:100%;min-height:297mm;margin:1.5rem auto;background:var(--white);
-  box-shadow:0 4px 30px rgba(0,0,0,0.12); padding:3rem; display:flex;flex-direction:column;
-}
-.head{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.5rem;border-bottom:2px solid var(--black);margin-bottom:2rem}
-.logo{font-family:var(--ff-head);font-size:22px;font-weight:800;color:var(--black)}
-.logo span{color:var(--accent)}
-.tagline{font-size:11px;color:var(--muted);margin-top:4px}
-.head-right{text-align:right}
-.doc-title{font-family:var(--ff-head);font-size:28px;font-weight:800;letter-spacing:-1px}
-.doc-title .g{color:var(--accent)}
-.meta-row{margin-top:8px;font-size:11px;color:var(--muted)}
-.meta-row input{
-  border:none;background:transparent;text-align:right;font-size:11px;color:var(--black);
-  font-family:var(--ff-body);font-weight:500;border-bottom:1px dashed var(--border);padding:1px 2px;width:130px;
-}
-.parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
-.party-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
-.party-block{font-size:12px;line-height:1.8;color:var(--text)}
-.party-block strong{display:block;font-size:14px;color:var(--black);margin-bottom:2px}
-.party-block input, .party-block textarea{
-  width:100%;border:none;background:var(--white);font-family:var(--ff-body);font-size:12px;color:var(--text);
-  border-bottom:1px dashed var(--border);padding:3px 2px;margin-bottom:2px;resize:none;
-}
-.party-block input::placeholder, .party-block textarea::placeholder{color:#c4c4c8}
-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem}
-thead th{
-  text-align:left;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
-  padding:0 4px 8px;border-bottom:1.5px solid var(--black);
-}
-thead th:last-child, tbody td:last-child{text-align:right}
-tbody td{padding:8px 4px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:top}
-tbody input{
-  border:none;background:transparent;font-family:var(--ff-body);font-size:12px;color:var(--text);width:100%;padding:2px;
-}
-tbody tr td:last-child input{text-align:right}
-.row-del{background:none;border:none;color:#c4c4c8;cursor:pointer;font-size:14px;padding:0 4px}
-.row-del:hover{color:#ef4444}
-.add-row{
-  font-size:11px;color:var(--accent);background:none;border:1px dashed var(--accent);border-radius:6px;
-  padding:6px 12px;cursor:pointer;font-family:var(--ff-body);font-weight:600;margin-bottom:2rem;
-}
-.totals{margin-left:auto;width:260px;margin-bottom:2rem}
-.tot-row{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;color:var(--text)}
-.tot-row input{
-  border:none;background:transparent;text-align:right;font-family:var(--ff-body);font-size:12px;color:var(--text);width:110px;
-}
-.tot-row.final{
-  border-top:2px solid var(--black);margin-top:4px;padding-top:10px;
-  font-family:var(--ff-head);font-weight:800;font-size:16px;color:var(--black);
-}
-.tot-row.final input{font-family:var(--ff-head);font-weight:800;font-size:16px;color:var(--black)}
-.status-row{display:flex;justify-content:flex-end;margin-bottom:2rem}
-.status-pill{
-  display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);
-  color:var(--accent-d);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:6px 14px;border-radius:100px;
-}
-.status-pill select{border:none;background:transparent;color:var(--accent-d);font-weight:700;font-family:var(--ff-body);font-size:10px;letter-spacing:1px;text-transform:uppercase}
-.notes-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
-.notes{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px;font-family:var(--ff-body);font-size:11px;color:var(--text);resize:vertical;min-height:50px}
-.foot{margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.foot-brand{font-family:var(--ff-head);font-size:11px;font-weight:700;color:var(--muted)}
-.foot-brand span{color:var(--accent)}
-.foot-contact{font-size:10px;color:var(--muted)}
-@media print{
-  .bar{display:none} body{padding-top:0;background:#fff}
-  .sheet{box-shadow:none;margin:0;width:auto;min-height:auto}
-  .row-del,.add-row{display:none}
-  input,textarea,select{border:none !important}
-}
-@media (max-width:700px){
-  .sheet{padding:1.25rem}
-  .head{flex-direction:column;gap:1rem}
-  .head-right{text-align:left}
-  .meta-row{display:flex;justify-content:space-between}
-  .meta-row input{text-align:left}
-  .parties{grid-template-columns:1fr}
-  .totals{width:100%}
-}
-
-/* Private access + generator controls */
-.login-gate{
-  position:fixed;inset:0;z-index:9999;background:#09090b;
-  display:flex;align-items:center;justify-content:center;padding:24px;
-}
-.login-gate.hidden{display:none}
-.login-card{
-  width:min(390px,100%);background:#faf9f7;border:1px solid #e4e4e7;
-  border-radius:14px;padding:34px;box-shadow:0 20px 80px rgba(0,0,0,.35);
-}
-.login-logo{font-family:var(--ff-head);font-size:28px;font-weight:800}
-.login-logo span{color:var(--accent)}
-.login-sub{font-size:12px;color:var(--muted);margin:4px 0 28px}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ritik & Co. — Receipt Manager</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>
+:root{--black:#09090b;--white:#faf9f7;--accent:#10b981;--accent-d:#059669;--muted:#71717a;--border:#e4e4e7;--text:#3f3f46;--danger:#dc2626;--ff-head:'Syne',sans-serif;--ff-body:'Inter',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{-webkit-text-size-adjust:100%}
+body{background:#e9e9e7;color:var(--black);font-family:var(--ff-body);line-height:1.5;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.login-gate{position:fixed;inset:0;z-index:9999;background:#09090b;display:flex;align-items:center;justify-content:center;padding:24px}.login-gate.hidden{display:none}
+.login-card{width:min(390px,100%);background:var(--white);border:1px solid var(--border);border-radius:14px;padding:34px;box-shadow:0 20px 80px rgba(0,0,0,.35)}
+.login-logo{font-family:var(--ff-head);font-size:28px;font-weight:800}.login-logo span{color:var(--accent)}.login-sub{font-size:12px;color:var(--muted);margin:4px 0 28px}
 .login-card label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.login-card input{
-  width:100%;padding:12px;border:1px solid var(--border);border-radius:7px;
-  font:14px var(--ff-body);outline:none;margin-bottom:10px;
-}
-.login-card input:focus{border-color:var(--accent)}
-.login-card button{
-  width:100%;padding:11px;border:0;border-radius:7px;background:var(--accent);
-  color:#fff;font:600 13px var(--ff-body);cursor:pointer;
-}
-.login-card button:hover{background:var(--accent-d)}
-.login-error{display:none;color:#dc2626;font-size:11px;margin-top:10px}
-.app-locked{display:none}
-.bar-actions{display:flex;align-items:center;gap:8px}
-.bar-btn.secondary{background:#27272a}
-.bar-btn.secondary:hover{background:#3f3f46}
-@media print{
-  .login-gate{display:none!important}
-  .app-locked{display:block}
-  .bar-actions{display:none}
-}
-@media (max-width:700px){
-  .bar-actions{gap:5px}
-  .bar-btn{padding:8px 10px}
-  .bar-label{font-size:11px}
-}
-
-</style>
-</head>
-<body>
-<div id="loginGate" class="login-gate">
-  <div class="login-card">
-    <div class="login-logo">Ritik <span>&</span> Co.</div>
-    <div class="login-sub">Private Receipt Generator</div>
-    <label for="accessCode">Access Code</label>
-    <input id="accessCode" type="password" autocomplete="current-password" placeholder="Enter access code"
-           onkeydown="if(event.key==='Enter') unlock()">
-    <button onclick="unlock()">Unlock</button>
-    <div id="loginError" class="login-error">Incorrect access code.</div>
-  </div>
-</div>
-
-<div id="app" class="app-locked">
-<div class="bar">
-  <div class="bar-label">Ritik <span>&</span> Co. — Receipt Builder</div>
-  <div class="bar-actions"><button class="bar-btn secondary" onclick="newReceipt()">New Receipt</button><button class="bar-btn" onclick="window.print()">Print / Save PDF</button><button class="bar-btn secondary" onclick="lockApp()">Lock</button></div>
-</div>
-
-<div class="sheet">
-  <div class="head">
-    <div>
-      <div class="logo">Ritik <span>&</span> Co.</div>
-      <div class="tagline">Brand & Visual Studio · Pune, India</div>
-    </div>
-    <div class="head-right">
-      <div class="doc-title">RECEIPT<span class="g">.</span></div>
-      <div class="meta-row">No. <input type="text" value="RC-001" id="receiptNo"></div>
-      <div class="meta-row">Date <input type="date" id="receiptDate"></div>
-    </div>
-  </div>
-
-  <div class="parties">
-    <div>
-      <div class="party-label">From</div>
-      <div class="party-block">
-        <strong>Ritik & Co.</strong>
-        Pune, Maharashtra, India<br>
-        ritikgarg@ritikandco.com<br>
-        ritikandco.com<br>
-        <input type="text" placeholder="GSTIN (if applicable)" id="gstin">
-      </div>
-    </div>
-    <div>
-      <div class="party-label">Received From</div>
-      <div class="party-block">
-        <input type="text" placeholder="Client / company name" id="clientName">
-        <input type="text" placeholder="Contact name" id="contactName">
-        <input type="text" placeholder="Email" id="clientEmail">
-      </div>
-    </div>
-  </div>
-
-  <table>
-    <thead>
-      <tr><th style="width:55%">Description</th><th style="width:15%">Qty</th><th style="width:20%">Amount (INR)</th><th style="width:5%"></th></tr>
-    </thead>
-    <tbody id="items">
-      <tr>
-        <td><input type="text" placeholder="e.g. DRS Product Catalogue — Design, Technical Formatting & Revisions"></td>
-        <td><input type="text" value="1"></td>
-        <td><input type="text" class="line-amt" placeholder="0.00" oninput="calc()"></td>
-        <td><button class="row-del" onclick="delRow(this)">✕</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="add-row" onclick="addRow()">+ Add line item</button>
-
-  <div class="totals">
-    <div class="tot-row"><span>Subtotal</span><input id="subtotal" type="text" value="0.00" readonly></div>
-    <div class="tot-row"><span>Amount Paid</span><input id="paid" type="text" placeholder="0.00" oninput="calc()"></div>
-    <div class="tot-row final"><span>Balance Due</span><input id="balance" type="text" value="0.00" readonly></div>
-  </div>
-
-  <div class="status-row">
-    <div class="status-pill">●
-      <select>
-        <option>Paid in Full</option>
-        <option selected>Partially Paid (50% Upfront)</option>
-        <option>Pending</option>
-      </select>
-    </div>
-  </div>
-
-  <div style="margin-bottom:2rem">
-    <div class="notes-label">Payment Method / Notes</div>
-    <textarea class="notes" placeholder="e.g. Paid via bank transfer / UPI. Remaining balance due on final delivery. Remaining 50% due on final delivery."></textarea>
-  </div>
-
-  <div class="foot">
-    <div class="foot-brand">Ritik <span>&</span> Co.</div>
-    <div class="foot-contact">Thank you for your business.</div>
-  </div>
-</div>
-</div>
-
-<script>
-const ACCESS_CODE = "Diyagarg2003";
-const STORAGE_KEY = "ritik_receipt_counter";
-const SESSION_KEY = "ritik_receipt_unlocked";
-
-function unlock(){
-  const input = document.getElementById("accessCode");
-  if(input.value === ACCESS_CODE){
-    sessionStorage.setItem(SESSION_KEY, "1");
-    document.getElementById("loginGate").classList.add("hidden");
-    document.getElementById("app").classList.remove("app-locked");
-    document.getElementById("loginError").style.display = "none";
-    input.value = "";
-    document.getElementById("clientName")?.focus();
-  } else {
-    document.getElementById("loginError").style.display = "block";
-    input.select();
-  }
-}
-
-function lockApp(){
-  sessionStorage.removeItem(SESSION_KEY);
-  document.getElementById("app").classList.add("app-locked");
-  document.getElementById("loginGate").classList.remove("hidden");
-  document.getElementById("accessCode").focus();
-}
-
-function nextReceiptNo(){
-  let n = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10) + 1;
-  localStorage.setItem(STORAGE_KEY, String(n));
-  return "RC-" + String(n).padStart(3, "0");
-}
-
-function calc(){
-  const amts = Array.from(document.querySelectorAll('.line-amt'))
-    .map(i => parseFloat(String(i.value).replace(/,/g,'')) || 0);
-  const subtotal = amts.reduce((a,b) => a+b, 0);
-  const paid = parseFloat(String(document.getElementById('paid').value).replace(/,/g,'')) || 0;
-  document.getElementById('subtotal').value = subtotal.toFixed(2);
-  document.getElementById('balance').value = Math.max(0, subtotal - paid).toFixed(2);
-}
-
-function addRow(){
-  const tr = document.createElement('tr');
-  tr.innerHTML =
-    '<td><input type="text" placeholder="Description"></td>' +
-    '<td><input type="text" value="1"></td>' +
-    '<td><input type="text" class="line-amt" placeholder="0.00" oninput="calc()"></td>' +
-    '<td><button class="row-del" onclick="delRow(this)">✕</button></td>';
-  document.getElementById('items').appendChild(tr);
-}
-
-function delRow(btn){
-  const rows = document.querySelectorAll('#items tr');
-  if(rows.length > 1){ btn.closest('tr').remove(); calc(); }
-}
-
-function newReceipt(){
-  if(!confirm("Start a new receipt? Current entries will be cleared.")) return;
-  document.getElementById("receiptNo").value = nextReceiptNo();
-  document.getElementById("receiptDate").valueAsDate = new Date();
-  ["clientName","contactName","clientEmail","gstin","paid"].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.value = "";
-  });
-  document.querySelector(".notes").value = "";
-  const items = document.getElementById("items");
-  items.innerHTML =
-    '<tr><td><input type="text" placeholder="e.g. DRS Product Catalogue — Design, Technical Formatting & Revisions"></td>' +
-    '<td><input type="text" value="1"></td>' +
-    '<td><input type="text" class="line-amt" placeholder="0.00" oninput="calc()"></td>' +
-    '<td><button class="row-del" onclick="delRow(this)">✕</button></td></tr>';
-  document.querySelector(".status-pill select").value = "Pending";
-  calc();
-}
-
-(function init(){
-  document.getElementById('receiptDate').valueAsDate = new Date();
-  if(!localStorage.getItem(STORAGE_KEY)) localStorage.setItem(STORAGE_KEY, "0");
-  document.getElementById('receiptNo').value = nextReceiptNo();
-
-  if(sessionStorage.getItem(SESSION_KEY) === "1"){
-    document.getElementById("loginGate").classList.add("hidden");
-    document.getElementById("app").classList.remove("app-locked");
-  } else {
-    document.getElementById("accessCode").focus();
-  }
-  calc();
-})();
-</script>
-
-</body>
-</html>
+.login-card input{width:100%;padding:12px;border:1px solid var(--border);border-radius:7px;outline:none;margin-bottom:10px;background:#fff}.login-card input:focus{border-color:var(--accent)}
+.login-card button{width:100%;padding:11px;border:0;border-radius:7px;background:var(--accent);color:#fff;font-weight:600}.login-card button:hover{background:var(--accent-d)}
+.login-error{display:none;color:var(--danger);font-size:11px;margin-top:10px}.app-locked{display:none}
+.topbar{position:sticky;top:0;z-index:20;background:var(--black);color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--ff-head);font-weight:800;font-size:14px}.brand span,.logo span,.foot-brand span{color:var(--accent)}.top-actions{display:flex;gap:8px}
+.btn{border:0;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:600}.btn-green{background:var(--accent);color:#fff}.btn-green:hover{background:var(--accent-d)}.btn-dark{background:#27272a;color:#fff}.btn-light{background:#fff;color:var(--black);border:1px solid var(--border)}
+.container{max-width:1200px;margin:0 auto;padding:28px 24px 60px}.view{display:none}.view.active{display:block}
+.page-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.page-title{font-family:var(--ff-head);font-size:30px;letter-spacing:-1px}.page-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}.stat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px}.stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:700}.stat-value{font-family:var(--ff-head);font-size:25px;margin-top:5px}
+.panel{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}.panel-head{padding:15px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px}.panel-title{font-family:var(--ff-head);font-weight:800;font-size:14px}
+.searchbar{display:flex;gap:8px;flex-wrap:wrap}.searchbar input,.searchbar select{padding:9px 11px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:12px;outline:none}.searchbar input{min-width:240px}
+.table-wrap{overflow:auto}.data-table{width:100%;border-collapse:collapse;min-width:720px}.data-table th{text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:11px 15px;border-bottom:1px solid var(--border)}.data-table td{padding:13px 15px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle}.data-table tr:last-child td{border-bottom:0}.data-table tr:hover td{background:#fafafa}.amount{text-align:right;font-weight:600}
+.badge{display:inline-flex;padding:5px 9px;border-radius:100px;font-size:9px;text-transform:uppercase;letter-spacing:.8px;font-weight:800}.badge.pending{background:#fef3c7;color:#92400e}.badge.paid{background:#d1fae5;color:#065f46}.badge.partial{background:#dbeafe;color:#1e40af}
+.row-actions{display:flex;gap:5px;flex-wrap:wrap}.icon-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 8px;font-size:10px}.empty{padding:40px;text-align:center;color:var(--muted);font-size:12px}
+.form-panel{max-width:1000px;margin:0 auto;background:var(--white);border:1px solid var(--border);padding:34px;box-shadow:0 4px 30px rgba(0,0,0,.08)}
+.receipt-sheet{width:210mm;max-width:100%;min-height:297mm;margin:0 auto;background:var(--white);padding:3rem;display:flex;flex-direction:column}
+.receipt-head{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.5rem;border-bottom:2px solid var(--black);margin-bottom:2rem}.logo{font-family:var(--ff-head);font-size:22px;font-weight:800}.tagline{font-size:11px;color:var(--muted);margin-top:4px}
+.head-right{text-align:right}.doc-title{font-family:var(--ff-head);font-size:28px;font-weight:800;letter-spacing:-1px}.doc-title .g{color:var(--accent)}.meta-row{margin-top:8px;font-size:11px;color:var(--muted)}.meta-row input{border:none;background:transparent;text-align:right;font-size:11px;color:var(--black);font-weight:500;border-bottom:1px dashed var(--border);padding:1px 2px;width:130px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}.party-label,.notes-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}.party-block{font-size:12px;line-height:1.8;color:var(--text)}.party-block strong{display:block;font-size:14px;color:var(--black);margin-bottom:2px}.party-block input{width:100%;border:none;background:var(--white);font-size:12px;color:var(--text);border-bottom:1px dashed var(--border);padding:3px 2px;margin-bottom:2px;outline:none}
+.receipt-items{width:100%;border-collapse:collapse;margin-bottom:1.5rem}.receipt-items th{text-align:left;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:0 4px 8px;border-bottom:1.5px solid var(--black)}.receipt-items th:last-child,.receipt-items td:last-child{text-align:right}.receipt-items td{padding:8px 4px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:top}
+.item-input{border:none;background:transparent;font-size:12px;color:var(--text);width:100%;padding:2px;outline:none}.qty-input,.rate-input{width:100%;text-align:right}.item-total{text-align:right;white-space:nowrap}.row-del{background:none;border:none;color:#c4c4c8;font-size:14px;padding:0 4px}.row-del:hover{color:#ef4444}
+.add-row{font-size:11px;color:var(--accent);background:none;border:1px dashed var(--accent);border-radius:6px;padding:6px 12px;font-weight:600;margin-bottom:1.6rem}.totals{margin-left:auto;width:300px;margin-bottom:1.5rem}.tot-row{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;color:var(--text)}.tot-row.final{border-top:2px solid var(--black);margin-top:4px;padding-top:10px;font-family:var(--ff-head);font-weight:800;font-size:16px;color:var(--black)}
+.status-row{display:flex;justify-content:flex-end;margin-bottom:1.5rem}.status-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--accent-d);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:100px}
+.amount-words{font-size:10px;color:var(--muted);font-style:italic;margin-bottom:1.5rem}.notes{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px;font-size:11px;color:var(--text);resize:vertical;min-height:58px;outline:none;background:#fff}
+.foot{margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.foot-brand{font-family:var(--ff-head);font-size:11px;font-weight:700;color:var(--muted)}.foot-contact{font-size:10px;color:var(--muted)}
+.editor-actions{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}.toast{position:fixed;right:20px;bottom:20px;background:#09090b;color:#fff;padding:12px 16px;border-radius:8px;font-size:12px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s;z-index:10000}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:800px){.stats{grid-template-columns:1fr}.parties{grid-template-columns:1fr}.page-head{align-items:flex-start;flex-direction:column}.container{padding:20px 14px 40px}.form-panel{padding:15px}.receipt-sheet{padding:1.25rem}.receipt-head{flex-direction:column;gap:1rem}.head-right{text-align:left}.meta-row{display:flex;justify-content:space-between}.meta-row input{text-align:left}.totals{width:100%}.topbar{padding:10px 14px}.top-actions{gap:4px}.top-actions .btn{padding:8px 9px}}
+@media print{body{background:#fff}.topbar,.editor-actions,.no-print{display:none!important}.container{padding:0}.view{display:none!important}.view.printable{display:block!important}.receipt-sheet{box-shadow:none;margin:0;width:auto;min-height:auto}.row-del,.add-row{display:none!important}input,textarea,select{border:none!important}}
+</style></head><body>
+<div id="loginGate" class="login-gate"><div class="login-card"><div class="login-logo">Ritik <span>&</span> Co.</div><div class="login-sub">Private Receipt Manager</div><label>Access Code</label><input id="accessCode" type="password" placeholder="Enter access code" autocomplete="current-password"><button onclick="unlock()">Unlock</button><div id="loginError" class="login-error">Incorrect access code.</div></div></div>
+<div id="app" class="app-locked"><header class="topbar"><div class="brand">Ritik <span>&</span> Co. — Receipt Manager</div><div class="top-actions"><button class="btn btn-green" onclick="openEditor()">+ New Receipt</button><button class="btn btn-dark" onclick="lockApp()">Lock</button></div></header>
+<main class="container">
+<section id="dashboardView" class="view active"><div class="page-head"><div><div class="page-title">Receipts</div><div class="page-sub">Financial Year 2026–27 · Private workspace</div></div><button class="btn btn-green" onclick="openEditor()">Create Receipt</button></div>
+<div class="stats"><div class="stat"><div class="stat-label">Total Billed</div><div class="stat-value" id="statBilled">₹0</div></div><div class="stat"><div class="stat-label">Amount Received</div><div class="stat-value" id="statPaid">₹0</div></div><div class="stat"><div class="stat-label">Balance Due</div><div class="stat-value" id="statDue">₹0</div></div></div>
+<div class="panel"><div class="panel-head"><div class="panel-title">Receipt History</div><div class="searchbar"><input id="searchInput" type="search" placeholder="Search client, receipt no. or description" oninput="renderReceipts()"><select id="statusFilter" onchange="renderReceipts()"><option value="all">All Status</option><option value="pending">Pending</option><option value="partial">Partially Paid</option><option value="paid">Paid in Full</option></select></div></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Receipt</th><th>Client</th><th>Date</th><th>Status</th><th class="amount">Amount</th><th>Actions</th></tr></thead><tbody id="receiptRows"></tbody></table><div id="emptyState" class="empty" style="display:none">No receipts found. Create your first receipt.</div></div></div></section>
+<section id="editorView" class="view"><div class="editor-actions"><button class="btn btn-light" onclick="backToDashboard()">← Back to Receipts</button><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-light" onclick="saveReceipt()">Save Receipt</button><button class="btn btn-green" onclick="saveAndPrint()">Save & Print / PDF</button></div></div>
+<div class="form-panel"><div class="receipt-sheet">
+<div class="receipt-head"><div><div class="logo">Ritik <span>&</span> Co.</div><div class="tagline">Brand & Visual Studio · Pune, India</div></div><div class="head-right"><div class="doc-title">RECEIPT<span class="g">.</span></div><div class="meta-row">No. <input id="receiptNo" type="text"></div><div class="meta-row">Date <input id="receiptDate" type="date"></div></div></div>
+<div class="parties"><div><div class="party-label">From</div><div class="party-block"><strong>Ritik & Co.</strong>Pune, Maharashtra, India<br>ritikgarg@ritikandco.com<br>ritikandco.com</div></div><div><div class="party-label">Received From</div><div class="party-block"><input id="clientName" type="text" placeholder="Client / company name"><input id="contactName" type="text" placeholder="Contact name"><input id="clientEmail" type="text" placeholder="Email"></div></div></div>
+<table class="receipt-items"><thead><tr><th style="width:50%">Description</th><th style="width:10%">Qty</th><th style="width:18%">Rate (INR)</th><th style="width:17%">Amount (INR)</th><th style="width:5%"></th></tr></thead><tbody id="items"></tbody></table><button class="add-row" onclick="addRow()">+ Add line item</button>
+<div class="totals"><div class="tot-row"><span>Subtotal</span><strong id="subtotal">₹0.00</strong></div><div class="tot-row"><span>Amount Paid</span><input id="paid" type="number" min="0" step="0.01" value="0" oninput="calc()" style="border:0;background:transparent;text-align:right;width:120px"></div><div class="tot-row final"><span>Balance Due</span><strong id="balance">₹0.00</strong></div></div>
+<div class="status-row"><div class="status-pill"><span>●</span><span id="statusText">PENDING</span></div></div><div class="amount-words" id="amountWords">Amount in words: Zero Rupees Only</div>
+<div style="margin-bottom:2rem"><div class="notes-label">Payment Method / Notes</div><textarea id="notes" class="notes" placeholder="e.g. Payment received via UPI / bank transfer."></textarea></div>
+<div class="foot"><div class="foot-brand">Ritik <span>&</span> Co.</div><div class="foot-contact">Thank you for your business.</div></div>
+</div></div></section></main></div><div id="toast" class="toast"></div><script>
+const ACCESS_CODE="Diyagarg2003",RECEIPTS_KEY="ritik_receipts_v1",COUNTER_KEY="ritik_receipt_counter_v1",SESSION_KEY="ritik_receipt_session_v1";
+let currentId=null;
+const $=id=>document.getElementById(id);
+function money(n){return"₹"+Number(n||0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function getReceipts(){try{return JSON.parse(localStorage.getItem(RECEIPTS_KEY)||"[]")}catch(e){return[]}}
+function setReceipts(a){localStorage.setItem(RECEIPTS_KEY,JSON.stringify(a))}
+function nextNo(){let n=Number(localStorage.getItem(COUNTER_KEY)||0)+1;localStorage.setItem(COUNTER_KEY,String(n));return"RC-"+String(n).padStart(3,"0")}
+function ensureCounter(){let max=0;getReceipts().forEach(r=>{let m=String(r.number||"").match(/(\d+)$/);if(m)max=Math.max(max,Number(m[1]))});if(Number(localStorage.getItem(COUNTER_KEY)||0)<max)localStorage.setItem(COUNTER_KEY,String(max))}
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2200)}
+function unlock(){if($("accessCode").value===ACCESS_CODE){sessionStorage.setItem(SESSION_KEY,"1");$("loginGate").classList.add("hidden");$("app").classList.remove("app-locked");$("loginError").style.display="none";renderReceipts()}else{$("loginError").style.display="block";$("accessCode").select()}}
+$("accessCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
+function lockApp(){sessionStorage.removeItem(SESSION_KEY);$("app").classList.add("app-locked");$("loginGate").classList.remove("hidden");$("accessCode").focus()}
+function addRow(d={description:"",qty:1,rate:0}){let tr=document.createElement("tr");tr.innerHTML='<td><input class="item-input desc-input" type="text" placeholder="Service / project description"></td><td><input class="item-input qty-input qty" type="number" min="0" step="1"></td><td><input class="item-input rate-input rate" type="number" min="0" step="0.01"></td><td class="item-total">₹0.00</td><td><button class="row-del" onclick="delRow(this)">✕</button></td>';tr.querySelector(".desc-input").value=d.description||"";tr.querySelector(".qty").value=Number(d.qty??1);tr.querySelector(".rate").value=Number(d.rate||0);tr.querySelectorAll("input").forEach(i=>i.addEventListener("input",calc));$("items").appendChild(tr);calc()}
+function delRow(b){if($("items").children.length>1){b.closest("tr").remove();calc()}}
+function collectItems(){return[...$("items").querySelectorAll("tr")].map(tr=>({description:tr.querySelector(".desc-input").value,qty:Number(tr.querySelector(".qty").value)||0,rate:Number(tr.querySelector(".rate").value)||0})).filter(x=>x.description||x.rate)}
+function calc(){let subtotal=0;$("items").querySelectorAll("tr").forEach(tr=>{let q=Number(tr.querySelector(".qty").value)||0,r=Number(tr.querySelector(".rate").value)||0,t=q*r;subtotal+=t;tr.querySelector(".item-total").textContent=money(t)});let paid=Math.max(0,Number($("paid").value)||0),balance=Math.max(0,subtotal-paid);$("subtotal").textContent=money(subtotal);$("balance").textContent=money(balance);$("amountWords").textContent="Amount in words: "+numberToWords(Math.round(subtotal))+" Rupees Only";let s=paid>=subtotal&&subtotal>0?"paid":paid>0?"partial":"pending";$("statusText").textContent=s==="paid"?"PAID IN FULL":s==="partial"?"PARTIALLY PAID":"PENDING";return{subtotal,paid,balance,status:s}}
+function numberToWords(num){num=Math.floor(Math.abs(num));if(!num)return"Zero";const o=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"],t=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];function u(n){let s="";if(n>=100){s+=o[Math.floor(n/100)]+" Hundred";n%=100;if(n)s+=" "}if(n>=20){s+=t[Math.floor(n/10)];n%=10;if(n)s+=" "+o[n]}else if(n)s+=o[n];return s}let p=[],c=Math.floor(num/1e7);num%=1e7;let l=Math.floor(num/1e5);num%=1e5;let th=Math.floor(num/1e3);num%=1e3;if(c)p.push(u(c)+" Crore");if(l)p.push(u(l)+" Lakh");if(th)p.push(u(th)+" Thousand");if(num)p.push(u(num));return p.join(" ")}
+function clearEditor(){currentId=null;$("receiptNo").value=nextNo();$("receiptDate").valueAsDate=new Date();["clientName","contactName","clientEmail","notes"].forEach(id=>$(id).value="");$("paid").value=0;$("items").innerHTML="";addRow();calc()}
+function openEditor(r=null){$("dashboardView").classList.remove("active");$("editorView").classList.add("active","printable");r?loadReceipt(r):clearEditor();window.scrollTo({top:0,behavior:"smooth"})}
+function backToDashboard(){$("editorView").classList.remove("active","printable");$("dashboardView").classList.add("active");renderReceipts();window.scrollTo({top:0,behavior:"smooth"})}
+function loadReceipt(r){currentId=r.id;$("receiptNo").value=r.number;$("receiptDate").value=r.date;$("clientName").value=r.clientName||"";$("contactName").value=r.contactName||"";$("clientEmail").value=r.clientEmail||"";$("paid").value=r.paid||0;$("notes").value=r.notes||"";$("items").innerHTML="";(r.items?.length?r.items:[{description:"",qty:1,rate:0}]).forEach(addRow);calc()}
+function formData(){let c=calc();return{id:currentId||crypto.randomUUID(),number:$("receiptNo").value,date:$("receiptDate").value,clientName:$("clientName").value.trim(),contactName:$("contactName").value.trim(),clientEmail:$("clientEmail").value.trim(),items:collectItems(),subtotal:c.subtotal,paid:c.paid,balance:c.balance,status:c.status,notes:$("notes").value}}
+function saveReceipt(){let r=formData();if(!r.clientName){toast("Add a client / company name first.");return null}let a=getReceipts(),i=a.findIndex(x=>x.id===r.id);if(i>=0)a[i]=r;else a.unshift(r);setReceipts(a);currentId=r.id;ensureCounter();renderReceipts();toast("Receipt saved — "+r.number);return r}
+function saveAndPrint(){let r=saveReceipt();if(r)setTimeout(()=>window.print(),180)}
+function duplicateReceipt(id){let r=getReceipts().find(x=>x.id===id);if(!r)return;openEditor({...r,id:crypto.randomUUID(),number:nextNo(),date:new Date().toISOString().slice(0,10)});toast("Duplicate created")}
+function editReceipt(id){let r=getReceipts().find(x=>x.id===id);if(r)openEditor(r)}
+function deleteReceipt(id){if(!confirm("Delete this receipt permanently from this browser?"))return;setReceipts(getReceipts().filter(x=>x.id!==id));renderReceipts();toast("Receipt deleted")}
+function renderReceipts(){let a=getReceipts().sort((x,y)=>(y.date||"").localeCompare(x.date||"")),q=$("searchInput").value.trim().toLowerCase(),f=$("statusFilter").value;let rows=a.filter(r=>{let h=[r.number,r.clientName,r.contactName,r.clientEmail,r.notes,...(r.items||[]).map(i=>i.description)].join(" ").toLowerCase();return(!q||h.includes(q))&&(f==="all"||r.status===f)});$("receiptRows").innerHTML=rows.map(r=>'<tr><td><strong>'+escapeHtml(r.number)+'</strong></td><td>'+escapeHtml(r.clientName||"—")+'</td><td>'+escapeHtml(r.date||"—")+'</td><td><span class="badge '+r.status+'">'+(r.status==="paid"?"Paid in Full":r.status==="partial"?"Partially Paid":"Pending")+'</span></td><td class="amount">'+money(r.subtotal)+'</td><td><div class="row-actions"><button class="icon-btn" onclick="editReceipt(\''+r.id+'\')">Edit</button><button class="icon-btn" onclick="duplicateReceipt(\''+r.id+'\')">Duplicate</button><button class="icon-btn" onclick="deleteReceipt(\''+r.id+'\')">Delete</button></div></td></tr>').join("");$("emptyState").style.display=rows.length?"none":"block";let total=a.reduce((s,r)=>s+(Number(r.subtotal)||0),0),paid=a.reduce((s,r)=>s+(Number(r.paid)||0),0);$("statBilled").textContent=money(total);$("statPaid").textContent=money(paid);$("statDue").textContent=money(Math.max(0,total-paid))}
+(function(){ensureCounter();$("receiptDate").valueAsDate=new Date();addRow();calc();if(sessionStorage.getItem(SESSION_KEY)==="1"){$("loginGate").classList.add("hidden");$("app").classList.remove("app-locked")}renderReceipts()})();
+</script></body></html>
