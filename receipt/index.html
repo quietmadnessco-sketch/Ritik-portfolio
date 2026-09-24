@@ -24,7 +24,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 .form-panel{max-width:1000px;margin:0 auto;background:var(--white);border:1px solid var(--border);padding:34px;box-shadow:0 4px 30px rgba(0,0,0,.08)}
 .receipt-sheet{width:210mm;max-width:100%;min-height:297mm;margin:0 auto;background:var(--white);padding:3rem;display:flex;flex-direction:column}
 .receipt-head{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:1.5rem;border-bottom:2px solid var(--black);margin-bottom:2rem}.logo{font-family:var(--ff-head);font-size:22px;font-weight:800}.tagline{font-size:11px;color:var(--muted);margin-top:4px}
-.head-right{text-align:right}.doc-title{font-family:var(--ff-head);font-size:28px;font-weight:800;letter-spacing:-1px}.doc-title .g{color:var(--accent)}.meta-row{margin-top:8px;font-size:11px;color:var(--muted)}.meta-row input{border:none;background:transparent;text-align:right;font-size:11px;color:var(--black);font-weight:500;border-bottom:1px dashed var(--border);padding:1px 2px;width:130px}
+.head-right{text-align:right}.doc-title{font-family:var(--ff-head);font-size:28px;font-weight:800;letter-spacing:-1px}.doc-title .g{color:var(--accent)}.meta-row{margin-top:8px;font-size:11px;color:var(--muted);display:grid;grid-template-columns:max-content 92px;column-gap:10px;align-items:center;justify-content:end;width:max-content;margin-left:auto}.meta-row input{border:none;background:transparent;text-align:right;font-size:11px;color:var(--black);font-weight:500;border-bottom:1px dashed var(--border);padding:1px 0;width:92px;box-sizing:border-box}
 .parties{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}.party-label,.notes-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}.party-block{font-size:12px;line-height:1.8;color:var(--text)}.party-block strong{display:block;font-size:14px;color:var(--black);margin-bottom:2px}.party-block input{width:100%;border:none;background:var(--white);font-size:12px;color:var(--text);border-bottom:1px dashed var(--border);padding:3px 2px;margin-bottom:2px;outline:none}
 .receipt-items{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:1.5rem}.receipt-items th{text-align:left;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:0 4px 8px;border-bottom:1.5px solid var(--black)}.receipt-items th:nth-child(2),.receipt-items td:nth-child(2){text-align:center}.receipt-items th:nth-child(3),.receipt-items td:nth-child(3),.receipt-items th:nth-child(4),.receipt-items td:nth-child(4){text-align:right}.receipt-items th:last-child,.receipt-items td:last-child{text-align:center}.receipt-items td{padding:8px 4px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:top}
 .item-input{border:none;background:transparent;font-size:12px;color:var(--text);width:100%;padding:2px;outline:none}.qty-input,.rate-input{width:100%;text-align:right}.item-total{text-align:right;white-space:nowrap}.row-del{background:none;border:none;color:#c4c4c8;font-size:14px;padding:0 4px}.row-del:hover{color:#ef4444}
@@ -42,32 +42,8 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 .column-hidden{display:none!important}.heading-row td{border-bottom:1px solid var(--border);padding-top:14px;padding-bottom:8px}.heading-row .desc-input{font-family:var(--ff-head);font-size:13px;font-weight:800;color:var(--black);letter-spacing:-.2px}.type-select{border:1px solid var(--border);border-radius:5px;background:#fff;font-size:9px;padding:3px 4px;margin-bottom:4px;color:var(--muted)}.heading-row .qty-cell,.heading-row .rate-cell,.heading-row .item-total,.heading-row .row-del{visibility:hidden}.row-type-wrap{display:flex;align-items:center;gap:5px}.discount-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px}.discount-controls input,.discount-controls select{padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:11px}.discount-amount{color:#047857!important}.signature-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px}.signature-preview{max-width:150px;max-height:55px;object-fit:contain;display:none}.signature-label{font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:700}.signature-upload{font-size:10px;color:var(--muted)}.signature-upload input{font-size:10px}.signature-actions{display:flex;gap:5px}.signature-actions button{font-size:9px;padding:4px 7px;border:1px solid var(--border);background:#fff;border-radius:5px}
 
 .payment-details{margin-bottom:1.2rem}.bank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.bank-grid input{padding:9px 10px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:11px;outline:none}.bank-grid input:focus{border-color:var(--accent)}.payment-print{margin-bottom:1.2rem;display:none}.bank-details-print{font-size:10px;line-height:1.7;color:var(--text);display:flex;flex-wrap:wrap;gap:4px 18px}.bank-details-print span{white-space:nowrap}.bank-details-print strong{color:var(--black)}
-@media(max-width:800px){.stats{grid-template-columns:1fr}.parties{grid-template-columns:1fr}.page-head{align-items:flex-start;flex-direction:column}.container{padding:20px 14px 40px}.bank-grid{grid-template-columns:1fr}.form-panel{padding:15px}.receipt-sheet{padding:1.25rem}.receipt-head{flex-direction:column;gap:1rem}.head-right{text-align:left}.meta-row{display:flex;justify-content:space-between}.meta-row input{text-align:left}.totals{width:100%}.topbar{padding:10px 14px}.top-actions{gap:4px}.top-actions .btn{padding:8px 9px}}
+@media(max-width:800px){.stats{grid-template-columns:1fr}.parties{grid-template-columns:1fr}.page-head{align-items:flex-start;flex-direction:column}.container{padding:20px 14px 40px}.bank-grid{grid-template-columns:1fr}.form-panel{padding:15px}.receipt-sheet{padding:1.25rem}.receipt-head{flex-direction:column;gap:1rem}.head-right{text-align:left}.meta-row{display:grid;grid-template-columns:max-content 92px;justify-content:start;column-gap:10px;width:max-content;margin-left:0}.meta-row input{text-align:left}.totals{width:100%}.topbar{padding:10px 14px}.top-actions{gap:4px}.top-actions .btn{padding:8px 9px}}
 @media print{body{background:#fff}.topbar,.editor-actions,.no-print{display:none!important}.container{padding:0}.view{display:none!important}.view.printable{display:block!important}.receipt-sheet{box-shadow:none;margin:0;width:auto;min-height:auto}.receipt-items{table-layout:fixed;width:100%}.receipt-items th:nth-child(1),.receipt-items td:nth-child(1){width:52%!important}.receipt-items th:nth-child(2),.receipt-items td:nth-child(2){width:10%!important;text-align:center!important}.receipt-items th:nth-child(3),.receipt-items td:nth-child(3){width:18%!important;text-align:right!important}.receipt-items th:nth-child(4),.receipt-items td:nth-child(4){width:20%!important;text-align:right!important}.receipt-items th:nth-child(5),.receipt-items td:nth-child(5){display:none!important}.qty-input{width:100%!important;text-align:center!important}.rate-input,.manual-amount{width:100%!important;text-align:right!important}input,textarea,select{border:none!important}.payment-print{display:block!important}}
-/* Compact receipt number & date */
-.receipt-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.receipt-meta .meta-row {
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 12px;
-  align-items: center;
-  width: auto;
-}
-
-.receipt-meta .meta-label {
-  text-align: right;
-}
-
-.receipt-meta .meta-value {
-  text-align: right;
-  min-width: 90px;
-}
 </style></head><body>
 <div id="loginGate" class="login-gate"><div class="login-card"><div class="login-logo">Ritik <span>&</span> Co.</div><div class="login-sub">Private Receipt Manager</div><label>Access Code</label><input id="accessCode" type="password" placeholder="Enter access code" autocomplete="current-password"><button onclick="unlock()">Unlock</button><div id="loginError" class="login-error">Incorrect access code.</div></div></div>
 <div id="app" class="app-locked"><header class="topbar"><div class="brand">Ritik <span>&</span> Co. — Receipt Manager</div><div class="top-actions"><button class="btn btn-green" onclick="openEditor()">+ New Receipt</button><button class="btn btn-dark" onclick="lockApp()">Lock</button></div></header>
