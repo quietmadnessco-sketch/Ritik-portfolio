@@ -51,7 +51,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 <div class="stats"><div class="stat"><div class="stat-label">Total Billed</div><div class="stat-value" id="statBilled">₹0</div></div><div class="stat"><div class="stat-label">Amount Received</div><div class="stat-value" id="statPaid">₹0</div></div><div class="stat"><div class="stat-label">Balance Due</div><div class="stat-value" id="statDue">₹0</div></div></div>
 <div class="panel"><div class="panel-head"><div class="panel-title">Receipt History</div><div class="searchbar"><input id="searchInput" type="search" placeholder="Search client, receipt no. or description" oninput="renderReceipts()"><select id="statusFilter" onchange="renderReceipts()"><option value="all">All Status</option><option value="pending">Pending</option><option value="partial">Partially Paid</option><option value="paid">Paid in Full</option></select></div></div>
 <div class="table-wrap"><table class="data-table"><thead><tr><th>Receipt</th><th>Client</th><th>Date</th><th>Status</th><th class="amount">Amount</th><th>Actions</th></tr></thead><tbody id="receiptRows"></tbody></table><div id="emptyState" class="empty" style="display:none">No receipts found. Create your first receipt.</div></div></div></section>
-<section id="editorView" class="view"><div class="editor-actions"><button class="btn btn-light" onclick="backToDashboard()">← Back to Receipts</button><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-light" onclick="saveReceipt()">Save Receipt</button><button class="btn btn-green" onclick="saveAndPrint()">Save & Print / PDF</button></div></div>
+<section id="editorView" class="view"><div class="editor-actions"><button class="btn btn-light" onclick="backToDashboard()">← Back to Receipts</button><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="saveReceiptBtn" class="btn btn-light">Save Receipt</button><button type="button" id="savePrintBtn" class="btn btn-green">Save & Print / PDF</button></div></div>
 <div class="form-panel"><div class="receipt-sheet">
 <div class="receipt-head"><div><div class="logo">Ritik <span>&</span> Co.</div><div class="tagline">Brand & Visual Studio · Pune, India</div></div><div class="head-right"><div class="doc-title">RECEIPT<span class="g">.</span></div><div class="meta-row">No. <input id="receiptNo" type="text"></div><div class="meta-row">Date <input id="receiptDate" type="date"></div></div></div>
 <div class="parties"><div><div class="party-label">From</div><div class="party-block"><strong>Ritik & Co.</strong>Pune, Maharashtra, India<br>ritikgarg@ritikandco.com<br>ritikandco.com</div></div><div><div class="party-label">Received From</div><div class="party-block"><input id="clientName" type="text" placeholder="Client / company name"><input id="contactName" type="text" placeholder="Contact name"><input id="clientEmail" type="text" placeholder="Email"></div></div></div>
@@ -82,10 +82,13 @@ let currentId=null;
 const $=id=>document.getElementById(id);
 function money(n){return"₹"+Number(n||0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function getReceipts(){try{return JSON.parse(localStorage.getItem(RECEIPTS_KEY)||"[]")}catch(e){return[]}}
-function setReceipts(a){localStorage.setItem(RECEIPTS_KEY,JSON.stringify(a))}
-function nextNo(){let n=Number(localStorage.getItem(COUNTER_KEY)||0)+1;localStorage.setItem(COUNTER_KEY,String(n));return"RC-"+String(n).padStart(3,"0")}
-function ensureCounter(){let max=0;getReceipts().forEach(r=>{let m=String(r.number||"").match(/(\d+)$/);if(m)max=Math.max(max,Number(m[1]))});if(Number(localStorage.getItem(COUNTER_KEY)||0)<max)localStorage.setItem(COUNTER_KEY,String(max))}
+let memoryReceipts=[];
+function getReceipts(){try{const raw=localStorage.getItem(RECEIPTS_KEY);return raw?JSON.parse(raw):memoryReceipts}catch(e){return memoryReceipts}}
+function setReceipts(a){memoryReceipts=Array.isArray(a)?a:[];try{localStorage.setItem(RECEIPTS_KEY,JSON.stringify(memoryReceipts));return true}catch(e){return false}}
+function getCounter(){try{return Number(localStorage.getItem(COUNTER_KEY)||0)}catch(e){return Number(window.__receiptCounter||0)}}
+function setCounter(n){window.__receiptCounter=n;try{localStorage.setItem(COUNTER_KEY,String(n))}catch(e){}}
+function nextNo(){let n=getCounter()+1;setCounter(n);return"RC-"+String(n).padStart(3,"0")}
+function ensureCounter(){let max=0;getReceipts().forEach(r=>{let m=String(r.number||"").match(/(\d+)$/);if(m)max=Math.max(max,Number(m[1]))});if(getCounter()<max)setCounter(max)}
 function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2200)}
 function unlock(){if($("accessCode").value===ACCESS_CODE){sessionStorage.setItem(SESSION_KEY,"1");$("loginGate").classList.add("hidden");$("app").classList.remove("app-locked");$("loginError").style.display="none";renderReceipts()}else{$("loginError").style.display="block";$("accessCode").select()}}
 $("accessCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
@@ -189,11 +192,38 @@ function backToDashboard(){$("editorView").classList.remove("active","printable"
 function loadReceipt(r){currentId=r.id;$("receiptNo").value=r.number;$("receiptDate").value=r.date;$("clientName").value=r.clientName||"";$("contactName").value=r.contactName||"";$("clientEmail").value=r.clientEmail||"";$("paid").value=r.paid||0;$("notes").value=r.notes||"";$("showQty").checked=r.showQty!==false;$("showRate").checked=r.showRate!==false;$("enableDiscount").checked=!!r.discountEnabled;$("discountType").value=r.discountType||"percent";$("discountValue").value=r.discountValue||0;toggleDiscount();$("items").innerHTML="";(r.items?.length?r.items:[{description:"",qty:1,rate:0}]).forEach(addRow);setColumnVisibility();loadSignature();calc()}
 function newId(){try{if(window.crypto&&typeof window.crypto.randomUUID==='function')return window.crypto.randomUUID()}catch(e){}return 'rc-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
 function formData(){let c=calc();return{id:currentId||newId(),number:$("receiptNo").value,date:$("receiptDate").value,clientName:$("clientName").value.trim(),contactName:$("contactName").value.trim(),clientEmail:$("clientEmail").value.trim(),items:collectItems(),showQty:$("showQty").checked,showRate:$("showRate").checked,subtotal:c.subtotal,discount:c.discount,total:c.total,discountEnabled:$("enableDiscount").checked,discountType:$("discountType").value,discountValue:Number($("discountValue").value)||0,paid:c.paid,balance:c.balance,status:c.status,notes:$("notes").value}}
-function saveReceipt(){try{let r=formData();if(!r.clientName){toast("Add a client / company name first.");return null}let a=getReceipts(),i=a.findIndex(x=>x.id===r.id);if(i>=0)a[i]=r;else a.unshift(r);setReceipts(a);currentId=r.id;ensureCounter();renderReceipts();toast("Receipt saved — "+r.number);return r}catch(e){console.error(e);toast("Could not save receipt. Please refresh and try again.");return null}}
-function saveAndPrint(){let r=saveReceipt();if(!r)return;setTimeout(()=>{try{window.print()}catch(e){console.error(e);toast("Saved, but print could not open.")}},250)}
+function saveReceipt(){
+  try{
+    const r=formData();
+    const a=getReceipts();
+    const i=a.findIndex(x=>x.id===r.id);
+    if(i>=0)a[i]=r; else a.unshift(r);
+    const ok=setReceipts(a);
+    currentId=r.id;
+    ensureCounter();
+    renderReceipts();
+    if(ok) toast("Receipt saved — "+r.number);
+    else toast("Saved for this session. Browser storage is unavailable.");
+    return r;
+  }catch(e){
+    console.error("SAVE ERROR",e);
+    alert("Could not save this receipt.\n\n"+(e&&e.message?e.message:e));
+    return null;
+  }
+}
+function saveAndPrint(){
+  const r=saveReceipt();
+  if(!r)return;
+  try{window.print();}catch(e){console.error("PRINT ERROR",e);alert("Receipt saved, but the print dialog could not open. Use Ctrl+P to print.");}
+}
 function duplicateReceipt(id){let r=getReceipts().find(x=>x.id===id);if(!r)return;openEditor({...r,id:newId(),number:nextNo(),date:new Date().toISOString().slice(0,10)});toast("Duplicate created")}
 function editReceipt(id){let r=getReceipts().find(x=>x.id===id);if(r)openEditor(r)}
 function deleteReceipt(id){if(!confirm("Delete this receipt permanently from this browser?"))return;setReceipts(getReceipts().filter(x=>x.id!==id));renderReceipts();toast("Receipt deleted")}
 function renderReceipts(){let a=getReceipts().sort((x,y)=>(y.date||"").localeCompare(x.date||"")),q=$("searchInput").value.trim().toLowerCase(),f=$("statusFilter").value;let rows=a.filter(r=>{let h=[r.number,r.clientName,r.contactName,r.clientEmail,r.notes,...(r.items||[]).map(i=>i.description)].join(" ").toLowerCase();return(!q||h.includes(q))&&(f==="all"||r.status===f)});$("receiptRows").innerHTML=rows.map(r=>'<tr><td><strong>'+escapeHtml(r.number)+'</strong></td><td>'+escapeHtml(r.clientName||"—")+'</td><td>'+escapeHtml(r.date||"—")+'</td><td><span class="badge '+r.status+'">'+(r.status==="paid"?"Paid in Full":r.status==="partial"?"Partially Paid":"Pending")+'</span></td><td class="amount">'+money(r.total!=null?r.total:r.subtotal)+'</td><td><div class="row-actions"><button class="icon-btn" onclick="editReceipt(\''+r.id+'\')">Edit</button><button class="icon-btn" onclick="duplicateReceipt(\''+r.id+'\')">Duplicate</button><button class="icon-btn" onclick="deleteReceipt(\''+r.id+'\')">Delete</button></div></td></tr>').join("");$("emptyState").style.display=rows.length?"none":"block";let total=a.reduce((s,r)=>s+(Number(r.total!=null?r.total:r.subtotal)||0),0),paid=a.reduce((s,r)=>s+(Number(r.paid)||0),0);$("statBilled").textContent=money(total);$("statPaid").textContent=money(paid);$("statDue").textContent=money(Math.max(0,total-paid))}
+document.addEventListener("DOMContentLoaded",()=>{
+  const sb=$("saveReceiptBtn"),sp=$("savePrintBtn");
+  if(sb) sb.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveReceipt();});
+  if(sp) sp.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveAndPrint();});
+});
 (function(){ensureCounter();$("receiptDate").valueAsDate=new Date();loadSignature();addRow();$("showQty").checked=true;$("showRate").checked=true;setColumnVisibility();calc();if(sessionStorage.getItem(SESSION_KEY)==="1"){$("loginGate").classList.add("hidden");$("app").classList.remove("app-locked")}renderReceipts()})();
 </script></body></html>
