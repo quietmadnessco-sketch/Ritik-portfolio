@@ -55,7 +55,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 <section id="editorView" class="view"><div class="editor-actions"><button class="btn btn-light" onclick="backToDashboard()">← Back to Receipts</button><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="saveReceiptBtn" class="btn btn-light">Save Receipt</button><button type="button" id="savePrintBtn" class="btn btn-green">Save & Print / PDF</button></div></div>
 <div class="form-panel"><div class="receipt-sheet">
 <div class="receipt-head"><div><div class="logo">Ritik <span>&</span> Co.</div><div class="tagline">Brand & Visual Studio · Pune, India</div></div><div class="head-right"><div class="doc-title">RECEIPT<span class="g">.</span></div><div class="meta-row">No. <input id="receiptNo" type="text"></div><div class="meta-row">Date <input id="receiptDate" type="date"></div></div></div>
-<div class="parties"><div><div class="party-label">From</div><div class="party-block"><strong>Ritik & Co.</strong>Pune, Maharashtra, India<br>ritikgarg@ritikandco.com<br>ritikandco.com</div></div><div><div class="party-label">To</div><div class="party-block"><input id="clientName" type="text" placeholder="Client / company name"><input id="contactName" type="text" placeholder="Contact name"><input id="clientEmail" type="text" placeholder="Email"></div></div></div>
+<div class="parties"><div><div class="party-label">From</div><div class="party-block"><strong>Ritik & Co.</strong>Pune, Maharashtra, India<br>ritikgarg@ritikandco.com<br>ritikandco.com</div></div><div><div class="party-label">Received From</div><div class="party-block"><input id="clientName" type="text" placeholder="Client / company name"><input id="contactName" type="text" placeholder="Contact name"><input id="clientEmail" type="text" placeholder="Email"></div></div></div>
 <div class="column-controls no-print">
   <span class="column-controls-label">Columns:</span>
   <label class="col-toggle"><input id="showQty" type="checkbox" checked onchange="setColumnVisibility()"> Quantity</label>
@@ -78,7 +78,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 <div class="payment-details no-print"><div class="notes-label">Business / Bank Details</div><div class="bank-grid"><input id="panNumber" type="text" placeholder="PAN Number"><input id="bankName" type="text" placeholder="Bank Name"><input id="accountNumber" type="text" placeholder="Account Number"><input id="ifscCode" type="text" placeholder="IFSC Code"><input id="accountHolder" type="text" placeholder="Account Holder Name"><input id="bankBranch" type="text" placeholder="Branch (Optional)"></div></div><div class="payment-print"><div class="notes-label">PAN / Bank Details</div><div id="bankDetailsPrint" class="bank-details-print"></div></div><div style="margin-bottom:2rem"><div class="notes-label">Payment Method / Notes</div><textarea id="notes" class="notes" placeholder="e.g. Bank Transfer"></textarea></div>
 <div class="foot"><div><div class="foot-brand">Ritik <span>&</span> Co.</div><div class="foot-contact">Thank you for your business.</div></div><div class="signature-wrap"><div class="signature-label">Authorized Signature</div><img id="signaturePreview" class="signature-preview" alt="Signature"><div class="signature-upload no-print"><input id="signatureFile" type="file" accept="image/png,image/jpeg,image/webp" onchange="handleSignature(this)"></div><div class="signature-actions no-print"><button type="button" onclick="clearSignature()">Remove Signature</button></div></div></div>
 </div></div></section></main></div><div id="toast" class="toast"></div><script>
-const ACCESS_CODE="Diyagarg2003",RECEIPTS_KEY="ritik_receipts_v1",COUNTER_KEY="ritik_receipt_counter_v1",SESSION_KEY="ritik_receipt_session_v1",SIGNATURE_KEY="ritik_receipt_signature_v1";
+const ACCESS_CODE="Diyagarg2003",RECEIPTS_KEY="ritik_receipts_v1",COUNTER_KEY="ritik_receipt_counter_v1",SESSION_KEY="ritik_receipt_session_v1",SIGNATURE_KEY="ritik_receipt_signature_v1",BUSINESS_KEY="ritik_business_details_v1";
 let currentId=null;
 const $=id=>document.getElementById(id);
 function money(n){return"₹"+Number(n||0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}
@@ -190,7 +190,7 @@ const DEFAULT_SIGNATURE='data:image/webp;base64,UklGRkZbAABXRUJQVlA4IDpbAACQNwGd
 
 function updateBankDetailsPrint(){const vals=[['PAN', $('panNumber')?.value.trim()||''],['Bank', $('bankName')?.value.trim()||''],['A/C', $('accountNumber')?.value.trim()||''],['IFSC', $('ifscCode')?.value.trim()||''],['Holder', $('accountHolder')?.value.trim()||''],['Branch', $('bankBranch')?.value.trim()||'']];$('bankDetailsPrint').innerHTML=vals.filter(x=>x[1]).map(x=>`<span><strong>${escapeHtml(x[0])}:</strong> ${escapeHtml(x[1])}</span>`).join('');}
 function businessDetailsData(){return{panNumber:$('panNumber').value.trim(),bankName:$('bankName').value.trim(),accountNumber:$('accountNumber').value.trim(),ifscCode:$('ifscCode').value.trim(),accountHolder:$('accountHolder').value.trim(),bankBranch:$('bankBranch').value.trim()}}
-function loadBusinessDetails(r={}){['panNumber','bankName','accountNumber','ifscCode','accountHolder','bankBranch'].forEach(id=>$(id).value=r[id]||'');updateBankDetailsPrint()}
+function loadBusinessDetails(r=null){const d=r&&Object.keys(r).some(k=>['panNumber','bankName','accountNumber','ifscCode','accountHolder','bankBranch'].includes(k))?r:(()=>{try{return JSON.parse(localStorage.getItem(BUSINESS_KEY)||'{}')}catch(e){return{}}})();['panNumber','bankName','accountNumber','ifscCode','accountHolder','bankBranch'].forEach(id=>$(id).value=d[id]||'');updateBankDetailsPrint()}
 function clearEditor(){currentId=null;$("receiptNo").value=nextNo();$("receiptDate").valueAsDate=new Date();["clientName","contactName","clientEmail","notes"].forEach(id=>$(id).value="");$("paid").value=0;$("enableDiscount").checked=false;$("discountType").value="percent";$("discountValue").value=0;toggleDiscount();$("items").innerHTML="";addRow();loadSignature();loadBusinessDetails();calc()}
 function openEditor(r=null){$("dashboardView").classList.remove("active");$("editorView").classList.add("active","printable");r?loadReceipt(r):clearEditor();window.scrollTo({top:0,behavior:"smooth"})}
 function backToDashboard(){$("editorView").classList.remove("active","printable");$("dashboardView").classList.add("active");renderReceipts();window.scrollTo({top:0,behavior:"smooth"})}
@@ -200,6 +200,7 @@ function formData(){let c=calc();return{id:currentId||newId(),number:$("receiptN
 function saveReceipt(){
   try{
     const r=formData();
+    try{localStorage.setItem(BUSINESS_KEY,JSON.stringify(businessDetailsData()))}catch(e){}
     const a=getReceipts();
     const i=a.findIndex(x=>x.id===r.id);
     if(i>=0)a[i]=r; else a.unshift(r);
@@ -229,6 +230,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const sb=$("saveReceiptBtn"),sp=$("savePrintBtn");
   if(sb) sb.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveReceipt();});
   if(sp) sp.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveAndPrint();});
+  ["panNumber","bankName","accountNumber","ifscCode","accountHolder","bankBranch"].forEach(id=>{const el=$(id); if(el) el.addEventListener("input",()=>{updateBankDetailsPrint(); try{localStorage.setItem(BUSINESS_KEY,JSON.stringify(businessDetailsData()))}catch(e){}});});
 });
 (function(){ensureCounter();$("receiptDate").valueAsDate=new Date();loadSignature();loadBusinessDetails();addRow();$("showQty").checked=true;$("showRate").checked=true;setColumnVisibility();calc();if(sessionStorage.getItem(SESSION_KEY)==="1"){$("loginGate").classList.add("hidden");$("app").classList.remove("app-locked")}renderReceipts()})();
 </script></body></html>
