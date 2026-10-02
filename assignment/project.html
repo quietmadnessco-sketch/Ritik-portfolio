@@ -129,7 +129,17 @@ figcaption b{color:var(--accent);font-weight:600}
   section,.card,.conf,.hier,figure{break-inside:avoid}
 }
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-[hidden]{display:none!important}</style>
+[hidden]{display:none!important}.download-intro{color:var(--muted);margin-bottom:20px;font-size:.92rem}
+.download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.download-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.download-preview{aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:20px;background:#111113}
+.download-preview img{width:100%;height:100%;object-fit:contain;border:0;border-radius:0;min-height:0}
+.download-card figcaption{margin:0;padding:20px;border-top:1px solid var(--border)}
+.download-card h3{font-family:var(--head);font-size:1rem;line-height:1.4;color:var(--text);margin-bottom:14px}
+.download-link{display:inline-flex;align-items:center;gap:14px;color:#04120d;background:var(--accent);padding:11px 16px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.85rem}
+.download-link:hover{background:#34d399}
+@media(max-width:720px){.download-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body><noscript><p class="wrap">Enable JavaScript and <a href="./index.html">complete the NDA</a> to view the brief.</p></noscript>
 
@@ -203,6 +213,13 @@ figcaption b{color:var(--accent);font-weight:600}
       </figure>
     </div>
   </section>
+
+  <section aria-labelledby="downloads"><h2 class="label" id="downloads">Download files</h2><p class="download-intro">Download the original PNG files for this assignment.</p><div class="download-grid"><figure class="download-card"><div class="download-preview"><img src="./file/RTX7_site_photo.png" alt="RTX-7 site photo" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>RTX-7 site photo</h3><a class="download-link" href="./file/RTX7_site_photo.png" download="RTX7_site_photo.png" aria-label="Download RTX-7 site photo as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure>
+<figure class="download-card"><div class="download-preview"><img src="./file/Rotex_actuator_angled_view.png" alt="Actuator — angled view" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>Actuator — angled view</h3><a class="download-link" href="./file/Rotex_actuator_angled_view.png" download="Rotex_actuator_angled_view.png" aria-label="Download Actuator — angled view as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure>
+<figure class="download-card"><div class="download-preview"><img src="./file/Rotex_actuator_front_view.png" alt="Actuator — front view" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>Actuator — front view</h3><a class="download-link" href="./file/Rotex_actuator_front_view.png" download="Rotex_actuator_front_view.png" aria-label="Download Actuator — front view as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure>
+<figure class="download-card"><div class="download-preview"><img src="./file/Rotex_actuator_hand_pump_cylinder.png" alt="Actuator with hand pump and cylinder" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>Actuator with hand pump and cylinder</h3><a class="download-link" href="./file/Rotex_actuator_hand_pump_cylinder.png" download="Rotex_actuator_hand_pump_cylinder.png" aria-label="Download Actuator with hand pump and cylinder as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure>
+<figure class="download-card"><div class="download-preview"><img src="./file/Rotex_cylinder_limit_switch.png" alt="Cylinder with limit switch" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>Cylinder with limit switch</h3><a class="download-link" href="./file/Rotex_cylinder_limit_switch.png" download="Rotex_cylinder_limit_switch.png" aria-label="Download Cylinder with limit switch as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure>
+<figure class="download-card"><div class="download-preview"><img src="./file/Rotex_magazine_reference.png" alt="Magazine reference" loading="lazy" decoding="async" width="600" height="600"></div><figcaption><h3>Magazine reference</h3><a class="download-link" href="./file/Rotex_magazine_reference.png" download="Rotex_magazine_reference.png" aria-label="Download Magazine reference as PNG">Download PNG <span aria-hidden="true">↓</span></a></figcaption></figure></div></section>
 
   <section aria-labelledby="mag">
     <h2 class="label" id="mag">Magazine page</h2>
