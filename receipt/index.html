@@ -43,7 +43,9 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 .heading-row .desc-input{font-family:var(--ff-head);font-size:12px;font-weight:700;color:#71717a;letter-spacing:0;text-overflow:ellipsis}
 .type-select{border:1px solid var(--border);border-radius:5px;background:#fff;font-size:9px;padding:3px 4px;margin-bottom:4px;color:var(--muted)}
 .heading-row .qty-cell,.heading-row .rate-cell,.heading-row .item-total{display:none}.heading-row .row-del{visibility:hidden}
-.row-type-wrap{display:flex;align-items:center;gap:5px}
+.row-type-wrap{display:flex;align-items:flex-start;gap:5px}
+textarea.desc-input{resize:none;overflow:hidden;display:block;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:inherit;min-height:24px}
+.row-type-wrap .type-select{flex-shrink:0;margin-top:2px}
 .discount-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px}.discount-controls input,.discount-controls select{padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:#fff;font-size:11px}.discount-amount{color:#047857!important}
 .signature-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px}.signature-preview{max-width:150px;max-height:55px;object-fit:contain;display:none}.signature-label{font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:700}.signature-upload{font-size:10px;color:var(--muted)}.signature-upload input{font-size:10px}.signature-actions{display:flex;gap:5px}.signature-actions button{font-size:9px;padding:4px 7px;border:1px solid var(--border);background:#fff;border-radius:5px}
 .payment-details{margin-bottom:1.2rem}.bank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.bank-grid input{padding:9px 10px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:11px;outline:none}.bank-grid input:focus{border-color:var(--accent)}.payment-print{margin-bottom:1.2rem;display:none}.bank-details-print{font-size:10px;line-height:1.7;color:var(--text);display:flex;flex-wrap:wrap;gap:4px 18px}.bank-details-print span{white-space:nowrap}.bank-details-print strong{color:var(--black)}
@@ -111,7 +113,7 @@ function parseMoneyValue(v){
 function addRow(d){
   d=(d&&typeof d==='object')?d:{};
   const tr=document.createElement('tr');
-  tr.innerHTML='<td><div class="row-type-wrap"><select class="type-select no-print"><option value="item">Item</option><option value="heading">Heading</option></select><input class="item-input desc-input" type="text" placeholder="Service / project description"></div></td>'
+  tr.innerHTML='<td><div class="row-type-wrap"><select class="type-select no-print"><option value="item">Item</option><option value="heading">Heading</option></select><textarea class="item-input desc-input" rows="1" placeholder="Service / project description"></textarea></div></td>'
    +'<td class="qty-cell"><input class="item-input qty-input qty" type="number" min="0" step="1"></td>'
    +'<td class="rate-cell"><input class="item-input rate-input rate" type="number" min="0" step="any"></td>'
    +'<td class="item-total"><input class="manual-amount amt" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00"></td>'
@@ -122,6 +124,9 @@ function addRow(d){
   tr.querySelector('.qty').value=Number(d.qty??1)||1;
   tr.querySelector('.rate').value=Number(d.rate??0);
   tr.dataset.manualAmount=String(Number(d.amount||0));
+  // description: Enter = new line, box grows so nothing goes outside the invoice
+  const desc=tr.querySelector('.desc-input');
+  desc.addEventListener('input',()=>autoGrow(desc));
   // qty / rate typing -> recalc everything
   tr.querySelector('.qty').addEventListener('input',calc);
   tr.querySelector('.rate').addEventListener('input',calc);
@@ -172,6 +177,10 @@ function subtotalFromRows(){
   $('items').querySelectorAll('tr').forEach(tr=>{if(!applyRowType(tr))s+=rowAmount(tr)});
   return s;
 }
+function autoGrow(el){if(!el)return;el.style.height='auto';el.style.height=(el.scrollHeight||24)+'px'}
+function growAll(){document.querySelectorAll('textarea.desc-input').forEach(autoGrow)}
+window.addEventListener('beforeprint',growAll);
+window.addEventListener('resize',growAll);
 function calc(){
   let subtotal=0;
   $('items').querySelectorAll('tr').forEach(tr=>{
@@ -182,6 +191,7 @@ function calc(){
     const inp=tr.querySelector('.amt');
     if(document.activeElement!==inp)inp.value=fmtNum(t);
   });
+  growAll();
   return updateTotals(subtotal);
 }
 function updateTotals(subtotal){
@@ -230,7 +240,7 @@ function loadBusinessDetails(r=null){const keys=['panNumber','mobileNumber','ban
 
 /* ---------- EDITOR ---------- */
 function clearEditor(){currentId=null;$('receiptNo').value=nextNo();$('receiptDate').valueAsDate=new Date();['clientName','contactName','clientEmail','notes'].forEach(id=>$(id).value='');$('paid').value=0;$('showQty').checked=true;$('showRate').checked=true;$('enableDiscount').checked=false;$('discountType').value='percent';$('discountValue').value=0;toggleDiscount();$('items').innerHTML='';addRow();setColumnVisibility();loadSignature();loadBusinessDetails();calc()}
-function openEditor(r=null){$('dashboardView').classList.remove('active');$('editorView').classList.add('active','printable');r?loadReceipt(r):clearEditor();window.scrollTo({top:0,behavior:'smooth'})}
+function openEditor(r=null){$('dashboardView').classList.remove('active');$('editorView').classList.add('active','printable');r?loadReceipt(r):clearEditor();growAll();setTimeout(growAll,50);window.scrollTo({top:0,behavior:'smooth'})}
 function backToDashboard(){$('editorView').classList.remove('active','printable');$('dashboardView').classList.add('active');renderReceipts();window.scrollTo({top:0,behavior:'smooth'})}
 function loadReceipt(r){
   currentId=r.id;$('receiptNo').value=r.number;$('receiptDate').value=r.date;$('clientName').value=r.clientName||'';$('contactName').value=r.contactName||'';$('clientEmail').value=r.clientEmail||'';$('paid').value=r.paid||0;$('notes').value=r.notes||'';
